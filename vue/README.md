@@ -248,12 +248,11 @@ register() {
 
 ### Bootstrap
 
-The template project include the Boostrap libaray for styling. You are not required to use boostrak, but 
-Bootstrap, but it provides easy access to many styling elements and is the most widely used styline library.
+The template project includes the Boostrap libaray for styling. You are not required to use Bootstrap, but it provides easy access to many styling elements and is the most widely used styling library.
 
 The Bootstrap CSS is included from a Content Delivery Network (CDN) with a link statement in the head section of the index.html. There are associated JavaScript files for some of the Bootstrap functionality. They are include in a script section at the bottom of the body setion of the index.html
 
-There are many sources avaible to determine how to user Boostrap, including `https://getbootstrap.com/` and `https://www.w3schools.com/bootstrap4/`
+There are many sources avaiable to determine how to use Boostrap, including `https://getbootstrap.com/` and `https://www.w3schools.com/bootstrap4/`
 
 ### Font Awesome
 

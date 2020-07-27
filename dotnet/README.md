@@ -69,7 +69,7 @@ There's a single controller in the `Controllers` folder: `LoginController.cs`. T
 Additional endpoings are provided the test 
 anonymous access `/login/ready`, authorized `/login/confirm`, and authorized for an admin user `/login/confirmadmin`.
 
-A link to a set of Postman tests to confirm the functionality of the LoginController is proivded in a Postman folder.
+A link to a set of Postman tests to confirm the functionality of the LoginController is provided in a Postman folder.
 
 If you need to modify the user registration form, start here.
 
