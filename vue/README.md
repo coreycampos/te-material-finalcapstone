@@ -37,10 +37,10 @@ When you first run the project and visit the base URL, you're taken to a login p
 ```js
 router.beforeEach((to, from, next) => {
   // Determine if the route requires Authentication
-  const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
+  const requiresAuth = to.matched.some((x) => x.meta.requiresAuth);
 
   // If it does and they are not logged in, send the user to "/login"
-  if (requiresAuth && store.state.token === '') {
+  if (requiresAuth && store.state.token === "") {
     next("/login");
   } else {
     // Else let them go to their next destination
@@ -57,60 +57,61 @@ In the following configuration, you must be authenticated to view the home route
 
 ```js
 const router = new Router({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
-      name: 'home',
+      path: "/",
+      name: "home",
       component: Home,
       meta: {
-        requiresAuth: true
-      }
+        requiresAuth: true,
+      },
     },
     {
       path: "/login",
       name: "login",
       component: Login,
       meta: {
-        requiresAuth: false
-      }
+        requiresAuth: false,
+      },
     },
     {
       path: "/logout",
       name: "logout",
       component: Logout,
       meta: {
-        requiresAuth: false
-      }
+        requiresAuth: false,
+      },
     },
     {
       path: "/register",
       name: "register",
       component: Register,
       meta: {
-        requiresAuth: false
-      }
+        requiresAuth: false,
+      },
     },
-  ]
-})
+  ],
+});
 ```
 
 Next, the navigation guard checks to see if the route requires authentication and if an authentication token exists.
 
-If authentication is not required, *or* the authentication token does exist—meaning it isn't an empty string—the user is routed to the requested route.
+If authentication is not required, _or_ the authentication token does exist—meaning it isn't an empty string—the user is routed to the requested route.
 
-However, if authentication is required *and* the authentication token doesn't exist—meaning it's an empty string—the user is redirected to the `/login` route:
+However, if authentication is required _and_ the authentication token doesn't exist—meaning it's an empty string—the user is redirected to the `/login` route:
 
 ```js
 // If it does and they are not logged in, send the user to "/login"
-if (requiresAuth && store.state.token === '') {
+if (requiresAuth && store.state.token === "") {
   next("/login");
 } else {
   // Else let them go to their next destination
   next();
 }
 ```
+
 > Note: the application stores the current user (if any) and their authentication token in a centralized store using Vuex.
 
 ### Vuex
@@ -140,15 +141,13 @@ When you fill in a username and password and click the "Sign In" button, the met
 If you look at `AuthService`, you'll notice that there's no base URL set for Axios:
 
 ```js
-import axios from 'axios';
+import axios from "axios";
 
 export default {
-
   login(user) {
-    return axios.post('/login', user)
-  }
-
-}
+    return axios.post("/login", user);
+  },
+};
 ```
 
 This is because this value is set in `/src/main.js` and the value comes from the `.env` property file you
@@ -168,7 +167,7 @@ login() {
       if (response.status == 200) {
         this.$store.commit("SET_AUTH_TOKEN", response.data.token);
         this.$store.commit("SET_USER", response.data.user);
-        this.$router.push("/");
+        this.$router.push({name: 'home'});
       }
     })
 }
@@ -200,12 +199,12 @@ There's a logout link in `App.vue` that forwards the user to the `/logout` route
 </template>
 
 <script>
-export default {
-  created() {
-    this.$store.commit("LOGOUT");
-    this.$router.push("/login");
-  }
-};
+  export default {
+    created() {
+      this.$store.commit("LOGOUT");
+      this.$router.push({ name: "login" });
+    },
+  };
 </script>
 ```
 
@@ -226,7 +225,7 @@ mutations: {
 
 When you reach the `/register` route, you'll see a bare registration page. Like the login page, this is intentional. You'll need to style this page to fit within your application.
 
-When you fill in a username, password, confirm the password role, and click the "Create Account" button, the method `register()` is called. This calls the `register()` method in `/src/services/AuthService.js`. This passes  your user details to your back-end application's REST API to create a new user:
+When you fill in a username, password, confirm the password role, and click the "Create Account" button, the method `register()` is called. This calls the `register()` method in `/src/services/AuthService.js`. This passes your user details to your back-end application's REST API to create a new user:
 
 ```js
 methods: {
@@ -237,7 +236,7 @@ register() {
     .then(response => {
       if (response.status == 201) {
         this.$router.push({
-          path: "/login",
+          name: 'login',
           query: { registration: "success" }
         });
       }
@@ -256,6 +255,6 @@ There are many sources avaiable to determine how to use Boostrap, including `htt
 
 ### Font Awesome
 
-Font Awesome is a widely used icon library. You are not required to use Font Awesome, but version 5 is included as a JavaScript library at the bottom of the body section of the index.html. 
+Font Awesome is a widely used icon library. You are not required to use Font Awesome, but version 5 is included as a JavaScript library at the bottom of the body section of the index.html.
 
 There are many sources available showing the available icons, including `https://fontawesome.com/` and `https://www.w3schools.com/icons/fontawesome5_intro.asp`

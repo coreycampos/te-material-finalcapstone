@@ -5,6 +5,11 @@
       <div class="alert alert-danger" role="alert" v-if="invalidCredentials">
         Invalid username and password!
       </div>
+
+      <div class="alert alert-danger" role="alert" v-if="networkError">
+        Network error!
+      </div>
+
       <div
         class="alert alert-success"
         role="alert"
@@ -34,7 +39,7 @@
         />
       </div>
       <div class="form-group">
-      <router-link :to="{ name: 'register' }">Need an account?</router-link>
+        <router-link :to="{ name: 'register' }">Need an account?</router-link>
       </div>
       <button class="btn btn-primary" type="submit">Sign in</button>
     </form>
@@ -54,6 +59,7 @@ export default {
         password: "",
       },
       invalidCredentials: false,
+      networkError: false,
     };
   },
   methods: {
@@ -64,13 +70,17 @@ export default {
           if (response.status == 200) {
             this.$store.commit("SET_AUTH_TOKEN", response.data.token);
             this.$store.commit("SET_USER", response.data.user);
-            this.$router.push("/");
+            this.$router.push({ name: "home" });
           }
         })
         .catch((error) => {
           const response = error.response;
 
-          if (response.status === 401) {
+          if (response == null) {
+            this.networkError = true;
+          }
+
+          else if (response.status === 401) {
             this.invalidCredentials = true;
           }
         });
