@@ -74,3 +74,9 @@ A link to a set of Postman tests to confirm the functionality of the LoginContro
 If you need to modify the user registration form, start here.
 
 The controller uses the `UserSqlDAO` to read and write data from the `users` table.
+
+### Tests
+
+The solution contains a test project with tests for the two provided SQL Server DAO methods in the base project. 
+
+Integration testing between the DAO and the database is a powerful way to insure the correctness of the DAO/database portion of your project.
