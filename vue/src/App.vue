@@ -8,19 +8,19 @@
       <router-link
         class="nav-item"
         v-bind:to="{ name: 'register' }"
-        v-if="!$store.state.token != ''"
+        v-if="!$store.state.token"
         >&nbsp;|&nbsp;Register</router-link
       >
       <router-link
         class="nav-item"
         v-bind:to="{ name: 'login' }"
-        v-if="!$store.state.token != ''"
+        v-if="!$store.state.token"
         >&nbsp;|&nbsp;Login</router-link
       >
       <router-link
         class="nav-item"
         v-bind:to="{ name: 'logout' }"
-        v-if="$store.state.token != ''"
+        v-if="$store.state.token"
         >&nbsp;|&nbsp;Logout</router-link
       >
     </div>

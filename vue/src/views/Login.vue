@@ -76,7 +76,7 @@ export default {
         .catch((error) => {
           const response = error.response;
 
-          if (response == null) {
+          if (response == null || response.status === 500) {
             this.networkError = true;
           }
 
