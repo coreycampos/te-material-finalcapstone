@@ -66,12 +66,12 @@ Most of the functionality related to JWT generation and security is located in t
 
 There's a single controller in the `Controllers` folder: `LoginController.cs`. This controller responds to the `/login` and `/login/register` endpoints and works with the Vue starter as is. 
 
-Additional endpoings are provided the test 
-anonymous access `/login/ready`, authorized `/login/confirm`, and authorized for an admin user `/login/confirmadmin`.
+If you need to modify the user registration form, start here.
+
+Additional endpoints are provided to test 
+anonymous access `/login/ready`, authorized access for any user `/login/confirm`, and authorized for an admin user `/login/confirmadmin`.
 
 A link to a set of Postman tests to confirm the functionality of the LoginController is provided in a Postman folder.
-
-If you need to modify the user registration form, start here.
 
 The controller uses the `UserSqlDAO` to read and write data from the `users` table.
 
