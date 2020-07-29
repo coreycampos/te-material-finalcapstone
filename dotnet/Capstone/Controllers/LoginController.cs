@@ -25,21 +25,21 @@ namespace Capstone.Controllers
         [HttpGet("ready")]
         public string Ready()
         {
-            return ("Server Ready");
+            return "Server Ready";
         }
 
         [Authorize]
         [HttpGet("confirm")]
         public string Confirm()
         {
-            return ("Token confirmed");
+            return "Token confirmed";
         }
 
         [Authorize(Roles = "admin")]
         [HttpGet("confirmadmin")]
         public string ConfirmAdmin()
         {
-            return ("Token confirmed for admin");
+            return "Token confirmed for admin";
         }
 
         //if not tagged and class is not tagged

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
 using Capstone.Models;
 using Capstone.Security;
@@ -24,25 +23,18 @@ namespace Capstone.DAO
         {
             User returnUser = null;
 
-            try
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                conn.Open();
+
+                SqlCommand cmd = new SqlCommand(sqlGetUser, conn);
+                cmd.Parameters.AddWithValue("@username", username);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.HasRows && reader.Read())
                 {
-                    conn.Open();
-
-                    SqlCommand cmd = new SqlCommand(sqlGetUser, conn);
-                    cmd.Parameters.AddWithValue("@username", username);
-                    SqlDataReader reader = cmd.ExecuteReader();
-
-                    if (reader.HasRows && reader.Read())
-                    {
-                        returnUser = GetUserFromReader(reader);
-                    }
+                    returnUser = GetUserFromReader(reader);
                 }
-            }
-            catch (SqlException)
-            {
-                throw;
             }
 
             return returnUser;
@@ -54,23 +46,16 @@ namespace Capstone.DAO
             IPasswordHasher passwordHasher = new PasswordHasher();
             PasswordHash hash = passwordHasher.ComputeHash(password);
 
-            try
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    conn.Open();
+                conn.Open();
 
-                    SqlCommand cmd = new SqlCommand(sqlAddUser, conn);
-                    cmd.Parameters.AddWithValue("@username", username);
-                    cmd.Parameters.AddWithValue("@password_hash", hash.Password);
-                    cmd.Parameters.AddWithValue("@salt", hash.Salt);
-                    cmd.Parameters.AddWithValue("@user_role", role);
-                    cmd.ExecuteNonQuery();
-                }
-            }
-            catch (SqlException)
-            {
-                throw;
+                SqlCommand cmd = new SqlCommand(sqlAddUser, conn);
+                cmd.Parameters.AddWithValue("@username", username);
+                cmd.Parameters.AddWithValue("@password_hash", hash.Password);
+                cmd.Parameters.AddWithValue("@salt", hash.Salt);
+                cmd.Parameters.AddWithValue("@user_role", role);
+                cmd.ExecuteNonQuery();
             }
 
             return GetUser(username);

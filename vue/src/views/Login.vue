@@ -13,8 +13,7 @@
       <div
         class="alert alert-success"
         role="alert"
-        v-if="this.$route.query.registration"
-      >
+        v-if="this.$route.query.registration">
         Thank you for registering, please sign in.
       </div>
       <div class="form-group">
@@ -25,8 +24,7 @@
           placeholder="Username"
           v-model="user.username"
           required
-          autofocus
-        />
+          autofocus />
       </div>
       <div class="form-group">
         <input
@@ -35,8 +33,7 @@
           class="form-control"
           placeholder="Password"
           v-model="user.password"
-          required
-        />
+          required />
       </div>
       <div class="form-group">
         <router-link :to="{ name: 'register' }">Need an account?</router-link>

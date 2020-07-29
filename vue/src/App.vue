@@ -1,29 +1,41 @@
+<!-- Main Application Template. 
+     Note that you have classes from bootstrap available to you.
+     See https://getbootstrap.com/docs/4.0/components/alerts/ for reference on bootstrap -->
 <template>
-  <div id="app">
+  <div id="app" class="container">
     <div id="nav">
-      <i class="fas fa-home"></i>
-      <router-link class="nav-item" v-bind:to="{ name: 'home' }"
-        >Home </router-link
-      >
+      <router-link class="nav-item" v-bind:to="{ name: 'home' }">
+        <i class="fas fa-home"></i> <!-- This is a font awesome icon -->
+        Home 
+      </router-link>
       <router-link
         class="nav-item"
         v-bind:to="{ name: 'register' }"
-        v-if="!$store.state.token"
-        >&nbsp;|&nbsp;Register</router-link
-      >
+        v-if="!$store.state.token">&nbsp;|&nbsp;Register</router-link>
       <router-link
         class="nav-item"
         v-bind:to="{ name: 'login' }"
-        v-if="!$store.state.token"
-        >&nbsp;|&nbsp;Login</router-link
-      >
+        v-if="!$store.state.token">
+        &nbsp;|&nbsp;Login
+      </router-link>
       <router-link
         class="nav-item"
         v-bind:to="{ name: 'logout' }"
-        v-if="$store.state.token"
-        >&nbsp;|&nbsp;Logout</router-link
-      >
+        v-if="$store.state.token">
+        &nbsp;|&nbsp;Logout
+      </router-link>
     </div>
     <router-view />
   </div>
 </template>
+
+<script>
+export default {
+  
+}
+</script>
+
+<!-- Application-Wide Styles go here -->
+<style>
+
+</style>

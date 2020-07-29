@@ -6,40 +6,37 @@
         {{ registrationErrorMsg }}
       </div>
       <div class="form-group">
-      <input
-        type="text"
-        id="username"
-        class="form-control"
-        placeholder="Username"
-        v-model="user.username"
-        required
-        autofocus
-      />
+        <input
+          type="text"
+          id="username"
+          class="form-control"
+          placeholder="Username"
+          v-model="user.username"
+          required
+          autofocus />
       </div>
       <div class="form-group">
-      <input
-        type="password"
-        id="password"
-        class="form-control"
-        placeholder="Password"
-        v-model="user.password"
-        required
-      />
+        <input
+          type="password"
+          id="password"
+          class="form-control"
+          placeholder="Password"
+          v-model="user.password"
+          required />
       </div>
       <div class="form-group">
-      <input
-        type="password"
-        id="confirmPassword"
-        class="form-control"
-        placeholder="Confirm Password"
-        v-model="user.confirmPassword"
-        required
-      />
+        <input
+          type="password"
+          id="confirmPassword"
+          class="form-control"
+          placeholder="Confirm Password"
+          v-model="user.confirmPassword"
+          required />
       </div>
       <div class="form-group">
-      <router-link :to="{ name: 'login' }">Have an account?</router-link>
+        <router-link :to="{ name: 'login' }">Have an account?</router-link>
       </div>
-      <button class="btn  btn-primary " type="submit">
+      <button class="btn btn-primary" type="submit">
         Create Account
       </button>
     </form>
