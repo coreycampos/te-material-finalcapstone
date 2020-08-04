@@ -9,9 +9,14 @@
             {{item.name}}
           </td>
           <td>
-            <button>
-              Details
-            </button>
+                <div class="cropDropdown">
+        <select v-model="selected">
+            <option disabled value="">Details</option>
+            <option v-for="option in options" v-bind:key="option.name"><router-link :to="{name: `${option.name}`}">{{option.name}}
+                </router-link>
+            </option>
+        </select>
+                </div>
           </td>
         </tr>
       </tbody>
@@ -21,6 +26,18 @@
 
 <script>
 export default {
-  name: "home"
+  name: "home",
+
+  data() {
+    return {
+      options: [
+
+        {name: "Seed-to-harvest"},
+        {name: "Seed-to-transplant"},
+        {name: "Transplant-to-harvest"},
+        {name: "Expiration"}
+            ]
+    }
+  }
 };
 </script>
