@@ -8,7 +8,12 @@ import axios from 'axios';
 export default {
 
   uploadFile(csvFile, type) {
-      return axios.post(`/upload/${type}`, csvFile)
+      return axios.post(`/upload/${type}`, csvFile, {
+          headers: {
+              'content-type': 'multipart/form-data',
+              'accept': 'multipart/form-data'
+          }
+      })
   }
 
 }

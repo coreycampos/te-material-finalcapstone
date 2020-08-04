@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Capstone.DAO;
 using Capstone.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.IO;
 
 namespace Capstone.Controllers
 {
@@ -23,7 +24,7 @@ namespace Capstone.Controllers
         }
 
         [HttpPost("harvestTimes")]
-        public void uploadHarvestTimes([FromBody] string value)
+        public void uploadHarvestTimes([FromBody] object value)
         {
             int fromUserId = 0;
             foreach (var claim in User.Claims)
@@ -33,6 +34,13 @@ namespace Capstone.Controllers
                     fromUserId = int.Parse(claim.Value);
                 }
             }
+
+            string destinationFilePath = @"C:\Users\Student\Tech Elevator\Git Repositories\team-oscar-final-capstone\dotnet\Capstone\UploadedFiled\harvestTimes.txt";
+            using (StreamWriter sw = new StreamWriter(destinationFilePath, true))
+            {
+                sw.Write(Request.Body);
+            }
+
             Console.WriteLine(fromUserId);
             Console.WriteLine(Request.Body);
 
