@@ -24,6 +24,18 @@
         v-if="$store.state.token">
         &nbsp;|&nbsp;Logout
       </router-link>
+      <router-link 
+      class="nav-item"
+      v-bind:to="{name: 'AllDetails'}"
+      >
+      &nbsp;|&nbsp;All Crop Details
+      </router-link>
+      <router-link 
+      class="nav-item"
+      v-bind:to="{name: 'uploadFiles'}"
+      >
+      &nbsp;|&nbsp;Upload Files
+      </router-link>
     </div>
     <router-view />
   </div>

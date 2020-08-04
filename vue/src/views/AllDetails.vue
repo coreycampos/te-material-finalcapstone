@@ -1,15 +1,15 @@
 <template>
   <div>
-    <Home-Crops />
+    <all-details />
   </div>
 </template>
 
 <script>
-import HomeCrops from "../components/HomeCrops.vue"
+import AllDetails from "../components/AllDetails.vue"
 
 export default {
   components: {
-    HomeCrops
+    AllDetails
     }
 };
 </script>
