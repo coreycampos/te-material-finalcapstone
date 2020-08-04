@@ -66,7 +66,10 @@ const router = new Router({
     {
       path: "/AllDetails",
       name: "AllDetails",
-      component: AllDetails
+      component: AllDetails,
+      meta: {
+        requiresAuth: true,
+      }
     },
     {
       path: "*",
