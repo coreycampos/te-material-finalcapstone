@@ -23,7 +23,7 @@
             </div>
             <label for ="csvFileUploader">Select a .csv file &nbsp;</label>
             <input type="file" id="csvFileUploader" name="csvFileUploader" v-on:change="onFileChange">
-            <br><input type="submit" class="uploadCSVButton" v-on:click.prevent="uploadCSVFile()"/>
+            <br><input type="submit" class="uploadCSVButton" v-on:submit="uploadCSVFile"/>
         </form>
         <section id="csvFileStructure">
             <h3>*Structure of your .csv files*</h3>
