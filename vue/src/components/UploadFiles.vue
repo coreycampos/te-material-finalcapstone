@@ -67,6 +67,7 @@ export default {
                 })
             },
         onFileChange(e) {
+            console.log(e.target.files)
             this.selectedCSVFile = e.target.files;
         }
     }
