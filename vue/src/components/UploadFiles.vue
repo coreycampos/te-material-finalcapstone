@@ -5,25 +5,25 @@
         <form id="fileUploadForm">
             <div id="fileTypeSelectors">
                 <div class="radio-selector">
-                    <input type="radio" id="harvestTimes" name="fileTypeSelector" value="harvestTimes">
+                    <input type="radio" id="harvestTimes" name="fileTypeSelector" value="harvestTimes" v-model="selectedFileType">
                     <label for ="harvestTimes">&nbsp; Harvest Times</label>
                 </div>
                 <div class="radio-selector">
-                    <input type="radio" id="transplantTimes" name="fileTypeSelector" value="transplantTimes">
+                    <input type="radio" id="transplantTimes" name="fileTypeSelector" value="transplantTimes" v-model="selectedFileType">
                     <label for ="transplantTimes">&nbsp; Transplant Times</label>
                 </div>
                 <div class="radio-selector">
-                    <input type="radio" id="expirationTimes" name="fileTypeSelector" value="expirationTimes">
+                    <input type="radio" id="expirationTimes" name="fileTypeSelector" value="expirationTimes" v-model="selectedFileType">
                     <label for ="expirationTimes">&nbsp; Expiration Times</label>
                 </div>
                 <div class="radio-selector">
-                    <input type="radio" id="cropPlans" name="fileTypeSelector" value="cropPlans">
+                    <input type="radio" id="cropPlans" name="fileTypeSelector" value="cropPlans" v-model="selectedFileType">
                     <label for ="cropPlans">&nbsp; Crop Plans</label>
                 </div>
             </div>
             <label for ="csvFileUploader">Select a .csv file &nbsp;</label>
-            <input type="file" id="csvFileUploader" name="csvFileUploader">
-            <br><input type="submit"/>
+            <input type="file" id="csvFileUploader" name="csvFileUploader" v-on:change="onFileChange">
+            <br><input type="submit" class="uploadCSVButton" v-on:click.prevent="uploadCSVFile(this.selectedCSVFile, this.selectedFileType)"/>
         </form>
         <section id="csvFileStructure">
             <h3>*Structure of your .csv files*</h3>
@@ -44,7 +44,32 @@
 </template>
 
 <script>
+import uploadService from '../services/UploadService.js';
+
 export default {
+    name: "upload-files",
+    data() {
+        return {
+            selectedFileType: "",
+            selectedCSVFile: null,
+        };
+    },
+    methods: {
+        uploadCSVFile(file, type) {
+            uploadService.uploadFile(file, type)
+                .then(response => {
+                    if (response.status == '201') {
+                        console.log("successfully uploaded");
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                })
+            },
+        onFileChange(e) {
+            this.selectedCSVFile = e.target.files;
+        }
+    }
 
 }
 </script>
