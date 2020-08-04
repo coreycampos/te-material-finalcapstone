@@ -23,7 +23,7 @@
             </div>
             <label for ="csvFileUploader">Select a .csv file &nbsp;</label>
             <input type="file" id="csvFileUploader" name="csvFileUploader" v-on:change="onFileChange">
-            <br><input type="submit" class="uploadCSVButton" v-on:click.prevent="uploadCSVFile(this.selectedCSVFile, this.selectedFileType)"/>
+            <br><input type="submit" class="uploadCSVButton" v-on:click.prevent="uploadCSVFile()"/>
         </form>
         <section id="csvFileStructure">
             <h3>*Structure of your .csv files*</h3>
@@ -55,21 +55,40 @@ export default {
         };
     },
     methods: {
-        uploadCSVFile(file, type) {
-            uploadService.uploadFile(file, type)
-                .then(response => {
-                    if (response.status == '201') {
-                        console.log("successfully uploaded");
-                    }
-                })
-                .catch(error => {
-                    console.error(error);
-                })
-            },
         onFileChange(e) {
-            console.log(e.target.files)
-            this.selectedCSVFile = e.target.files;
-        }
+            console.log(e.target.files[0])
+            this.selectedCSVFile = e.target.files[0];
+        },
+        uploadCSVFile() {
+            let file = this.selectedCSVFile;
+            let type = this.selectedFileType;
+            const fileType = ".csv";
+
+            if (!file.name.endsWith(fileType)) {
+                alert('Sorry, only .csv files are allowed.');
+                //$("#csvFileUploader").val('');
+                //this.$refs.csvFileUploader.val('');
+                //this.input.value='';
+            }
+            else if (type == "") {
+                alert('Please choose one of the file designation options.');
+            }
+            else {
+                uploadService.uploadFile(file, type)
+                    .then(response => {
+                        if (response.status == '201') {
+                            console.log("successfully uploaded");
+                            if (this.$router.currentRoute.name !== 'home') {
+                                this.$router.push({name: 'home'});
+                            }
+                        }
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    })
+            }
+        },
+        
     }
 
 }
