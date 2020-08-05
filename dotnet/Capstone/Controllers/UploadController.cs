@@ -18,15 +18,12 @@ namespace Capstone.Controllers
     {
         private readonly IUserDAO userDAO;
         private readonly ICropDAO cropDAO;
+        private readonly IPlanDAO planDAO;
 
-        public UploadController (IUserDAO _userDAO, ICropDAO _cropDAO)
+        public UploadController (IUserDAO _userDAO, ICropDAO _cropDAO, IPlanDAO _planDAO)
         {
             userDAO = _userDAO;
             cropDAO = _cropDAO;
-        }
-
-        public UploadController(IPlanDAO _planDAO)
-        {
             planDAO = _planDAO;
         }
 
