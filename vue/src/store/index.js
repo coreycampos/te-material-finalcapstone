@@ -25,22 +25,28 @@ export default new Vuex.Store({
     token: currentToken || '',
     user: currentUser || {}, // If a user is an admin, their user.role will be 'admin'
     crop: [{
-      name: "corn",
-      harvestTime: 80,
-      transplantTime: 0,
-      expirationTime: 60
+        cropId: 1,
+        cropName: "corn",
+        timeSeedToHarvest: 80,
+        timeSeedToTransplant: 10,
+        timeToExpiration: 70,
+        timeTransplantToHarvest: 60,
       },
       {
-      name: "wheat",
-      harvestTime: 110,
-      transplantTime: 0,
-      expirationTime: 90
+        cropId: 2,
+        cropName: "wheat",
+        timeSeedToHarvest: 110,
+        timeSeedToTransplant: 14,
+        timeToExpiration: 90,
+        timeTransplantToHarvest: 96,
       },
       {
-      name: "summer squash",
-      harvestTime: 65,
-      transplantTime: 28,
-      expirationTime: 30
+        cropId: 3,
+        cropName: "summer squash",
+        timeSeedToHarvest: 65,
+        timeSeedToTransplant: 21,
+        timeToExpiration: 30,
+        timeTransplantToHarvest: 44,
       }
     ]
   },
