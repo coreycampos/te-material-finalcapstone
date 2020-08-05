@@ -8,7 +8,7 @@ import axios from 'axios';
 export default {
 
   uploadFile(type, formData) {
-      return axios.post(`/upload/${type}`,
+      return axios.put(`/upload/${type}`,
         formData, 
         {
           headers: {

@@ -11,7 +11,9 @@ namespace Capstone.DAO
     {
         private readonly string connectionString;
         private string sqlSelectAllCrops = "SELECT * FROM crops";
-        private string sqlUpdateCrop = "UPDATE crops SET @attribute = @newValue WHERE crop_name = @cropName";
+        private string sqlUpdateCrop = "IF EXISTS (SELECT * FROM crops WHERE crop_name = @cropName) " +
+            "BEGIN UPDATE crops SET @attribute = @newValue WHERE crop_name = @cropName END " +
+            "ELSE INSERT INTO crops (crop_name, @attribute) VALUES (@cropName, @newValue) END";
 
         public CropSqlDAO(string dbConnectionString)
         {
@@ -47,14 +49,6 @@ namespace Capstone.DAO
                 return cropList;
         }
 
-        public bool AddCrop(Crop newCrop)
-        {
-            bool result = false;
-
-            return result;
-
-        }
-
         public bool UpdateCrop(string cropName, string updatedAttribute, int newValue)
         {
             bool result = false;
@@ -81,8 +75,6 @@ namespace Capstone.DAO
             {
                 result = false;
             }
-
-
 
                 return result;
         }
