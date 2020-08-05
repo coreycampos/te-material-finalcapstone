@@ -24,7 +24,7 @@ namespace Capstone.Controllers
         }
 
         [HttpPost("harvestTimes")]
-        public void uploadHarvestTimes([FromBody] object value)
+        public void uploadHarvestTimes(List<HarvestTime> payload)
         {
             int fromUserId = 0;
             foreach (var claim in User.Claims)
@@ -34,13 +34,7 @@ namespace Capstone.Controllers
                     fromUserId = int.Parse(claim.Value);
                 }
             }
-
-            string destinationFilePath = @"C:\Users\Student\Tech Elevator\Git Repositories\team-oscar-final-capstone\dotnet\Capstone\UploadedFiled\harvestTimes.txt";
-            using (StreamWriter sw = new StreamWriter(destinationFilePath, true))
-            {
-                sw.Write(Request.Body);
-            }
-
+            Console.WriteLine(payload);
             Console.WriteLine(fromUserId);
             Console.WriteLine(Request.Body);
 

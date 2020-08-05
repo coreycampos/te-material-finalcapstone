@@ -1,1 +1,6 @@
-carrot, 70, turnip, 45, pepper, 65, tomato, 80, cauliflower, 110
+crop, time_to_harvest
+carrot, 70
+turnip, 45
+pepper, 65
+tomato, 80
+cauliflower, 110

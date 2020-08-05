@@ -1,20 +1,23 @@
 import axios from 'axios';
 
-const http = axios.create({
-baseURL: "https://localhost:44315",
+// const http = axios.create({
+// baseURL: "https://localhost:44315",
     
-})
+// })
 
 export default {
 
-  uploadFile(csvFile, type) {
-      return axios.post(`/upload/${type}`, csvFile, {
+  uploadFile(type, formData) {
+      return axios.post(`/upload/${type}`,
+        formData, 
+        {
           headers: {
-              'content-type': 'multipart/form-data',
-              'accept': 'multipart/form-data'
+              'content-type': 'application/json',
           }
       })
-      // return http.post(`/upload/${type}`, csvFile);
+    // console.log(type);
+    // console.log(payload);
+    // return axios.post(`/upload/${type}`, payload);
   }
 
 }

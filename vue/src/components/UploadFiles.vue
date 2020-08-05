@@ -2,7 +2,7 @@
     <div class="upload-container-root">
         <h2>Upload a File</h2>
         <h3>Choose a file to .csv file to upload 'Harvest Times', 'Transplant Times', 'Expiration Times', or 'Crop Plans'</h3>
-        <form id="fileUploadForm">
+        <form id="fileUploadForm" v-on:submit.prevent="uploadCSVFile">
             <div id="fileTypeSelectors">
                 <div class="radio-selector">
                     <input type="radio" id="harvestTimes" name="fileTypeSelector" value="harvestTimes" v-model="selectedFileType">
@@ -23,7 +23,7 @@
             </div>
             <label for ="csvFileUploader">Select a .csv file &nbsp;</label>
             <input type="file" id="csvFileUploader" name="csvFileUploader" v-on:change="onFileChange">
-            <br><input type="submit" class="uploadCSVButton" v-on:submit="uploadCSVFile"/>
+            <br><input type="submit" class="uploadCSVButton"/>
         </form>
         <section id="csvFileStructure">
             <h3>*Structure of your .csv files*</h3>
@@ -55,11 +55,37 @@ export default {
         };
     },
     methods: {
+        csvFileToJSON (csvFile, callback) {
+            let reader = new FileReader();
+            reader.readAsText(csvFile);
+            
+            reader.onload = function() {
+                console.log(reader.result);
+                let lines = reader.result.split("\n");
+                let resultObjects = [];
+                let headers = lines[0].split(",");
+                for (let i=1; i<lines.length; i++) {
+                    let currentObject = {};
+                    let currentLine = lines[i].split(",");
+                    for (let j=0; j<headers.length; j++) {
+                        let header = headers[j].trim()
+                        currentObject[header] = currentLine[j].trim()
+                    }
+                    resultObjects.push(currentObject);
+                }
+                // console.log(resultObjects);
+                // parsedCSV = resultObjects;
+                
+                //console.log(JSON.stringify(resultObjects));
+                callback(resultObjects)
+            };
+        },
         onFileChange(e) {
             console.log(e.target.files[0])
             this.selectedCSVFile = e.target.files[0];
         },
         uploadCSVFile() {
+            // let formData = new FormData();
             let file = this.selectedCSVFile;
             let type = this.selectedFileType;
             const fileType = ".csv";
@@ -74,9 +100,11 @@ export default {
                 alert('Please choose one of the file designation options.');
             }
             else {
-                uploadService.uploadFile(file, type)
+                this.csvFileToJSON(file, function(result) {
+                    console.log(result)
+                    uploadService.uploadFile(type, result)
                     .then(response => {
-                        if (response.status == '201') {
+                        if (response.status == '201' || response.status == '200') {
                             console.log("successfully uploaded");
                             if (this.$router.currentRoute.name !== 'home') {
                                 this.$router.push({name: 'home'});
@@ -86,6 +114,10 @@ export default {
                     .catch(error => {
                         console.error(error);
                     })
+                })
+                
+                // formData.append('file', file);
+                            
             }
         },
         
