@@ -25,13 +25,30 @@ export default new Vuex.Store({
     token: currentToken || '',
     user: currentUser || {}, // If a user is an admin, their user.role will be 'admin'
     crop: [{
-      name: "corn",
-      harvestTime: 5,
-      transplantTime: 4},
+        cropId: 1,
+        cropName: "corn",
+        timeSeedToHarvest: 80,
+        timeSeedToTransplant: 10,
+        timeToExpiration: 70,
+        timeTransplantToHarvest: 60,
+      },
       {
-      name: "wheat",
-      harvestTime: 3,
-      transplantTime: 1}]
+        cropId: 2,
+        cropName: "wheat",
+        timeSeedToHarvest: 110,
+        timeSeedToTransplant: 14,
+        timeToExpiration: 90,
+        timeTransplantToHarvest: 96,
+      },
+      {
+        cropId: 3,
+        cropName: "summer squash",
+        timeSeedToHarvest: 65,
+        timeSeedToTransplant: 21,
+        timeToExpiration: 30,
+        timeTransplantToHarvest: 44,
+      }
+    ]
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -49,6 +66,9 @@ export default new Vuex.Store({
       state.token = '';
       state.user = {};
       axios.defaults.headers.common = {};
+    },
+    POPULATE_CROP_DATA(state, data) {
+      state.crop = data;
     }
   }
 })
