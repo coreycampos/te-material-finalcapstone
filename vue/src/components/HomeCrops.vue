@@ -41,7 +41,7 @@ export default {
             },
 
         sendToEdit() {
-            this.$router.push({name: 'EditCrop', param: this.item})
+            this.$router.push({name: 'EditCrop', param: })
         },
 
         updateCrop(item){

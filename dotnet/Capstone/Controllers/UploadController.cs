@@ -57,20 +57,20 @@ namespace Capstone.Controllers
         //{
         //}
 
-        [HttpPut("cropUpdate")]
-        public IActionResult UpdateCrop(Crop updatedCrop)
-        {
-            Console.WriteLine(updatedCrop);
+        //[HttpPut("cropUpdate")]
+        //public IActionResult UpdateCrop(Crop updatedCrop)
+        //{
+        //    Console.WriteLine(updatedCrop);
 
-            int shouldBeOne = cropDAO.UpdateCrop(updatedCrop);
-            if (shouldBeOne == 1)
-            {
-                return Ok("Update successful");
-            }
-            else
-            {
-                return BadRequest("Update failed");
-            }
-        }
+        //    int shouldBeOne = cropDAO.UpdateCrop(updatedCrop);
+        //    if (shouldBeOne == 1)
+        //    {
+        //        return Ok("Update successful");
+        //    }
+        //    else
+        //    {
+        //        return BadRequest("Update failed");
+        //    }
+        //}
     }
 }
