@@ -18,9 +18,16 @@ namespace Capstone.Controllers
     {
         private readonly IUserDAO userDAO;
 
+        private readonly IPlanDAO planDAO;
+
         public UploadController (IUserDAO _userDAO)
         {
             userDAO = _userDAO;
+        }
+
+        public UploadController(IPlanDAO _planDAO)
+        {
+            planDAO = _planDAO;
         }
 
         [HttpPost("harvestTimes")]
@@ -50,9 +57,25 @@ namespace Capstone.Controllers
         //{
         //}
 
-        //[HttpPost("cropPlans")]
-        //public IActionResult uploadCropPlans([FromBody] string value)
-        //{
-        //}
+        [HttpPost("cropPlans")]
+        public IActionResult uploadCropPlans(List<CropPlan> cropPlans)
+        {
+            bool allUploaded = false;
+
+            foreach (CropPlan newPlan in cropPlans)
+            {
+                bool result = planDAO.AddNewPlan(newPlan);
+
+                if (!result)
+                {
+                    allUploaded = false;
+                    return BadRequest();
+                }
+            }
+
+            allUploaded = true;
+
+            return Created("", allUploaded);
+        }
     }
 }

@@ -103,3 +103,9 @@ VALUES (1, '06/27/2020', 4, 'theft');
 
 INSERT INTO waste (inventory_id, date_wasted, amount_wasted, waste_description)
 VALUES (1, '07/08/2020', 11, 'expired');
+
+INSERT INTO crop_plans (crop_id, area_identifier, planned_harvest_date)
+VALUES (2, 'northeast', '08/10/2020');
+
+SELECT * FROM inventory AS i JOIN harvests AS h ON h.harvest_id = i.harvest_id
+JOIN crops AS c ON h.crop_id = c.crop_id WHERE DATEDIFF(day, DATEADD(day, c.time_to_expire, i.date_added), GETDATE()) <= 7;

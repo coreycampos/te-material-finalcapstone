@@ -29,5 +29,13 @@ namespace Capstone.Controllers
             List<CropPlan> planList = planDAO.GetAllPlans();
             return planList;
         }
+
+        [HttpGet("upcomingPlans")]
+        public List<CropPlan> PlansWithinWeek()
+        {
+            List<CropPlan> planList = planDAO.PlansWithinWeek();
+            return planList;
+        }
+
     }
 }

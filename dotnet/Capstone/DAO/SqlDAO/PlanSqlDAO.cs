@@ -11,13 +11,15 @@ namespace Capstone.DAO
     {
         private readonly string connectionString;
         private string sqlSelectAllPlans = "SELECT * FROM crop_plans";
+        private string sqlPlansWithinWeek = "SELECT * FROM crop_plans WHERE planned_harvest_date < DATEADD(day, 7, GETDATE());";
+        private string sqlAddNewPlan = "INSERT INTO crop_plans (crop_id, area_identifier, planned_harvest_date) VALUES (@cropId, @area, @plannedDate)";
 
         public PlanSqlDAO(string dbConnectionString)
         {
             connectionString = dbConnectionString;
         }
 
-        public List<CropPlan> GetAllPlans()
+        public List<CropPlan> GenericSelectPlans(string someSqlCommand)
         {
             List<CropPlan> planList = new List<CropPlan>();
 
@@ -25,7 +27,7 @@ namespace Capstone.DAO
             {
                 conn.Open();
 
-                SqlCommand cmd = new SqlCommand(sqlSelectAllPlans, conn);
+                SqlCommand cmd = new SqlCommand(someSqlCommand, conn);
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read() == true)
@@ -42,7 +44,47 @@ namespace Capstone.DAO
 
                 return planList;
             }
+        }
 
+        public List<CropPlan> GetAllPlans()
+        {
+            return GenericSelectPlans(sqlSelectAllPlans);
+        }
+
+        public List<CropPlan> PlansWithinWeek()
+        {
+            return GenericSelectPlans(sqlPlansWithinWeek);
+        }
+
+        public bool AddNewPlan(CropPlan newPlan)
+        {
+            bool result = false;
+
+            try
+            {
+
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(sqlAddNewPlan, conn);
+                    cmd.Parameters.AddWithValue("@cropId", newPlan.cropId);
+                    cmd.Parameters.AddWithValue("@area", newPlan.area);
+                    cmd.Parameters.AddWithValue("plannedDate", newPlan.plannedDateOfHarvest);
+                    cmd.ExecuteNonQuery();
+
+                }
+
+                result = true;
+
+            }
+
+            catch
+            {
+                result = false;
+            }
+
+                return result;
         }
     }
 }
