@@ -2,42 +2,40 @@
     <div class="home">
     <h1>Home</h1>
 
-    <table id="crop table">
-      <tbody>
-        <tr v-for="item in $store.state.crop" v-bind:key="item.name">
-          <td>
-            {{item.name}}
-          </td>
-          <td>
-                <div class="cropDropdown">
-        <select v-model="selected">
-            <option disabled value="">Details</option>
-            <option v-for="option in options" v-bind:key="option.name"><router-link :to="{name: `${option.name}`}">{{option.name}}
-                </router-link>
-            </option>
-        </select>
-                </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <h2 v-for="item in $store.state.crop" v-bind:key="item.name">
+        {{item.name}}
+                <button id="displayToggle" v-on:click="changeDisplay">
+                    Display Details
+                </button>
+          <Crop-Info v-bind:crop="item" v-show="display" />
+    </h2>
+    
   </div>
 </template>
 
+
 <script>
+import CropInfo from '../components/CropInfo'
+
 export default {
   name: "home",
 
-  data() {
-    return {
-      options: [
+    components: {
+        CropInfo
+    },
 
-        {name: "Seed-to-harvest"},
-        {name: "Seed-to-transplant"},
-        {name: "Transplant-to-harvest"},
-        {name: "Expiration"}
-            ]
+    data(){
+        return {
+            display: false
+        }
+    },
+
+    methods: {
+        changeDisplay() {
+            this.display = !this.display;
+            console.log(this.display);
+            }
     }
-  }
+
 };
 </script>
