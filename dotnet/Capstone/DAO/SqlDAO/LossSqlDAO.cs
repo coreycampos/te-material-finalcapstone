@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Capstone.Models;
 using System.Data.SqlClient;
 
-namespace Capstone.DAO.SqlDAO
+namespace Capstone.DAO
 {
     public class LossSqlDAO: ILossDAO
     {
