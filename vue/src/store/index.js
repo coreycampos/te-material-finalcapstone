@@ -26,12 +26,23 @@ export default new Vuex.Store({
     user: currentUser || {}, // If a user is an admin, their user.role will be 'admin'
     crop: [{
       name: "corn",
-      harvestTime: 5,
-      transplantTime: 4},
+      harvestTime: 80,
+      transplantTime: 0,
+      expirationTime: 60
+      },
       {
       name: "wheat",
-      harvestTime: 3,
-      transplantTime: 1}]
+      harvestTime: 110,
+      transplantTime: 0,
+      expirationTime: 90
+      },
+      {
+      name: "summer squash",
+      harvestTime: 65,
+      transplantTime: 28,
+      expirationTime: 30
+      }
+    ]
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -49,6 +60,9 @@ export default new Vuex.Store({
       state.token = '';
       state.user = {};
       axios.defaults.headers.common = {};
+    },
+    POPULATE_CROP_DATA(state, data) {
+      state.crop = data;
     }
   }
 })
