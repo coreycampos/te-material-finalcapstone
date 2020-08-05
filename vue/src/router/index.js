@@ -7,6 +7,7 @@ import Logout from "../views/Logout.vue";
 import Register from "../views/Register.vue";
 import UploadFiles from "../views/UploadFileView.vue";
 import store from "../store/index";
+import EditCropDetails from "../views/EditCropDetails"
 
 Vue.use(Router);
 
@@ -69,6 +70,14 @@ const router = new Router({
       component: AllDetails,
       meta: {
         requiresAuth: true,
+      }
+    },
+    {
+      path: "/EditCrop",
+      name: "EditCrop",
+      component: EditCropDetails,
+      meta: {
+        requiresAuth: true
       }
     },
     {
