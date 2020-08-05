@@ -73,18 +73,22 @@ namespace Capstone.Controllers
             allUploaded = true;
 
             return Created("", allUploaded);
+        }
         //[HttpPost("cropPlans")]
         //public IActionResult UploadCropPlans(CropPlans payload)
         //{
         //}
 
         [HttpPut("cropUpdate")]
-        public IActionResult UpdateCrop(Crop updatedCrop)
+        public IActionResult UpdateCrop(string cropName, string updatedAttribute, int newValue)
         {
-            Console.WriteLine(updatedCrop);
+            Console.WriteLine(cropName);
+            Console.WriteLine(updatedAttribute);
+            Console.WriteLine(newValue);
 
-            int shouldBeOne = cropDAO.UpdateCrop(updatedCrop);
-            if (shouldBeOne == 1)
+            bool result = cropDAO.UpdateCrop(cropName, updatedAttribute, newValue);
+
+            if (result)
             {
                 return Ok("Update successful");
             }
