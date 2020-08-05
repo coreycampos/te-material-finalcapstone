@@ -45,6 +45,7 @@
 
 <script>
 import uploadService from '../services/UploadService.js';
+// import router from '../router/index.js';
 
 export default {
     name: "upload-files",
@@ -106,19 +107,17 @@ export default {
                     .then(response => {
                         if (response.status == '201' || response.status == '200') {
                             console.log("successfully uploaded");
-                            if (this.$router.currentRoute.name !== 'home') {
-                                this.$router.push({name: 'home'});
-                            }
+                            //if (this.$router.name !== 'home') {
+                                //this.$router.push({name: 'home'});
+                            //}
                         }
                     })
                     .catch(error => {
                         console.error(error);
                     })
                 })
-                
-                // formData.append('file', file);
-                            
             }
+            this.$router.push({name: 'home'});
         },
         
     }
