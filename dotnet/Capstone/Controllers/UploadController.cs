@@ -27,7 +27,7 @@ namespace Capstone.Controllers
             planDAO = _planDAO;
         }
 
-        [HttpPost("harvestTimes")]
+        [HttpPut("harvestTimes")]
         public void UploadHarvestTimes(List<HarvestTime> payload)
         {
             int fromUserId = 0;
