@@ -8,7 +8,7 @@
                     Display Details
                 </button>
                 
-                <button id="sendToEdit" v-on:click="sendToEdit">
+                <button id="sendToEdit" v-on:click="sendToEdit(item)">
                     Edit
                 </button>
           <Crop-Info v-bind:crop="item" v-show="display" />
@@ -40,8 +40,8 @@ export default {
             console.log(this.display);
             },
 
-        sendToEdit() {
-            this.$router.push({name: 'EditCrop', param: })
+        sendToEdit(item) {
+            this.$router.push({name: 'EditCrop', params:{crop: item} })
         },
 
         updateCrop(item){
