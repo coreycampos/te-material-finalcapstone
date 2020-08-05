@@ -2,8 +2,8 @@
     <div class="home">
     <h1>Home</h1>
 
-    <h2 v-for="item in $store.state.crop" v-bind:key="item.name">
-        {{item.name}}
+    <h2 v-for="item in $store.state.crop" v-bind:key="item.cropId">
+        {{item.cropName}}
                 <button id="displayToggle" v-on:click="changeDisplay">
                     Display Details
                 </button>
@@ -30,10 +30,6 @@ export default {
 
     data(){
         return {
-            crop: {
-                harvestTime: "",
-                transplantTime: "",
-            },
             display: false
         }
     },
@@ -45,7 +41,7 @@ export default {
             },
 
         sendToEdit() {
-            this.$router.push({name: 'EditCrop', param: this.crop})
+            this.$router.push({name: 'EditCrop', param: this.item})
         },
 
         updateCrop(item){

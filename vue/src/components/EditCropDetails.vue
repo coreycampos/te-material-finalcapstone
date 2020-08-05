@@ -1,14 +1,14 @@
 <template>
     <div>
         <form>
-            <label for="harvest time input">
-                Harvest Time
+            <label for="seedToHarvestInput">
+                Seed to Harvest Time
             </label>
-            <input type="text" id="harvest time input" v-model="harvestTime">
-            <label for="transplant time input">
+            <input type="text" id="seedToHarvestInput" v-model="timeToHarvest">
+            <label for="seedToTransplantInput">
                 Transplant Time
             </label>
-            <input type="text" id="transplant time input" v-model="transplantTime">
+            <input type="text" id="seedToTransplantInput" v-model="timeToTransplant">
         </form>
     </div>
 </template>
@@ -20,8 +20,8 @@ export default {
 
     data(){
         return {
-            harvestTime: this.crop.harvestTime,
-            transplantTime: this.crop.transplantTime,
+            timeToHarvest: this.crop.timeSeedToHarvest,
+            timeToTransplant: this.crop.timeSeedToTransplant,
         }
     }
 }

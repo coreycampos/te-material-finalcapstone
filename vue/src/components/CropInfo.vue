@@ -3,18 +3,30 @@
         <table>
             <tr>
                 <td>
-                    Harvest Time
+                    Seed to Harvest Time
                 </td>
                 <td>
-                    Transplant Time
+                    Seed to Transplant Time
+                </td>
+                <td>
+                    Transplant to Harvest Time
+                </td>
+                <td>
+                    Time to Expiration
                 </td>
             </tr>
           <tr>
               <td>
-                  {{crop.harvestTime}}
+                  {{crop.timeSeedToHarvest}}
               </td>
               <td>
-                  {{crop.transplantTime}}
+                  {{crop.timeSeedToTransplant}}
+              </td>
+              <td>
+                  {{crop.timeTransplantToHarvest}}
+              </td>
+              <td>
+                  {{crop.timeToExpiration}}
               </td>
           </tr>
           </table>
