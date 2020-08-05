@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
+import AllDetails from "../views/AllDetails"
 import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import Logout from "../views/Logout.vue";
@@ -61,6 +62,14 @@ const router = new Router({
       meta: {
         requiresAuth: true,
       },
+    },
+    {
+      path: "/AllDetails",
+      name: "AllDetails",
+      component: AllDetails,
+      meta: {
+        requiresAuth: true,
+      }
     },
     {
       path: "*",

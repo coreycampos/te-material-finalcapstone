@@ -11,7 +11,7 @@ namespace Capstone.Models
 
         public int harvestId { get; set; }
 
-        public int amount { get; set; }
+        public Decimal amount { get; set; }
 
         public DateTime dateAdded { get; set; }
     }
