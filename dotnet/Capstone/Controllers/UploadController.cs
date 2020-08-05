@@ -18,11 +18,13 @@ namespace Capstone.Controllers
     {
         private readonly IUserDAO userDAO;
         private readonly ICropDAO cropDAO;
+        private readonly IPlanDAO planDAO;
 
-        public UploadController (IUserDAO _userDAO, ICropDAO _cropDAO)
+        public UploadController (IUserDAO _userDAO, ICropDAO _cropDAO, IPlanDAO _planDAO)
         {
             userDAO = _userDAO;
             cropDAO = _cropDAO;
+            planDAO = _planDAO;
         }
 
         [HttpPost("harvestTimes")]
@@ -52,25 +54,48 @@ namespace Capstone.Controllers
         //{
         //}
 
+        [HttpPost("cropPlans")]
+        public IActionResult uploadCropPlans(List<CropPlan> cropPlans)
+        {
+            bool allUploaded = false;
+
+            foreach (CropPlan newPlan in cropPlans)
+            {
+                bool result = planDAO.AddNewPlan(newPlan);
+
+                if (!result)
+                {
+                    allUploaded = false;
+                    return BadRequest();
+                }
+            }
+
+            allUploaded = true;
+
+            return Created("", allUploaded);
+        }
         //[HttpPost("cropPlans")]
         //public IActionResult UploadCropPlans(CropPlans payload)
         //{
         //}
 
-        //[HttpPut("cropUpdate")]
-        //public IActionResult UpdateCrop(Crop updatedCrop)
-        //{
-        //    Console.WriteLine(updatedCrop);
+        [HttpPut("cropUpdate")]
+        public IActionResult UpdateCrop(string cropName, string updatedAttribute, int newValue)
+        {
+            Console.WriteLine(cropName);
+            Console.WriteLine(updatedAttribute);
+            Console.WriteLine(newValue);
 
-        //    int shouldBeOne = cropDAO.UpdateCrop(updatedCrop);
-        //    if (shouldBeOne == 1)
-        //    {
-        //        return Ok("Update successful");
-        //    }
-        //    else
-        //    {
-        //        return BadRequest("Update failed");
-        //    }
-        //}
+            bool result = cropDAO.UpdateCrop(cropName, updatedAttribute, newValue);
+
+            if (result)
+            {
+                return Ok("Update successful");
+            }
+            else
+            {
+                return BadRequest("Update failed");
+            }
+        }
     }
 }

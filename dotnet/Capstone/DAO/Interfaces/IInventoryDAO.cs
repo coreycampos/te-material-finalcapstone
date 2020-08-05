@@ -8,6 +8,14 @@ namespace Capstone.DAO
 {
     public interface IInventoryDAO
     {
+        List<Inventory> GenericSelectInventory(string someSqlCommand);
+
+        //Get all inventory items
+
         List<Inventory> GetAllInventory();
+
+        //What's expiring within 7 days?
+
+        List<Inventory> ExpiringWithinWeek();
     }
 }
