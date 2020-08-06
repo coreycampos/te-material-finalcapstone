@@ -37,5 +37,20 @@ namespace Capstone.Controllers
             return planList;
         }
 
+        [HttpPut("planUpdate")]
+        public IActionResult UpdatePlan(CropPlan somePlan)
+        {
+            bool result = planDAO.UpdatePlan(somePlan);
+
+            if (result)
+            {
+                return Ok("Update successful");
+            }
+            else
+            {
+                return BadRequest("Update failed");
+            }
+        }
+        
     }
 }

@@ -17,5 +17,6 @@ namespace Capstone.DAO
         //What's expiring within 7 days?
 
         List<Inventory> ExpiringWithinWeek();
+
     }
 }

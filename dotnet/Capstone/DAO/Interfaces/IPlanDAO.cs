@@ -21,5 +21,9 @@ namespace Capstone.DAO
         // Add a new plan
 
         bool AddNewPlan(CropPlan newPlan);
+
+        //Update a plan
+
+        bool UpdatePlan(CropPlan somePlan);
     }
 }

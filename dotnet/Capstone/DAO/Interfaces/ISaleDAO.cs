@@ -9,5 +9,7 @@ namespace Capstone.DAO
     public interface ISaleDAO
     {
         List<Sales> GetAllSales();
+        bool RecordNewSale(Sales newSale);
+
     }
 }

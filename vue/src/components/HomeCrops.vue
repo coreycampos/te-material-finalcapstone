@@ -4,9 +4,9 @@
 
     <h2 v-for="item in $store.state.crop" v-bind:key="item.cropId">
         {{item.cropName}}
-                <button id="displayToggle" v-on:click="changeDisplay">
+                <!-- <button id="displayToggle" v-on:click="changeDisplay">
                     Display Details
-                </button>
+                </button> -->
                 
                 <button id="sendToEdit" v-on:click="sendToEdit(item)">
                     Edit

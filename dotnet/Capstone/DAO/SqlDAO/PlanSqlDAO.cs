@@ -11,8 +11,9 @@ namespace Capstone.DAO
     {
         private readonly string connectionString;
         private string sqlSelectAllPlans = "SELECT * FROM crop_plans";
-        private string sqlPlansWithinWeek = "SELECT * FROM crop_plans WHERE planned_harvest_date < DATEADD(day, 7, GETDATE());";
-        private string sqlAddNewPlan = "INSERT INTO crop_plans (crop_id, area_identifier, planned_harvest_date) VALUES (@cropId, @area, @plannedDate)";
+        private string sqlPlansWithinWeek = "SELECT * FROM crop_plans WHERE planting_date < DATEADD(day, 7, GETDATE());";
+        private string sqlAddNewPlan = "INSERT INTO crop_plans (crop_id, area_identifier, planting_date) VALUES (@cropId, @area, @plantingDate)";
+        private string sqlUpdatePlan = "UPDATE crop_plans SET crop_id = @cropId, area_identifier = @area, planting_date = @plantingDate WHERE plan_id = @planId;";
 
         public PlanSqlDAO(string dbConnectionString)
         {
@@ -37,7 +38,7 @@ namespace Capstone.DAO
                     currentPlan.planId = Convert.ToInt32(reader["plan_id"]);
                     currentPlan.cropId = Convert.ToInt32(reader["crop_id"]);
                     currentPlan.area = Convert.ToString(reader["area_identifier"]);
-                    currentPlan.plannedDateOfHarvest = Convert.ToDateTime(reader["planned_harvest_date"]);
+                    currentPlan.plantingDate = Convert.ToDateTime(reader["planting_date"]);
 
                     planList.Add(currentPlan);
                 }
@@ -70,7 +71,7 @@ namespace Capstone.DAO
                     SqlCommand cmd = new SqlCommand(sqlAddNewPlan, conn);
                     cmd.Parameters.AddWithValue("@cropId", newPlan.cropId);
                     cmd.Parameters.AddWithValue("@area", newPlan.area);
-                    cmd.Parameters.AddWithValue("plannedDate", newPlan.plannedDateOfHarvest);
+                    cmd.Parameters.AddWithValue("@plantingDate", newPlan.plantingDate);
                     cmd.ExecuteNonQuery();
 
                 }
@@ -85,6 +86,38 @@ namespace Capstone.DAO
             }
 
                 return result;
+        }
+
+        public bool UpdatePlan(CropPlan somePlan)
+        {
+            bool result = false;
+
+            try
+            {
+
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(sqlAddNewPlan, conn);
+                    cmd.Parameters.AddWithValue("@planId", somePlan.planId);
+                    cmd.Parameters.AddWithValue("@cropId", somePlan.cropId);
+                    cmd.Parameters.AddWithValue("@area", somePlan.area);
+                    cmd.Parameters.AddWithValue("@plantingDate", somePlan.plantingDate);
+                    cmd.ExecuteNonQuery();
+
+                }
+
+                result = true;
+
+            }
+
+            catch
+            {
+                result = false;
+            }
+
+            return result;
         }
     }
 }

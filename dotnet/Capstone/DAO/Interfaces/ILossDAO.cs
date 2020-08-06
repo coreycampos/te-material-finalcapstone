@@ -9,5 +9,6 @@ namespace Capstone.DAO
     public interface ILossDAO
     {
         List<Loss> GetAllLosses();
+        bool RecordNewLoss(Loss newLoss);
     }
 }

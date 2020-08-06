@@ -29,5 +29,21 @@ namespace Capstone.Controllers
             return harvestList;
         }
 
+        [HttpPost("newHarvest")]
+        public IActionResult AddNewHarvest(Harvest newHarvest)
+        {
+            bool result = harvestDAO.AddNewHarvest(newHarvest);
+
+            if (result)
+            {
+                return Created("", result);
+            }
+
+            else
+            {
+                return BadRequest();
+            }
+        }
+
     }
 }
