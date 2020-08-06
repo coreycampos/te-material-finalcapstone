@@ -10,6 +10,6 @@ namespace Capstone.DAO
     {
         List<Crop> GetAllCrops();
 
-        bool UpdateCrop(string cropName, string updatedAttribute, int newValue);
+        bool UpdateCrop(Crop someCrop);
     }
 }

@@ -12,8 +12,10 @@ namespace Capstone.DAO
         private readonly string connectionString;
         private string sqlSelectAllCrops = "SELECT * FROM crops";
         private string sqlUpdateCrop = "IF EXISTS (SELECT * FROM crops WHERE crop_name = @cropName) " +
-            "BEGIN UPDATE crops SET @attribute = @newValue WHERE crop_name = @cropName END " +
-            "ELSE INSERT INTO crops (crop_name, @attribute) VALUES (@cropName, @newValue) END";
+            "BEGIN UPDATE crops SET time_seed_to_transplant = @newST, time_transplant_to_harvest = @newTH, " +
+            "time_seed_to_harvest = @newSH, time_to_expire = @newEX WHERE crop_id = @cropId END " +
+            "ELSE INSERT INTO crops (crop_name, time_seed_to_transplant, time_transplant_to_harvest, time_seed_to_harvest, time_to_expire) " +
+            "VALUES (@cropName, @newST, @newTH, @newSH, @newEX) END";
 
         public CropSqlDAO(string dbConnectionString)
         {
@@ -49,7 +51,7 @@ namespace Capstone.DAO
                 return cropList;
         }
 
-        public bool UpdateCrop(string cropName, string updatedAttribute, int newValue)
+        public bool UpdateCrop(Crop someCrop)
         {
             bool result = false;
 
@@ -60,9 +62,12 @@ namespace Capstone.DAO
                     conn.Open();
 
                     SqlCommand cmd = new SqlCommand(sqlUpdateCrop, conn);
-                    cmd.Parameters.AddWithValue("@attribute", updatedAttribute);
-                    cmd.Parameters.AddWithValue("@newValue", newValue);
-                    cmd.Parameters.AddWithValue("@cropName", cropName);
+                    cmd.Parameters.AddWithValue("@cropId", someCrop.cropId);
+                    cmd.Parameters.AddWithValue("@cropName", someCrop.cropName);
+                    cmd.Parameters.AddWithValue("@newST", someCrop.timeSeedToTransplant);
+                    cmd.Parameters.AddWithValue("@newTH", someCrop.timeTransplantToHarvest);
+                    cmd.Parameters.AddWithValue("@newSH", someCrop.timeSeedToHarvest);
+                    cmd.Parameters.AddWithValue("@newEX", someCrop.timeToExpiration);
 
                     cmd.ExecuteNonQuery();
 
