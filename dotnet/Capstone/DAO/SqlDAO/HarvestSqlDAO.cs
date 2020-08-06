@@ -11,6 +11,7 @@ namespace Capstone.DAO
     {
         private readonly string connectionString;
         private string sqlSelectAllHarvests = "SELECT * FROM harvests";
+        private string sqlAddNewHarvest = "INSERT INTO harvests (crop_id, area_identifier, weight_count, date_harvested) VALUES (@cropId, @area, @weight, @dateHarvested)";
 
         public HarvestSqlDAO(string dbConnectionString)
         {
@@ -43,6 +44,37 @@ namespace Capstone.DAO
 
                 return harvestList;
             }
+        }
+
+        public bool AddNewHarvest(Harvest newHarvest)
+        {
+            bool result = false;
+            
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(sqlAddNewHarvest, conn);
+                    cmd.Parameters.AddWithValue("@cropId", newHarvest.cropID);
+                    cmd.Parameters.AddWithValue("@area", newHarvest.area);
+                    cmd.Parameters.AddWithValue("@weight", newHarvest.cropID);
+                    cmd.Parameters.AddWithValue("@dateHarvested", newHarvest.dateHarvested);
+
+                    cmd.ExecuteNonQuery();
+                }
+
+                result = true;
+
+            }
+
+            catch
+            {
+                result = false;
+            }
+
+            return result;
         }
     }
 }

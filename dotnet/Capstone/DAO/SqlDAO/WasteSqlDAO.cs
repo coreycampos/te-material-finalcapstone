@@ -11,6 +11,8 @@ namespace Capstone.DAO
     {
         private readonly string connectionString;
         private string sqlSelectAllWastes = "SELECT * FROM waste";
+        private string sqlRecordNewWaste = "INSERT INTO waste (inventory_id, date_wasted, amount_wasted, waste_description) " +
+            "VALUES (@inventoryId, @dateWasted, @amountWasted, @wasteDescription);";
 
         public WasteSqlDAO(string dbConnectionString)
         {
@@ -44,6 +46,36 @@ namespace Capstone.DAO
                 return wasteList;
             }
 
+        }
+
+        public bool RecordNewWaste(Waste newWaste)
+        {
+            bool result = false;
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(sqlRecordNewWaste, conn);
+                    cmd.Parameters.AddWithValue("@inventoryId", newWaste.inventoryId);
+                    cmd.Parameters.AddWithValue("@dateWasted", newWaste.dateWasted);
+                    cmd.Parameters.AddWithValue("@amountWasted", newWaste.amountWasted);
+                    cmd.Parameters.AddWithValue("@wasteDescription", newWaste.wasteDescription);
+
+                    cmd.ExecuteNonQuery();
+                }
+
+                result = true;
+            }
+
+            catch
+            {
+                result = false;
+            }
+
+            return result;
         }
     }
 }

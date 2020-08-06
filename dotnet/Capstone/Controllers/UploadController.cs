@@ -109,20 +109,10 @@ namespace Capstone.Controllers
 
             return Created("", allUploaded);
         }
-        //[HttpPost("cropPlans")]
-        //public IActionResult UploadCropPlans(CropPlans payload)
-        //{
-        //}
 
         [HttpPut("cropUpdate")]
         public IActionResult UpdateCrop(Crop someCrop)
         {
-            Console.WriteLine(someCrop.cropId);
-            Console.WriteLine(someCrop.cropName);
-            Console.WriteLine(someCrop.timeSeedToTransplant);
-            Console.WriteLine(someCrop.timeTransplantToHarvest);
-            Console.WriteLine(someCrop.timeSeedToHarvest);
-            Console.WriteLine(someCrop.timeToExpiration);
 
             bool result = cropDAO.UpdateCrop(someCrop);
 
