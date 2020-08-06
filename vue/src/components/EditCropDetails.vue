@@ -23,13 +23,19 @@
                 Time to Expiration
             </label>
             <input type="text" id="timeToExpiration" v-model="crop.timeToExpiration">
+
+            <input type="submit" v-on:click.prevent="saveChanges(crop)">
         </form>
     </div>
 </template>
 
 <script>
+import UploadService from "../services/UploadService.js"
+
 export default {
     name: 'EditCrop',
+
+
     created(){
         this.crop.cropId = this.$route.params.crop.cropId;
         this.crop.cropName = this.$route.params.crop.cropName;
@@ -50,6 +56,14 @@ export default {
                 timeTransplantToHarvest: "",
             }
            
+        }
+    },
+
+    methods: {
+        saveChanges(crop){
+            UploadService.updateCrop(crop).then( () => {
+                this.$router.push({name: 'home'});
+            })
         }
     }
 }
