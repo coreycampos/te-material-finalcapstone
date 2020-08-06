@@ -11,7 +11,7 @@
                 <button id="sendToEdit" v-on:click="sendToEdit(item)">
                     Edit
                 </button>
-          <Crop-Info v-bind:crop="item" v-show="display" />
+          <Crop-Info v-bind:crop="item" />
     </h2>
     
   </div>
