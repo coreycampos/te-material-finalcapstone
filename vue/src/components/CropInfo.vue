@@ -1,6 +1,9 @@
 <template>
     <div>
-        <table>
+        <button id="displayToggle" v-on:click="changeDisplay">
+                    Display Details
+                </button>
+        <table v-show="display">
             <tr class="headerRow">
                 <td>
                     Seed to Harvest Time
@@ -36,6 +39,17 @@
 <script>
 export default {
     name: 'CropInfo',
-    props: ['crop']
+    props: ['crop'],
+    data(){
+        return {
+            display: false
+        }
+    },
+    methods: {
+        changeDisplay() {
+            this.display = !this.display;
+            console.log(this.display);
+            },
+    }
 }
 </script>
