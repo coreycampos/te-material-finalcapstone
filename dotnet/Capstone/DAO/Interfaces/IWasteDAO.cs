@@ -9,5 +9,6 @@ namespace Capstone.DAO
     public interface IWasteDAO
     {
         List<Waste> GetAllWastes();
+        bool RecordNewWaste(Waste newWaste);
     }
 }

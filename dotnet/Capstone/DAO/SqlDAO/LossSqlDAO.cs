@@ -11,6 +11,8 @@ namespace Capstone.DAO
     {
         private readonly string connectionString;
         private string sqlSelectAllLosses = "SELECT * FROM loss";
+        private string sqlRecordNewLoss = "INSERT INTO loss (inventory_id, date_lost, amount_lost, loss_description) " +
+            "VALUES (@inventoryId, @dateLost, @amountLost, @lossDescription);";
 
         public LossSqlDAO(string dbConnectionString)
         {
@@ -44,6 +46,36 @@ namespace Capstone.DAO
                 return lossList;
             }
 
+        }
+
+        public bool RecordNewLoss(Loss newLoss)
+        {
+            bool result = false;
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(sqlRecordNewLoss, conn);
+                    cmd.Parameters.AddWithValue("@inventoryId", newLoss.inventoryId);
+                    cmd.Parameters.AddWithValue("@dateLost", newLoss.dateLost);
+                    cmd.Parameters.AddWithValue("@amountLost", newLoss.amountLost);
+                    cmd.Parameters.AddWithValue("@lossDescription", newLoss.lossDescription);
+
+                    cmd.ExecuteNonQuery();
+                }
+
+                result = true;
+            }
+
+            catch
+            {
+                result = false;
+            }
+
+            return result;
         }
     }
 }

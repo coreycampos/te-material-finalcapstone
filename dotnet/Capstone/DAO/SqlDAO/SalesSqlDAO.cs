@@ -11,6 +11,8 @@ namespace Capstone.DAO
     {
         private readonly string connectionString;
         private string sqlSelectAllSales = "SELECT * FROM sales";
+        private string sqlRecordNewSale = "INSERT INTO sales (inventory_id, date_sold, amount_sold, revenue, method_of_sale) " +
+            "VALUES (@inventoryId, @dateSold, @amountSold, @revenue, @methodOfSale)";
 
         public SalesSqlDAO(string dbConnectionString)
         {
@@ -44,6 +46,37 @@ namespace Capstone.DAO
                 return salesList;
             }
 
+        }
+
+        public bool RecordNewSale(Sales newSale)
+        {
+            bool result = false;
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(sqlRecordNewSale, conn);
+                    cmd.Parameters.AddWithValue("@inventoryId", newSale.inventoryId);
+                    cmd.Parameters.AddWithValue("@dateSold", newSale.dateSold);
+                    cmd.Parameters.AddWithValue("@amountSold", newSale.amountSold);
+                    cmd.Parameters.AddWithValue("@revenue", newSale.revenue);
+                    cmd.Parameters.AddWithValue("@methodOfSale", newSale.methodOfSale);
+
+                    cmd.ExecuteNonQuery();
+                }
+
+                result = true;
+            }
+
+            catch
+            {
+                result = false;
+            }
+
+            return result;
         }
     }
 }

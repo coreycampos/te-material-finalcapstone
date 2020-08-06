@@ -18,7 +18,7 @@ crop_id int IDENTITY(1,1) NOT NULL,
 crop_name varchar(50) NOT NULL,
 time_seed_to_transplant int DEFAULT 0,
 time_transplant_to_harvest int DEFAULT 0,
-time_seed_to_harvest int DEFAULT (time_seed_to_transplant + time_transplant_to_harvest),
+time_seed_to_harvest int DEFAULT 0,
 time_to_expire int DEFAULT 0,
 PRIMARY KEY (crop_id)
 );
@@ -29,7 +29,7 @@ CREATE TABLE crop_plans (
 plan_id int IDENTITY(1,1) NOT NULL,
 crop_id int NOT NULL,
 area_identifier varchar(50) NOT NULL,
-planned_harvest_date date NOT NULL,
+planting_date date NOT NULL,
 PRIMARY KEY (plan_id),
 FOREIGN KEY (crop_id) REFERENCES crops(crop_id)
 );
@@ -92,7 +92,7 @@ FOREIGN KEY (inventory_id) REFERENCES inventory(inventory_id)
 INSERT INTO crops (crop_name, time_seed_to_transplant, time_transplant_to_harvest, time_seed_to_harvest, time_to_expire) 
 VALUES ('corn', 14, 13, 27, 16), ('wheat', 130, 80, 210, 62);
 
-INSERT INTO crop_plans (crop_id, area_identifier, planned_harvest_date)
+INSERT INTO crop_plans (crop_id, area_identifier, planting_date)
 VALUES (2, 'southwest', '08/31/2020');
 
 INSERT INTO harvests (crop_id, area_identifier, weight_count, date_harvested)
@@ -110,7 +110,7 @@ VALUES (1, '06/27/2020', 4, 'theft');
 INSERT INTO waste (inventory_id, date_wasted, amount_wasted, waste_description)
 VALUES (1, '07/08/2020', 11, 'expired');
 
-INSERT INTO crop_plans (crop_id, area_identifier, planned_harvest_date)
+INSERT INTO crop_plans (crop_id, area_identifier, planting_date)
 VALUES (2, 'northeast', '08/10/2020');
 
 IF EXISTS (SELECT * FROM crops WHERE crop_name = 'squash')
@@ -122,4 +122,4 @@ BEGIN
 INSERT INTO crops (crop_name, time_to_expire) VALUES ('squash', 35)
 END;
 
-SELECT * FROM crops;
+SELECT * FROM waste;

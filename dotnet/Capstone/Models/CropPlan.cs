@@ -13,6 +13,6 @@ namespace Capstone.Models
 
         public string area { get; set; }
 
-        public DateTime plannedDateOfHarvest { get; set; }
+        public DateTime plantingDate { get; set; }
     }
 }
