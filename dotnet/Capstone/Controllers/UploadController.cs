@@ -44,15 +44,50 @@ namespace Capstone.Controllers
 
         }
 
-        //[HttpPost("transplantTimes")]
+        //[HttpPut("transplantTimes")]
         //public IActionResult UploadTransplantTimes(List<TransplantTime> payload)
         //{
+        //    Console.WriteLine(payload);
+        //    Console.WriteLine(Request.Body);
+
+        //    bool allUploaded = false;
+
+        //    foreach (TransplantTime newCropData in payload)
+        //    {
+        //        bool result1 = cropDAO.UpdateCrop(newCropData.crop, "timeSeedToTransplant", newCropData.timeSeedToTransplant);
+        //        bool result2 = cropDAO.UpdateCrop(newCropData.crop, "timeTransplantToHarvest", newCropData.timeTransplantToHarvest);
+
+        //        if (!result1 || !result2)
+        //        {
+        //            allUploaded = false;
+        //            return BadRequest();
+        //        }
+        //    }
+
+        //    allUploaded = true;
+
+        //    return Created("", allUploaded);
         //}
 
-        //[HttpPost("expirationTimes")]
-        //public IActionResult UploadExpirationTimes(List<ExpirationTime> payload)
-        //{
-        //}
+    //    [HttpPost("expirationTimes")]
+    //    public IActionResult UploadExpirationTimes(List<ExpirationTime> payload)
+    //    {
+    //        Console.WriteLine(payload);
+    //        Console.WriteLine(Request.Body);
+
+    //        bool result = cropDAO.UpdateCrop(newCropData.crop, "timeSeedToTransplant", newCropData.timeSeedToTransplant);
+
+    //        if (!result)
+    //        {
+    //            allUploaded = false;
+    //            return BadRequest();
+    //        }
+    //    }
+
+    //    allUploaded = true;
+
+    //        return Created("", allUploaded);
+    //}
 
         [HttpPost("cropPlans")]
         public IActionResult uploadCropPlans(List<CropPlan> cropPlans)
