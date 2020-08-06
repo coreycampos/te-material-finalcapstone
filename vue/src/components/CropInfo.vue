@@ -1,7 +1,7 @@
 <template>
     <div>
         <table>
-            <tr>
+            <tr class="headerRow">
                 <td>
                     Seed to Harvest Time
                 </td>
