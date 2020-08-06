@@ -7,22 +7,22 @@
             <label for="seedToHarvestInput">
                 Seed to Harvest Time
             </label>
-            <input type="text" id="seedToHarvestInput" v-model="crop.timeSeedToHarvest">
+            <input type="number" id="seedToHarvestInput" v-model.number="crop.timeSeedToHarvest">
 
             <label for="seedToTransplantInput">
                 Seed to Transplant Time
             </label>
-            <input type="text" id="seedToTransplantInput" v-model="crop.timeSeedToTransplant">
+            <input type="number" id="seedToTransplantInput" v-model.number="crop.timeSeedToTransplant">
 
             <label for="transplantToHarvest">
                 Transplant to Harvest Time
             </label>
-            <input type="text" id="transplantToHarvest" v-model="crop.timeTransplantToHarvest">
+            <input type="number" id="transplantToHarvest" v-model.number="crop.timeTransplantToHarvest">
 
             <label for="timetoExpiration">
                 Time to Expiration
             </label>
-            <input type="text" id="timeToExpiration" v-model="crop.timeToExpiration">
+            <input type="number" id="timeToExpiration" v-model.number="crop.timeToExpiration">
 
             <input type="submit" v-on:click.prevent="saveChanges(crop)">
         </form>
@@ -50,10 +50,10 @@ export default {
             crop:{
                 cropId: "",
                 cropName: "",
-                timeSeedToHarvest: "",
-                timeSeedToTransplant: "",
-                timeToExpiration: "",
-                timeTransplantToHarvest: "",
+                timeSeedToHarvest: 0,
+                timeSeedToTransplant: 0,
+                timeToExpiration: 0,
+                timeTransplantToHarvest: 0,
             }
            
         }

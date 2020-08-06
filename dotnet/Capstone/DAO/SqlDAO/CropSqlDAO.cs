@@ -14,7 +14,7 @@ namespace Capstone.DAO
         private string sqlUpdateCrop = "IF EXISTS (SELECT * FROM crops WHERE crop_name = @cropName) " +
             "BEGIN UPDATE crops SET time_seed_to_transplant = @newST, time_transplant_to_harvest = @newTH, " +
             "time_seed_to_harvest = @newSH, time_to_expire = @newEX WHERE crop_id = @cropId END " +
-            "ELSE INSERT INTO crops (crop_name, time_seed_to_transplant, time_transplant_to_harvest, time_seed_to_harvest, time_to_expire) " +
+            "ELSE BEGIN INSERT INTO crops (crop_name, time_seed_to_transplant, time_transplant_to_harvest, time_seed_to_harvest, time_to_expire) " +
             "VALUES (@cropName, @newST, @newTH, @newSH, @newEX) END";
 
         public CropSqlDAO(string dbConnectionString)
@@ -76,7 +76,7 @@ namespace Capstone.DAO
                 }
             }
 
-            catch
+            catch(Exception e)
             {
                 result = false;
             }
