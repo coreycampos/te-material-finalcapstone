@@ -115,13 +115,16 @@ namespace Capstone.Controllers
         //}
 
         [HttpPut("cropUpdate")]
-        public IActionResult UpdateCrop(string cropName, string updatedAttribute, int newValue)
+        public IActionResult UpdateCrop(Crop someCrop)
         {
-            Console.WriteLine(cropName);
-            Console.WriteLine(updatedAttribute);
-            Console.WriteLine(newValue);
+            Console.WriteLine(someCrop.cropId);
+            Console.WriteLine(someCrop.cropName);
+            Console.WriteLine(someCrop.timeSeedToTransplant);
+            Console.WriteLine(someCrop.timeTransplantToHarvest);
+            Console.WriteLine(someCrop.timeSeedToHarvest);
+            Console.WriteLine(someCrop.timeToExpiration);
 
-            bool result = cropDAO.UpdateCrop(cropName, updatedAttribute, newValue);
+            bool result = cropDAO.UpdateCrop(someCrop);
 
             if (result)
             {

@@ -20,7 +20,7 @@ export default {
     // return axios.post(`/upload/${type}`, payload);
   },
   updateCrop(crop) {
-    return axios.put('/Upload/cropUpdate', crop);
+    return axios.put('/upload/cropUpdate', crop);
   },
 
 }
