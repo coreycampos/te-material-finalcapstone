@@ -34,7 +34,7 @@ PRIMARY KEY (plan_id),
 FOREIGN KEY (crop_id) REFERENCES crops(crop_id)
 );
 
---The user will input this through the application as there is no mention of uploading CSV files in the user story.
+--The user will input data for these through the application as there is no mention of uploading CSV files in the user story.
 
 CREATE TABLE harvests (
 harvest_id int IDENTITY(1,1) NOT NULL,
