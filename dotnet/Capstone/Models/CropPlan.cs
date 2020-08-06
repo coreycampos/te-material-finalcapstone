@@ -9,10 +9,10 @@ namespace Capstone.Models
     {
         public int planId { get; set; }
 
-        public int cropId { get; set; }
+        public string area_identifier { get; set; }
 
-        public string area { get; set; }
+        public string crop { get; set; }
 
-        public DateTime plantingDate { get; set; }
+        public string planting_date { get; set; }
     }
 }

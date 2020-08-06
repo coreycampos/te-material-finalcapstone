@@ -10,6 +10,6 @@ namespace Capstone.Models
         public string crop { get; set; }
 
         //[JsonProperty(PropertyName = "rotation_period")]
-        public string time_to_harvest { get; set; }
+        public int time_to_harvest { get; set; }
     }
 }

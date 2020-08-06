@@ -28,68 +28,87 @@ namespace Capstone.Controllers
         }
 
         [HttpPut("harvestTimes")]
-        public void UploadHarvestTimes(List<HarvestTime> payload)
+        public IActionResult UploadHarvestTimes(List<HarvestTime> payload)
         {
-            int fromUserId = 0;
-            foreach (var claim in User.Claims)
-            {
-                if (claim.Type == "sub")
-                {
-                    fromUserId = int.Parse(claim.Value);
-                }
-            }
             Console.WriteLine(payload);
-            Console.WriteLine(fromUserId);
             Console.WriteLine(Request.Body);
 
+            bool allUploaded = false;
+
+            foreach (HarvestTime newCropData in payload)
+            {
+                Crop updatedCrop = new Crop();
+                updatedCrop.cropName = newCropData.crop;
+                updatedCrop.timeSeedToHarvest = newCropData.time_to_harvest;
+
+                bool result = cropDAO.UpdateCrop(updatedCrop);
+
+                if (!result)
+                {
+                    allUploaded = false;
+                    return BadRequest();
+                }
+            }
+            allUploaded = true;
+            return Created("", allUploaded);
         }
 
-        //[HttpPut("transplantTimes")]
-        //public IActionResult UploadTransplantTimes(List<TransplantTime> payload)
-        //{
-        //    Console.WriteLine(payload);
-        //    Console.WriteLine(Request.Body);
+        [HttpPut("transplantTimes")]
+        public IActionResult UploadTransplantTimes(List<TransplantTime> payload)
+        {
+            Console.WriteLine(payload);
+            Console.WriteLine(Request.Body);
 
-        //    bool allUploaded = false;
+            bool allUploaded = false;
 
-        //    foreach (TransplantTime newCropData in payload)
-        //    {
-        //        bool result1 = cropDAO.UpdateCrop(newCropData.crop, "timeSeedToTransplant", newCropData.timeSeedToTransplant);
-        //        bool result2 = cropDAO.UpdateCrop(newCropData.crop, "timeTransplantToHarvest", newCropData.timeTransplantToHarvest);
+            foreach (TransplantTime newCropData in payload)
+            {
+                Crop updatedCrop = new Crop();
+                updatedCrop.cropName = newCropData.crop;
+                updatedCrop.timeSeedToTransplant = newCropData.time_seed_to_transplant;
+                updatedCrop.timeTransplantToHarvest = newCropData.time_transplant_to_harvest;
 
-        //        if (!result1 || !result2)
-        //        {
-        //            allUploaded = false;
-        //            return BadRequest();
-        //        }
-        //    }
+                bool result = cropDAO.UpdateCrop(updatedCrop);
 
-        //    allUploaded = true;
+                if (!result)
+                {
+                    allUploaded = false;
+                    return BadRequest();
+                }
+            }
 
-        //    return Created("", allUploaded);
-        //}
+            allUploaded = true;
 
-    //    [HttpPost("expirationTimes")]
-    //    public IActionResult UploadExpirationTimes(List<ExpirationTime> payload)
-    //    {
-    //        Console.WriteLine(payload);
-    //        Console.WriteLine(Request.Body);
+            return Created("", allUploaded);
+        }
 
-    //        bool result = cropDAO.UpdateCrop(newCropData.crop, "timeSeedToTransplant", newCropData.timeSeedToTransplant);
+        [HttpPost("expirationTimes")]
+        public IActionResult UploadExpirationTimes(List<ExpirationTime> payload)
+        {
+            Console.WriteLine(payload);
+            Console.WriteLine(Request.Body);
 
-    //        if (!result)
-    //        {
-    //            allUploaded = false;
-    //            return BadRequest();
-    //        }
-    //    }
+            bool allUploaded = false;
 
-    //    allUploaded = true;
+            foreach (ExpirationTime newCropData in payload)
+            {
+                Crop updatedCrop = new Crop();
+                updatedCrop.cropName = newCropData.crop;
+                updatedCrop.timeSeedToHarvest = newCropData.time_to_expiration;
 
-    //        return Created("", allUploaded);
-    //}
+                bool result = cropDAO.UpdateCrop(updatedCrop);
 
-        [HttpPost("cropPlans")]
+                if (!result)
+                {
+                    allUploaded = false;
+                    return BadRequest();
+                }
+            }
+            allUploaded = true;
+            return Created("", allUploaded);
+        }
+
+        [HttpPut("cropPlans")]
         public IActionResult uploadCropPlans(List<CropPlan> cropPlans)
         {
             bool allUploaded = false;
