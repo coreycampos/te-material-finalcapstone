@@ -13,6 +13,6 @@ namespace Capstone.Models
 
         public string crop { get; set; }
 
-        public string planting_date { get; set; }
+        public int planting_date { get; set; }
     }
 }

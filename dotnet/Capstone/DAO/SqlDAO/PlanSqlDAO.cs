@@ -38,7 +38,7 @@ namespace Capstone.DAO
                     currentPlan.planId = Convert.ToInt32(reader["plan_id"]);
                     currentPlan.crop = Convert.ToString(reader["crop_id"]);
                     currentPlan.area_identifier = Convert.ToString(reader["area_identifier"]);
-                    currentPlan.planting_date = Convert.ToString(reader["planting_date"]);
+                    currentPlan.planting_date = Convert.ToInt32(reader["planting_date"]);
 
                     planList.Add(currentPlan);
                 }

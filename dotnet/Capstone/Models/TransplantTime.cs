@@ -9,8 +9,8 @@ namespace Capstone.Models
     {
         public string crop { get; set; }
 
-        public int time_seed_to_transplant { get; set; }
+        public int direct_seed_to_transplant_time { get; set; }
 
-        public int time_transplant_to_harvest { get; set; }
+        public int transplant_to_harvest_time { get; set; }
     }
 }

@@ -65,8 +65,8 @@ namespace Capstone.Controllers
             {
                 Crop updatedCrop = new Crop();
                 updatedCrop.cropName = newCropData.crop;
-                updatedCrop.timeSeedToTransplant = newCropData.time_seed_to_transplant;
-                updatedCrop.timeTransplantToHarvest = newCropData.time_transplant_to_harvest;
+                updatedCrop.timeSeedToTransplant = newCropData.direct_seed_to_transplant_time;
+                updatedCrop.timeTransplantToHarvest = newCropData.transplant_to_harvest_time;
 
                 bool result = cropDAO.UpdateCrop(updatedCrop);
 
@@ -82,7 +82,7 @@ namespace Capstone.Controllers
             return Created("", allUploaded);
         }
 
-        [HttpPost("expirationTimes")]
+        [HttpPut("expirationTimes")]
         public IActionResult UploadExpirationTimes(List<ExpirationTime> payload)
         {
             Console.WriteLine(payload);
@@ -94,7 +94,7 @@ namespace Capstone.Controllers
             {
                 Crop updatedCrop = new Crop();
                 updatedCrop.cropName = newCropData.crop;
-                updatedCrop.timeSeedToHarvest = newCropData.time_to_expiration;
+                updatedCrop.timeSeedToHarvest = newCropData.days_to_expire;
 
                 bool result = cropDAO.UpdateCrop(updatedCrop);
 

@@ -9,6 +9,6 @@ namespace Capstone.Models
     {
         public string crop { get; set; }
 
-        public int time_to_expiration { get; set; }
+        public int days_to_expire { get; set; }
     }
 }
