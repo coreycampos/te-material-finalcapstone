@@ -41,7 +41,7 @@ namespace Capstone.DAO
                     currentCrop.cropName = Convert.ToString(reader["crop_name"]);
                     currentCrop.timeSeedToTransplant = Convert.ToInt32(reader["time_seed_to_transplant"]);
                     currentCrop.timeTransplantToHarvest = Convert.ToInt32(reader["time_transplant_to_harvest"]);
-                    currentCrop.timeSeedToTransplant = Convert.ToInt32(reader["time_seed_to_harvest"]);
+                    currentCrop.timeSeedToHarvest = Convert.ToInt32(reader["time_seed_to_harvest"]);
                     currentCrop.timeToExpiration = Convert.ToInt32(reader["time_to_expire"]);
 
                     cropList.Add(currentCrop);
