@@ -16,6 +16,18 @@ namespace Capstone.DAO
             "time_seed_to_harvest = @newSH, time_to_expire = @newEX WHERE crop_id = @cropId END " +
             "ELSE BEGIN INSERT INTO crops (crop_name, time_seed_to_transplant, time_transplant_to_harvest, time_seed_to_harvest, time_to_expire) " +
             "VALUES (@cropName, @newST, @newTH, @newSH, @newEX) END";
+        private string sqlUpdateHarvestTime = "IF EXISTS (SELECT * FROM crops WHERE crop_name = @cropName) " +
+            "BEGIN UPDATE crops SET time_seed_to_harvest = @newSH WHERE crop_name = @cropName END " +
+            "ELSE BEGIN INSERT INTO crops (crop_name, time_seed_to_harvest) " +
+            "VALUES (@cropName, @newSH) END";
+        private string sqlUpdateExpirationTime = "IF EXISTS (SELECT * FROM crops WHERE crop_name = @cropName) " +
+            "BEGIN UPDATE crops SET time_to_expire = @newEX WHERE crop_name = @cropName END " +
+            "ELSE BEGIN INSERT INTO crops (crop_name, time_to_expire) " +
+            "VALUES (@cropName, @newEX) END";
+        private string sqlUpdateTransplantTime = "IF EXISTS (SELECT * FROM crops WHERE crop_name = @cropName) " +
+            "BEGIN UPDATE crops SET time_seed_to_transplant = @newST, time_transplant_to_harvest = @newTH WHERE crop_name = @cropName END " +
+            "ELSE BEGIN INSERT INTO crops (crop_name, time_seed_to_transplant, time_transplant_to_harvest) " +
+            "VALUES (@cropName, @newST, @newTH) END";
 
         public CropSqlDAO(string dbConnectionString)
         {
@@ -82,6 +94,100 @@ namespace Capstone.DAO
             }
 
                 return result;
+        }
+
+        public bool UpdateHarvestTime(Crop someCrop)
+        {
+            bool result = false;
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(sqlUpdateHarvestTime, conn);
+                    cmd.Parameters.AddWithValue("@cropName", someCrop.cropName);
+                    cmd.Parameters.AddWithValue("@newSH", someCrop.timeSeedToHarvest);
+
+                    int rowsReturned = cmd.ExecuteNonQuery();
+
+                    if (rowsReturned > 0)
+                    {
+                        result = true;
+                    }
+                }
+            }
+
+            catch (Exception e)
+            {
+                result = false;
+            }
+
+            return result;
+        }
+
+        public bool UpdateExpirationTime(Crop someCrop)
+        {
+            bool result = false;
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(sqlUpdateExpirationTime, conn);
+                    cmd.Parameters.AddWithValue("@cropName", someCrop.cropName);
+                    cmd.Parameters.AddWithValue("@newEX", someCrop.timeToExpiration);
+
+                    int rowsReturned = cmd.ExecuteNonQuery();
+
+                    if (rowsReturned > 0)
+                    {
+                        result = true;
+                    }
+                }
+            }
+
+            catch (Exception e)
+            {
+                result = false;
+            }
+
+            return result;
+        }
+
+        public bool UpdateTransplantTime(Crop someCrop)
+        {
+            bool result = false;
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(sqlUpdateTransplantTime, conn);
+                    cmd.Parameters.AddWithValue("@cropName", someCrop.cropName);
+                    cmd.Parameters.AddWithValue("@newST", someCrop.timeSeedToTransplant);
+                    cmd.Parameters.AddWithValue("@newTH", someCrop.timeTransplantToHarvest);
+
+                    int rowsReturned = cmd.ExecuteNonQuery();
+
+                    if (rowsReturned > 0)
+                    {
+                        result = true;
+                    }
+                }
+            }
+
+            catch (Exception e)
+            {
+                result = false;
+            }
+
+            return result;
         }
 
     }

@@ -41,7 +41,7 @@ namespace Capstone.Controllers
                 updatedCrop.cropName = newCropData.crop;
                 updatedCrop.timeSeedToHarvest = newCropData.time_to_harvest;
 
-                bool result = cropDAO.UpdateCrop(updatedCrop);
+                bool result = cropDAO.UpdateHarvestTime(updatedCrop);
 
                 if (!result)
                 {
@@ -68,7 +68,7 @@ namespace Capstone.Controllers
                 updatedCrop.timeSeedToTransplant = newCropData.direct_seed_to_transplant_time;
                 updatedCrop.timeTransplantToHarvest = newCropData.transplant_to_harvest_time;
 
-                bool result = cropDAO.UpdateCrop(updatedCrop);
+                bool result = cropDAO.UpdateTransplantTime(updatedCrop);
 
                 if (!result)
                 {
@@ -94,9 +94,9 @@ namespace Capstone.Controllers
             {
                 Crop updatedCrop = new Crop();
                 updatedCrop.cropName = newCropData.crop;
-                updatedCrop.timeSeedToHarvest = newCropData.days_to_expire;
+                updatedCrop.timeToExpiration = newCropData.days_to_expire;
 
-                bool result = cropDAO.UpdateCrop(updatedCrop);
+                bool result = cropDAO.UpdateExpirationTime(updatedCrop);
 
                 if (!result)
                 {

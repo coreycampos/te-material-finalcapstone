@@ -11,5 +11,11 @@ namespace Capstone.DAO
         List<Crop> GetAllCrops();
 
         bool UpdateCrop(Crop someCrop);
+
+        bool UpdateHarvestTime(Crop someCrop);
+
+        bool UpdateExpirationTime(Crop someCrop);
+
+        bool UpdateTransplantTime(Crop someCrop);
     }
 }
