@@ -1,31 +1,21 @@
 <template>
     <div>
         <table id="full crop table">
-            <tr>
+            <tr class="headerRow">
                 <td>
-                    <h1>
                     Crop Name &nbsp;
-                    </h1>
                 </td>
                 <td>
-                    <h1>
                     Seed to Harvest Time &nbsp;
-                    </h1>
                 </td>
                 <td>
-                    <h1>
                     Seed to Transpant Time
-                    </h1>
                 </td>
                 <td>
-                    <h1>
                     Transplant to Harvest Time
-                    </h1>
                 </td>
                 <td>
-                    <h1>
                         Time to Expiration
-                    </h1>
                 </td>
             </tr>
             <tr v-for="item in $store.state.crop" v-bind:key="item.cropId">
@@ -44,3 +34,9 @@ export default {
     
 }
 </script>
+
+<style scoped>
+.headerRow {
+    font-weight: bold;
+}
+</style>

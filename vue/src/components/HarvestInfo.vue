@@ -6,14 +6,16 @@
             <td>Harvest Id</td>
             <td>Crop</td>
             <td>Area</td>
+            <td>Harvest Weight</td>
             <td>Harvest Date</td>
         </tr>
-        <tr>
+        <!-- <tr>
             <td>{{harvest.harvestId}}</td>
             <td>{{harvest.cropPlanted}}</td>
             <td>{{harvest.area}}</td>
+            <td>{{harvest.weight}}</td>
             <td>{{harvest.harvestDate}}</td>
-        </tr>
+        </tr> -->
     </table>
 </div>
 </template>
@@ -26,5 +28,7 @@ export default {
 </script>
 
 <style scoped>
-
+.headerRow {
+    font-weight: bold;
+}
 </style>

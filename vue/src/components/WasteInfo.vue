@@ -1,5 +1,6 @@
 <template>
     <div>
+        <h2>Crop Waste</h2>
         <table>
             <tr class="headerRow">
                 <td>Waste Id</td>
@@ -8,13 +9,13 @@
                 <td>Amount Wasted</td>
                 <td>Waste Description</td>
             </tr>
-            <tr>
+            <!-- <tr>
                 <td>{{waste.wasteId}}</td>
                 <td>{{waste.inventoryId}}</td>
                 <td>{{waste.dateWasted}}</td>
                 <td>{{waste.amountWasted}}</td>
                 <td>{{waste.wasteDescription}}</td>
-            </tr>
+            </tr> -->
           </table>
     </div>
 </template>
@@ -25,3 +26,9 @@ export default {
     props: ['waste']
 }
 </script>
+
+<style scoped>
+.headerRow {
+    font-weight: bold;
+}
+</style>

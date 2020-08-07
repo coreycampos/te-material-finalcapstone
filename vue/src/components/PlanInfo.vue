@@ -1,6 +1,6 @@
 <template>
 <div>
-    <h2> Crop Plans</h2>
+    <h2>Crop Plans</h2>
     <table>
         <tr class="headerRow">
             <td>Plan Id</td>
@@ -8,12 +8,12 @@
             <td>Area</td>
             <td>Planned Harvest Date</td>
         </tr>
-        <tr>
+        <!-- <tr>
             <td>{{plan.planId}}</td>
             <td>{{plan.cropPlanted}}</td>
             <td>{{plan.area}}</td>
             <td>{{plan.plannedHarvestDate}}</td>
-        </tr>
+        </tr> -->
     </table>
 </div>
 </template>
@@ -26,5 +26,7 @@ export default {
 </script>
 
 <style scoped>
-
+.headerRow {
+    font-weight: bold;
+}
 </style>

@@ -1,16 +1,16 @@
 <template>
     <div>
-        <edit-crop-details />
+        <add-harvest />
     </div>
 </template>
 
 <script>
-import EditCropDetails from "../components/EditCropDetails.vue"
+import AddHarvest from "../components/AddHarvest.vue"
 
 export default {
     components: {
-        EditCropDetails,
-    }
+        AddHarvest
+        }
 }
 </script>
 

@@ -1,5 +1,6 @@
 <template>
     <div>
+        <h2>Crop Loss</h2>
         <table>
             <tr class="headerRow">
                 <td>Loss Id</td>
@@ -8,13 +9,13 @@
                 <td>Amount Lost</td>
                 <td>Loss Description</td>
             </tr>
-            <tr>
+            <!-- <tr>
                 <td>{{loss.lossId}}</td>
                 <td>{{loss.inventoryId}}</td>
                 <td>{{loss.dateLost}}</td>
                 <td>{{loss.amountLost}}</td>
                 <td>{{loss.lossDescription}}</td>
-            </tr>
+            </tr> -->
           </table>
     </div>
 </template>
@@ -25,3 +26,9 @@ export default {
     props: ['loss']
 }
 </script>
+
+<style scoped>
+.headerRow {
+    font-weight: bold;
+}
+</style>

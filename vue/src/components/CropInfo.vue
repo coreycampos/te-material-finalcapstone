@@ -18,7 +18,7 @@
                     Time to Expiration
                 </td>
             </tr>
-          <tr>
+          <tr class="informationRow">
               <td>
                   {{crop.timeSeedToHarvest}}
               </td>
@@ -53,3 +53,12 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.headerRow{
+    font-size: 75%;
+}
+.informationRow{
+    font-size: 60%;
+}
+</style>

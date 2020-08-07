@@ -36,6 +36,18 @@
       >
       &nbsp;|&nbsp;Upload Files
       </router-link>
+      <router-link 
+      class="nav-item"
+      v-bind:to="{name: 'AllFarmInfo'}"
+      >
+      &nbsp;|&nbsp;All Farm Information
+      </router-link>
+      <router-link 
+      class="nav-item"
+      v-bind:to="{name: 'AddHarvestData'}"
+      >
+      &nbsp;|&nbsp;Add Harvest Data
+      </router-link>
     </div>
     <router-view />
   </div>

@@ -1,13 +1,15 @@
 import Vue from "vue";
 import Router from "vue-router";
-import AllDetails from "../views/AllDetails"
+import AllDetails from "../views/AllDetails.vue"
 import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import Logout from "../views/Logout.vue";
 import Register from "../views/Register.vue";
 import UploadFiles from "../views/UploadFileView.vue";
 import store from "../store/index";
-import EditCropDetails from "../views/EditCropDetails"
+import EditCropDetails from "../views/EditCropDetails.vue"
+import AllFarmInfo from "../views/AllFarmInfo.vue"
+import AddHarvestData from "../views/AddHarvestData.vue"
 
 Vue.use(Router);
 
@@ -76,6 +78,22 @@ const router = new Router({
       path: "/EditCrop",
       name: "EditCrop",
       component: EditCropDetails,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/AllFarmInfo",
+      name: "AllFarmInfo",
+      component: AllFarmInfo,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/AddHarvest",
+      name: "AddHarvestData",
+      component: AddHarvestData,
       meta: {
         requiresAuth: true
       }
