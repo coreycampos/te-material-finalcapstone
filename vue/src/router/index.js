@@ -94,7 +94,7 @@ const router = new Router({
       }
     },
     {
-      path: "/AddHarvest",
+      path: "/add/Harvest",
       name: "AddHarvestData",
       component: AddHarvestData,
       meta: {
@@ -103,7 +103,7 @@ const router = new Router({
     },
 
     {
-      path: "/AddSale",
+      path: "/add/Sale",
       name: "AddSale",
       component: AddSale,
       meta: {
@@ -112,7 +112,7 @@ const router = new Router({
     },
 
     {
-      path: "/AddLoss",
+      path: "/add/Loss",
       name: "AddLoss",
       component: AddLoss,
       meta: {
@@ -121,7 +121,7 @@ const router = new Router({
     },
 
     {
-      path: "/AddWaste",
+      path: "/add/Waste",
       name: "AddWaste",
       component: AddWaste,
       meta: {
