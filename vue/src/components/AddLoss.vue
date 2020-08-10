@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import lossService from '../services/LossDataService.js';
 export default {
         name: 'add-loss',
 
@@ -42,6 +43,15 @@ export default {
                 amountLost: 0,
                 lossDescription: ""
             }
+        }
+    },
+
+    methods: {
+        saveLoss() {
+            lossService.addLoss(this.loss)
+            .then((response) => console.log(response))
+            .catch((error) => console.log(error));
+            this.$router.push({name: 'Home'});
         }
     }
 }

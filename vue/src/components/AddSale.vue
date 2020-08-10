@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import saleService from '../services/SaleDataService.js';
 export default {
     name: 'add-sale',
 
@@ -49,8 +50,16 @@ export default {
                 methodOfSale: ""
             }
         }
+    },
+
+    methods: {
+        saveSale() {
+            saleService.addSale(this.sale)
+            .then((response) => console.log(response))
+            .catch((error) => console.log(error));
+            this.$router.push({name: 'Home'});
+        }
     }
-    
 }
 </script>
 

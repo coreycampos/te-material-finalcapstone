@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import wasteService from '../services/WasteDataService.js';
 export default {
     name: 'add-waste',
 
@@ -42,6 +43,15 @@ export default {
                 amountWasted: 0,
                 wasteDescription: ""
             }
+        }
+    },
+
+    methods: {
+        saveWaste() {
+            wasteService.addLoss(this.waste)
+            .then((response) => console.log(response))
+            .catch((error) => console.log(error));
+            this.$router.push({name: 'Home'});
         }
     }
 }
