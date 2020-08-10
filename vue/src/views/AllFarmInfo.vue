@@ -1,6 +1,6 @@
 <template>
     <div>
-        <plan-info />
+        <plan-info v-bind:plans="$store.state.cropPlans" />
         <harvest-info />
         <sales-info />
         <loss-info />
@@ -14,6 +14,7 @@ import PlanInfo from "../components/PlanInfo.vue"
 import LossInfo from "../components/LossInfo.vue"
 import HarvestInfo from "../components/HarvestInfo.vue"
 import WasteInfo from "../components/WasteInfo.vue"
+import CropPlansService from "../services/CropPlansService.js"
 
 export default {
     components: {
@@ -22,7 +23,17 @@ export default {
         LossInfo,
         HarvestInfo,
         WasteInfo
-    }    
+    },
+    created() {
+        CropPlansService.getAllPlans()
+        .then(response => {
+            this.$store.commit("POPULATE_CROP_PLANS", response.data);
+        })
+        .catch(error => {
+            console.error(error);
+            alert("Error - see console.");
+            });
+        }
 }
 </script>
 
