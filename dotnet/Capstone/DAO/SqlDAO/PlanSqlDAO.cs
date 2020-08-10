@@ -14,6 +14,7 @@ namespace Capstone.DAO
         private string sqlPlansWithinWeek = "SELECT * FROM crop_plans WHERE planting_date < DATEADD(day, 7, GETDATE());";
         private string sqlAddNewPlan = "INSERT INTO crop_plans (crop_id, area_identifier, planting_date) VALUES (@cropId, @area, @plantingDate)";
         private string sqlUpdatePlan = "UPDATE crop_plans SET crop_id = @cropId, area_identifier = @area, planting_date = @plantingDate WHERE plan_id = @planId;";
+        private string sqlGetCropId = "SELECT crop_id FROM crops WHERE crop_name = @cropName;";
 
         public PlanSqlDAO(string dbConnectionString)
         {
@@ -38,7 +39,7 @@ namespace Capstone.DAO
                     currentPlan.planId = Convert.ToInt32(reader["plan_id"]);
                     currentPlan.crop = Convert.ToString(reader["crop_id"]);
                     currentPlan.area_identifier = Convert.ToString(reader["area_identifier"]);
-                    currentPlan.planting_date = Convert.ToInt32(reader["planting_date"]);
+                    currentPlan.planting_date = Convert.ToString(reader["planting_date"]);
 
                     planList.Add(currentPlan);
                 }
@@ -66,14 +67,21 @@ namespace Capstone.DAO
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-
+                    // query to select the cropId from our crop name, execute scalar to give first value
+                    SqlCommand gettingCropId = new SqlCommand(sqlGetCropId, conn);
+                    gettingCropId.Parameters.AddWithValue("@cropName", newPlan.crop);
+                    object cropId = gettingCropId.ExecuteScalar();
+                                       
                     SqlCommand cmd = new SqlCommand(sqlAddNewPlan, conn);
-                    cmd.Parameters.AddWithValue("@cropId", newPlan.crop);
+                    cmd.Parameters.AddWithValue("@cropId", cropId);
                     cmd.Parameters.AddWithValue("@area", newPlan.area_identifier);
                     cmd.Parameters.AddWithValue("@plantingDate", newPlan.planting_date);
-                    cmd.ExecuteNonQuery();
+                    int rowsReturned = cmd.ExecuteNonQuery();
+                    if (rowsReturned > 0)
+                    {
+                        result = true;
+                    }
                 }
-                result = true;
             }
             catch (Exception e)
             {
