@@ -7,9 +7,12 @@ import Logout from "../views/Logout.vue";
 import Register from "../views/Register.vue";
 import UploadFiles from "../views/UploadFileView.vue";
 import store from "../store/index";
-import EditCropDetails from "../views/EditCropDetails.vue"
-import AllFarmInfo from "../views/AllFarmInfo.vue"
-import AddHarvestData from "../views/AddHarvestData.vue"
+import EditCropDetails from "../views/EditCropDetails.vue";
+import AllFarmInfo from "../views/AllFarmInfo.vue";
+import AddHarvestData from "../views/AddHarvestData.vue";
+import AddSale from "../views/AddSale.vue";
+import AddLoss from "../views/AddLoss.vue";
+import AddWaste from "../views/AddWaste.vue";
 
 Vue.use(Router);
 
@@ -94,6 +97,33 @@ const router = new Router({
       path: "/AddHarvest",
       name: "AddHarvestData",
       component: AddHarvestData,
+      meta: {
+        requiresAuth: true
+      }
+    },
+
+    {
+      path: "/AddSale",
+      name: "AddSale",
+      component: AddSale,
+      meta: {
+        requiresAuth: true
+      }
+    },
+
+    {
+      path: "/AddLoss",
+      name: "AddLoss",
+      component: AddLoss,
+      meta: {
+        requiresAuth: true
+      }
+    },
+
+    {
+      path: "/AddWaste",
+      name: "AddWaste",
+      component: AddWaste,
       meta: {
         requiresAuth: true
       }
