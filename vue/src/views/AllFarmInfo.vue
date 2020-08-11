@@ -1,7 +1,7 @@
 <template>
     <div>
         <plan-info v-bind:plans="$store.state.cropPlans" />
-        <harvest-info />
+        <harvest-info v-bind:harvests="$store.state.harvests" />
         <sales-info />
         <loss-info />
         <waste-info />
@@ -15,6 +15,7 @@ import LossInfo from "../components/LossInfo.vue"
 import HarvestInfo from "../components/HarvestInfo.vue"
 import WasteInfo from "../components/WasteInfo.vue"
 import CropPlansService from "../services/CropPlansService.js"
+import HarvestDataService from "../services/HarvestDataService.js"
 
 export default {
     components: {
@@ -33,7 +34,15 @@ export default {
             console.error(error);
             alert("Error - see console.");
             });
-        }
+        HarvestDataService.getAllHarvests()
+        .then(response => {
+            this.$store.commit("POPULATE_HARVEST_DATA", response.data);
+        })
+        .catch(error => {
+            console.error(error);
+            alert("Error - see console.");
+            });
+    }
 }
 </script>
 

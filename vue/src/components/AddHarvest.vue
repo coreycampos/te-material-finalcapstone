@@ -52,7 +52,10 @@ export default {
             harvestService.addHarvest(this.harvest)
             .then((response) => console.log(response))
             .catch((error) => console.log(error));
-            this.$router.push({ name: 'Home'});
+            if (this.$router.name !== 'home') {
+                console.log("Made it to line 56");
+                this.$router.push({name: 'home'});
+            }
         }
     }
    

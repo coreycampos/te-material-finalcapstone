@@ -58,6 +58,16 @@ export default new Vuex.Store({
         planting_date: "05/02/2020",
       }
     ],
+    harvests: [
+      {
+        area: "raised bed 1",
+        cropId: 9,
+        cropName: "garlic",
+        dateHarvested: "08/10/2020",
+        harvestId: 1,
+        weight: 50,
+      }
+    ]
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -81,6 +91,9 @@ export default new Vuex.Store({
     },
     POPULATE_CROP_PLANS(state, data) {
       state.cropPlans = data;
+    },
+    POPULATE_HARVEST_DATA(state, data) {
+      state.harvests = data;
     }
   }
 })

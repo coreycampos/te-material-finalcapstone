@@ -117,7 +117,7 @@ export default {
                     })
                 })
             }
-            this.$router.push({name: 'home'});
+            this.$router.push({name: 'Home'});
         },
         
     }

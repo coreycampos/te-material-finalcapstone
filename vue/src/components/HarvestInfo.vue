@@ -9,13 +9,13 @@
             <td>Harvest Weight</td>
             <td>Harvest Date</td>
         </tr>
-        <!-- <tr>
+        <tr v-for="harvest in harvests" v-bind:key="harvest.harvestId">
             <td>{{harvest.harvestId}}</td>
-            <td>{{harvest.cropPlanted}}</td>
+            <td>{{harvest.cropName}}</td>
             <td>{{harvest.area}}</td>
             <td>{{harvest.weight}}</td>
-            <td>{{harvest.harvestDate}}</td>
-        </tr> -->
+            <td>{{harvest.dateHarvested}}</td>
+        </tr>
     </table>
 </div>
 </template>
@@ -23,7 +23,7 @@
 <script>
 export default {
     name: 'HarvestInfo',
-    props: ['harvest']
+    props: ['harvests']
 }
 </script>
 

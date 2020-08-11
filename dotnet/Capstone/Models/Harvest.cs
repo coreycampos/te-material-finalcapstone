@@ -11,6 +11,8 @@ namespace Capstone.Models
 
         public int cropID { get; set; }
 
+        public string cropName { get; set; }
+
         public string area { get; set; }
 
         public Decimal weight { get; set; }

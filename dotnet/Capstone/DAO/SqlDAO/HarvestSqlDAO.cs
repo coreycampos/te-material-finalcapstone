@@ -10,7 +10,7 @@ namespace Capstone.DAO
     public class HarvestSqlDAO : IHarvestDAO
     {
         private readonly string connectionString;
-        private string sqlSelectAllHarvests = "SELECT * FROM harvests";
+        private string sqlSelectAllHarvests = "SELECT harvest_id, harvests.crop_id , crops.crop_name, area_identifier, weight_count, date_harvested FROM harvests INNER JOIN crops ON crops.crop_id=harvests.crop_id;";
         private string sqlAddNewHarvest = "INSERT INTO harvests (crop_id, area_identifier, weight_count, date_harvested) VALUES (@cropId, @area, @weight, @dateHarvested)";
 
         public HarvestSqlDAO(string dbConnectionString)
@@ -35,6 +35,7 @@ namespace Capstone.DAO
 
                     currentHarvest.harvestId = Convert.ToInt32(reader["harvest_id"]);
                     currentHarvest.cropID = Convert.ToInt32(reader["crop_id"]);
+                    currentHarvest.cropName = Convert.ToString(reader["crop_name"]);
                     currentHarvest.area = Convert.ToString(reader["area_identifier"]);
                     currentHarvest.weight = Convert.ToDecimal(reader["weight_count"]);
                     currentHarvest.dateHarvested = Convert.ToDateTime(reader["date_harvested"]);
@@ -59,7 +60,7 @@ namespace Capstone.DAO
                     SqlCommand cmd = new SqlCommand(sqlAddNewHarvest, conn);
                     cmd.Parameters.AddWithValue("@cropId", newHarvest.cropID);
                     cmd.Parameters.AddWithValue("@area", newHarvest.area);
-                    cmd.Parameters.AddWithValue("@weight", newHarvest.cropID);
+                    cmd.Parameters.AddWithValue("@weight", newHarvest.weight);
                     cmd.Parameters.AddWithValue("@dateHarvested", newHarvest.dateHarvested);
 
                     cmd.ExecuteNonQuery();
