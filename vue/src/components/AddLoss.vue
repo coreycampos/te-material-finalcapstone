@@ -26,13 +26,13 @@ import lossService from '../services/LossDataService.js';
 export default {
         name: 'add-loss',
 
-    created() {
-        this.loss.lossId = this.$route.params.loss.lossId;
-        this.loss.inventoryId = this.$route.params.loss.inventoryId;
-        this.loss.dateLost = this.$route.params.loss.dateLost;
-        this.loss.amountLost = this.$route.params.loss.amountLost;
-        this.loss.lossDescription = this.$route.params.loss.lossDescription;
-    },
+    // created() {
+    //     this.loss.lossId = this.$route.params.loss.lossId;
+    //     this.loss.inventoryId = this.$route.params.loss.inventoryId;
+    //     this.loss.dateLost = this.$route.params.loss.dateLost;
+    //     this.loss.amountLost = this.$route.params.loss.amountLost;
+    //     this.loss.lossDescription = this.$route.params.loss.lossDescription;
+    // },
 
     data() {
         return {

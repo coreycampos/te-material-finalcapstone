@@ -26,13 +26,13 @@ import wasteService from '../services/WasteDataService.js';
 export default {
     name: 'add-waste',
 
-    created() {
-        this.waste.wasteId = this.$route.params.waste.wasteId;
-        this.waste.inventoryId = this.$route.params.waste.inventoryId;
-        this.waste.dateWasted = this.$route.params.waste.dateWasted;
-        this.waste.amountWasted = this.$route.params.waste.amountWasted;
-        this.waste.wasteDescription = this.$route.params.waste.wasteDescription;
-    },
+    // created() {
+    //     this.waste.wasteId = this.$route.params.waste.wasteId;
+    //     this.waste.inventoryId = this.$route.params.waste.inventoryId;
+    //     this.waste.dateWasted = this.$route.params.waste.dateWasted;
+    //     this.waste.amountWasted = this.$route.params.waste.amountWasted;
+    //     this.waste.wasteDescription = this.$route.params.waste.wasteDescription;
+    // },
 
     data() {
         return {

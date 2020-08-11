@@ -6,4 +6,7 @@ export default {
         return axios.get('plan/allPlans');
     },
     
+    updateCropPlans(cropPlan){
+        return axios.put('plan/planUpdate', cropPlan);
+    }
 }

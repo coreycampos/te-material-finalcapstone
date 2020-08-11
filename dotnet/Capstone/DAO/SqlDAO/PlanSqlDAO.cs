@@ -113,7 +113,7 @@ namespace Capstone.DAO
                     gettingCropId.Parameters.AddWithValue("@cropName", somePlan.crop);
                     object cropId = gettingCropId.ExecuteScalar();
 
-                    SqlCommand cmd = new SqlCommand(sqlAddNewPlan, conn);
+                    SqlCommand cmd = new SqlCommand(sqlUpdatePlan, conn);
                     cmd.Parameters.AddWithValue("@planId", somePlan.planId);
                     cmd.Parameters.AddWithValue("@cropId", cropId);
                     cmd.Parameters.AddWithValue("@area", somePlan.area_identifier);

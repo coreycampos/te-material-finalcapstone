@@ -10,13 +10,15 @@
             
             <label for="plantingDate">Planting Date</label>
             <input type="text" v-model="cropPlan.planting_date" id="plantingDate">
-            <input type="submit">
+            <input type="submit" v-on:click.prevent="saveChanges(cropPlan)">
         </form>
 
     </div>
 </template>
 
 <script>
+import CropPlansService from "../services/CropPlansService.js"
+
 export default {
     created(){
         this.cropPlan.crop = this.$route.params.cropPlan.crop;
@@ -36,6 +38,15 @@ export default {
                 planting_date: 0,
             }
         }
+    },
+
+    methods: {
+        saveChanges(cropPlan){
+            CropPlansService.updateCropPlans(cropPlan).then( () => {
+                this.$router.push({name: 'home'});
+            })
+        }
+        
     }
 }
 </script>
