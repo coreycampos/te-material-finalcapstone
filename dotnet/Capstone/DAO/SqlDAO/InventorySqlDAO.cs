@@ -13,7 +13,7 @@ namespace Capstone.DAO
         private string sqlSelectAllInventory = "SELECT * FROM inventory";
         private string sqlAddInventory = "INSERT INTO inventory (crop_id, amount, date_added) VALUES (@cropId, @amount, @dateAdded)";
         private string sqlDebitInventory = "UPDATE inventory SET amount = amount - @debit WHERE inventory_id = @inventoryId";
-        private string sqlGetItemTotal = "SELECT SUM(amount) AS total FROM inventory WHERE crop_name = @cropName";
+        private string sqlGetItemTotal = "SELECT amount FROM inventory WHERE inventory_id = @inventoryId";
 
         public InventorySqlDAO(string dbConnectionString)
         {
@@ -52,28 +52,31 @@ namespace Capstone.DAO
             return GenericSelectInventory(sqlSelectAllInventory);
         }
 
-        public decimal GetTotalItem(string cropName)
+        public Inventory GetSpecificInventory(int inventoryId)
         {
-            decimal totalOnHand = 0;
+            Inventory currentInventory = new Inventory();
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
 
                 SqlCommand cmd = new SqlCommand(sqlGetItemTotal, conn);
-                cmd.Parameters.AddWithValue("@cropName", cropName);
+                cmd.Parameters.AddWithValue("@inventoryId", inventoryId);
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read() == true)
                 {
-                    totalOnHand = Convert.ToDecimal(reader["total"]);
+                    currentInventory.inventoryId = Convert.ToInt32(reader["inventory_id"]);
+                    currentInventory.cropId = Convert.ToInt32(reader["crop_id"]);
+                    currentInventory.amount = Convert.ToDecimal(reader["amount"]);
+                    currentInventory.dateAdded = Convert.ToDateTime(reader["date_added"]);
                 }
 
-                return totalOnHand;
+                return currentInventory;
             }
         }
 
-        public bool addInventory(int cropId, decimal amount, DateTime dateAdded)
+        public bool AddInventory(int cropId, decimal amount, DateTime dateAdded)
         {
             bool result = false;
 
@@ -109,6 +112,13 @@ namespace Capstone.DAO
 
             try
             {
+                Inventory currentInventory = GetSpecificInventory(inventoryId);
+
+                if (debit > currentInventory.amount)
+                {
+                    return result;
+                }
+
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
