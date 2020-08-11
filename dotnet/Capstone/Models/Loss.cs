@@ -11,6 +11,10 @@ namespace Capstone.Models
 
         public int inventoryId { get; set; }
 
+        public string cropName { get; set; }
+
+        public DateTime dateAdded { get; set; }
+
         public DateTime dateLost { get; set; }
 
         public Decimal amountLost { get; set; }

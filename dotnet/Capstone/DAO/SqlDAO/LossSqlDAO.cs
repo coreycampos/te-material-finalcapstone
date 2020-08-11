@@ -10,7 +10,8 @@ namespace Capstone.DAO
     public class LossSqlDAO: ILossDAO
     {
         private readonly string connectionString;
-        private string sqlSelectAllLosses = "SELECT * FROM loss";
+        private string sqlSelectAllLosses = "SELECT l.inventory_id, i.date_added, c.crop_name, l.loss_id, l.date_lost, l.amount_lost, l.loss_description FROM loss AS l " +
+            "JOIN inventory AS i ON l.inventory_id = i.inventory_id JOIN crops AS c ON i.crop_id = c.crop_id;";
         private string sqlRecordNewLoss = "INSERT INTO loss (inventory_id, date_lost, amount_lost, loss_description) " +
             "VALUES (@inventoryId, @dateLost, @amountLost, @lossDescription);";
 
@@ -36,6 +37,8 @@ namespace Capstone.DAO
 
                     currentLoss.lossId = Convert.ToInt32(reader["loss_id"]);
                     currentLoss.inventoryId = Convert.ToInt32(reader["inventory_id"]);
+                    currentLoss.dateAdded = Convert.ToDateTime(reader["date_added"]);
+                    currentLoss.cropName = Convert.ToString(reader["crop_name"]);
                     currentLoss.dateLost = Convert.ToDateTime(reader["date_lost"]);
                     currentLoss.amountLost = Convert.ToDecimal(reader["amount_lost"]);
                     currentLoss.lossDescription = Convert.ToString(reader["loss_description"]);

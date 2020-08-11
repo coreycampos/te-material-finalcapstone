@@ -10,7 +10,8 @@ namespace Capstone.DAO
     public class SalesSqlDAO : ISaleDAO
     {
         private readonly string connectionString;
-        private string sqlSelectAllSales = "SELECT * FROM sales";
+        private string sqlSelectAllSales = "SELECT s.inventory_id, i.date_added, c.crop_name, s.sale_id, s.date_sold, s.amount_sold, s.revenue, s.method_of_sale FROM sales AS s " +
+            "JOIN inventory AS i ON s.inventory_id = i.inventory_id JOIN crops AS c ON i.crop_id = c.crop_id;";
         private string sqlRecordNewSale = "INSERT INTO sales (inventory_id, date_sold, amount_sold, revenue, method_of_sale) " +
             "VALUES (@inventoryId, @dateSold, @amountSold, @revenue, @methodOfSale)";
 
@@ -34,6 +35,8 @@ namespace Capstone.DAO
                 {
                     Sales currentSale = new Sales();
 
+                    currentSale.cropName = Convert.ToString(reader["crop_name"]);
+                    currentSale.dateAdded = Convert.ToDateTime(reader["date_added"]);
                     currentSale.saleId = Convert.ToInt32(reader["sale_id"]);
                     currentSale.inventoryId = Convert.ToInt32(reader["inventory_id"]);
                     currentSale.dateSold = Convert.ToDateTime(reader["date_sold"]);

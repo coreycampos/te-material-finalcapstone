@@ -10,10 +10,10 @@ namespace Capstone.DAO
     public class InventorySqlDAO : IInventoryDAO
     {
         private readonly string connectionString;
-        private string sqlSelectAllInventory = "SELECT * FROM inventory";
-        private string sqlAddInventory = "INSERT INTO inventory (crop_id, amount, date_added) VALUES (@cropId, @amount, @dateAdded)";
-        private string sqlDebitInventory = "UPDATE inventory SET amount = amount - @debit WHERE inventory_id = @inventoryId";
-        private string sqlGetSpecificInventory = "SELECT * FROM inventory WHERE inventory_id = @inventoryId";
+        private string sqlSelectAllInventory = "SELECT c.crop_name, i.* FROM inventory AS i JOIN crops AS c ON i.crop_id = c.crop_id;";
+        private string sqlAddInventory = "INSERT INTO inventory (crop_id, amount, date_added) VALUES (@cropId, @amount, @dateAdded);";
+        private string sqlDebitInventory = "UPDATE inventory SET amount = amount - @debit WHERE inventory_id = @inventoryId;";
+        private string sqlGetSpecificInventory = "SELECT * FROM inventory WHERE inventory_id = @inventoryId;";
 
         public InventorySqlDAO(string dbConnectionString)
         {
@@ -35,6 +35,7 @@ namespace Capstone.DAO
                 {
                     Inventory currentInventory = new Inventory();
 
+                    currentInventory.cropName = Convert.ToString(reader["crop_name"]);
                     currentInventory.inventoryId = Convert.ToInt32(reader["inventory_id"]);
                     currentInventory.cropId = Convert.ToInt32(reader["crop_id"]);
                     currentInventory.amount = Convert.ToDecimal(reader["amount"]);
@@ -66,6 +67,7 @@ namespace Capstone.DAO
 
                 while (reader.Read() == true)
                 {
+                    currentInventory.cropName = Convert.ToString(reader["crop_name"]);
                     currentInventory.inventoryId = Convert.ToInt32(reader["inventory_id"]);
                     currentInventory.cropId = Convert.ToInt32(reader["crop_id"]);
                     currentInventory.amount = Convert.ToDecimal(reader["amount"]);

@@ -124,4 +124,5 @@ BEGIN
 INSERT INTO crops (crop_name, time_to_expire) VALUES ('squash', 35)
 END;
 
-SELECT * FROM sales;
+SELECT i.inventory_id, i.date_added, c.crop_name, l.date_lost, l.amount_lost, l.loss_description FROM loss AS l JOIN inventory AS i ON l.inventory_id = i.inventory_id JOIN crops AS c ON i.crop_id = c.crop_id;
+

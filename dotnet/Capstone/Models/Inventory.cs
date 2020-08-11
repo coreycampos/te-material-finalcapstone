@@ -11,6 +11,8 @@ namespace Capstone.Models
 
         public int cropId { get; set; }
 
+        public string cropName { get; set; }
+
         public Decimal amount { get; set; }
 
         public DateTime dateAdded { get; set; }
