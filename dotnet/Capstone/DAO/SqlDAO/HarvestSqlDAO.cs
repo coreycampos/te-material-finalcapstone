@@ -14,13 +14,14 @@ namespace Capstone.DAO
         private string sqlAddNewHarvest = "INSERT INTO harvests (crop_id, area_identifier, weight_count, date_harvested) VALUES (@cropId, @area, @weight, @dateHarvested)";
         private string sqlExpiringWithinWeek = "SELECT * FROM harvests AS h JOIN crops AS c ON h.crop_id = c.crop_id "
 + "WHERE DATEDIFF(day, DATEADD(day, c.time_to_expire, h.date_harvested), GETDATE()) <= 7;";
+        private string sqlUpdateHarvest = "UPDATE harvests SET crop_id = @cropId, area_identifier = @area, weight_count = @amount, date_harvested = @dateHarvested WHERE harvest_id = @harvestId;";
+        private string sqlGetCropId = "SELECT crop_id FROM crops WHERE crop_name = @cropName;";
+
 
         public HarvestSqlDAO(string dbConnectionString)
         {
             connectionString = dbConnectionString;
         }
-
-
 
         public List<Harvest> GenericSelectHarvest(string sqlCommand)
         {
@@ -86,6 +87,37 @@ namespace Capstone.DAO
 
             return result;
         }
+        public bool UpdateHarvest(Harvest someHarvest)
+        {
+            bool result = false;
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand gettingCropId = new SqlCommand(sqlGetCropId, conn);
+                    gettingCropId.Parameters.AddWithValue("@cropName", someHarvest.cropName);
+                    object cropId = gettingCropId.ExecuteScalar();
+
+                    SqlCommand cmd = new SqlCommand(sqlUpdateHarvest, conn);
+                    cmd.Parameters.AddWithValue("@planId", someHarvest.harvestId);
+                    cmd.Parameters.AddWithValue("@cropId", cropId);
+                    cmd.Parameters.AddWithValue("@area", someHarvest.area);
+                    cmd.Parameters.AddWithValue("@dateHarvested", someHarvest.dateHarvested);
+                    cmd.Parameters.AddWithValue("@amount", someHarvest.weight);
+                    cmd.ExecuteNonQuery();
+                }
+                result = true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                result = false;
+            }
+            return result;
+        }
+
 
         public List<Harvest> ExpiringWithinWeek()
         {
