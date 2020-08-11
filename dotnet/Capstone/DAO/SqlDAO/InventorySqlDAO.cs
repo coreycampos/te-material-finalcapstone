@@ -13,7 +13,7 @@ namespace Capstone.DAO
         private string sqlSelectAllInventory = "SELECT * FROM inventory";
         private string sqlAddInventory = "INSERT INTO inventory (crop_id, amount, date_added) VALUES (@cropId, @amount, @dateAdded)";
         private string sqlDebitInventory = "UPDATE inventory SET amount = amount - @debit WHERE inventory_id = @inventoryId";
-        private string sqlGetItemTotal = "SELECT amount FROM inventory WHERE inventory_id = @inventoryId";
+        private string sqlGetSpecificInventory = "SELECT * FROM inventory WHERE inventory_id = @inventoryId";
 
         public InventorySqlDAO(string dbConnectionString)
         {
@@ -60,7 +60,7 @@ namespace Capstone.DAO
             {
                 conn.Open();
 
-                SqlCommand cmd = new SqlCommand(sqlGetItemTotal, conn);
+                SqlCommand cmd = new SqlCommand(sqlGetSpecificInventory, conn);
                 cmd.Parameters.AddWithValue("@inventoryId", inventoryId);
                 SqlDataReader reader = cmd.ExecuteReader();
 
