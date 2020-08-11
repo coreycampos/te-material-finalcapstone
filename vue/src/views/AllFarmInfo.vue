@@ -3,7 +3,7 @@
         <plan-info v-bind:plans="$store.state.cropPlans" />
         <harvest-info v-bind:harvests="$store.state.harvests" />
         <sales-info v-bind:sales="$store.state.sales" />
-        <loss-info />
+        <loss-info v-bind:losses="$store.state.losses" />
         <waste-info />
     </div>
 </template>
@@ -17,7 +17,8 @@ import WasteInfo from "../components/WasteInfo.vue"
 
 import CropPlansService from "../services/CropPlansService.js"
 import HarvestDataService from "../services/HarvestDataService.js"
-import SaleDataService from "../services/SaleDataService"
+import SaleDataService from "../services/SaleDataService.js"
+import LossDataService from "../services/LossDataService.js"
 
 export default {
     components: {
@@ -47,6 +48,14 @@ export default {
         SaleDataService.getAllSales()
         .then(response => {
             this.$store.commit("POPULATE_SALE_DATA", response.data);
+        })
+        .catch(error => {
+            console.error(error);
+            alert("Error - see console.");
+            });
+        LossDataService.getAllLosses()
+        .then(response => {
+            this.$store.commit("POPULATE_LOSS_DATA", response.data);
         })
         .catch(error => {
             console.error(error);

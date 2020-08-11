@@ -66,7 +66,7 @@ export default new Vuex.Store({
         dateHarvested: "08/10/2020",
         harvestId: 1,
         weight: 50,
-      }
+      },
     ],
     sales: [
       {
@@ -76,7 +76,16 @@ export default new Vuex.Store({
         amountSold: 500,
         revenue: 385.50,
         methodOfSale: "wholesale",
-      }
+      },
+    ],
+    losses: [
+      {
+        lossId: 1,
+        inventoryId: 2,
+        dateLost: "07/20/2020",
+        amountLost: 100,
+        lossDescription: "Sheep got into the silo and ate grain.",
+      },
     ],
   },
   mutations: {
@@ -108,5 +117,8 @@ export default new Vuex.Store({
     POPULATE_SALE_DATA(state, data) {
       state.sales = data;
     },
+    POPULATE_LOSS_DATA(state, data) {
+      state.losses = data;
+    }
   }
 })
