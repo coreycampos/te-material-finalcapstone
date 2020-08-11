@@ -1,15 +1,10 @@
 <template>
     <div>
         <plan-info v-bind:plans="$store.state.cropPlans" />
-        <button>Edit</button>
         <harvest-info v-bind:harvests="$store.state.harvests" />
-        <button>Edit</button>
         <sales-info v-bind:sales="$store.state.sales" />
-        <button>Edit</button>
         <loss-info v-bind:losses="$store.state.losses" />
-        <button>Edit</button>
         <waste-info v-bind:wastes="$store.state.wastes" />
-        <button>Edit</button>
     </div>
 </template>
 
@@ -34,6 +29,13 @@ export default {
         HarvestInfo,
         WasteInfo
     },
+
+    methods: {
+        sendToEditPlan(){
+            this.$router.push({name: 'EditCropPlans', params: {cropPlan: this.$store.state.cropPlans} })
+        }
+    },
+
     created() {
         CropPlansService.getAllPlans()
         .then(response => {

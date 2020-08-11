@@ -9,7 +9,8 @@ import UploadFiles from "../views/UploadFileView.vue";
 import store from "../store/index";
 import EditCropDetails from "../views/EditCropDetails.vue";
 import AllFarmInfo from "../views/AllFarmInfo.vue";
-import AddFarmInfo from "../views/AddFarmInfo"
+import AddFarmInfo from "../views/AddFarmInfo.vue";
+import EditCropPlans from "../views/EditCropPlans.vue";
 
 Vue.use(Router);
 
@@ -94,6 +95,14 @@ const router = new Router({
       path: "/add/FarmInfo",
       name: "AddFarmInfo",
       component: AddFarmInfo,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/edit/CropPlans",
+      name: "EditCropPlans",
+      component: EditCropPlans,
       meta: {
         requiresAuth: true
       }

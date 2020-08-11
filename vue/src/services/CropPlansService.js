@@ -5,4 +5,5 @@ export default {
     getAllPlans() {
         return axios.get('plan/allPlans');
     },
+    
 }
