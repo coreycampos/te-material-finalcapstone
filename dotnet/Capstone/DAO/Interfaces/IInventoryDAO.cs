@@ -12,11 +12,11 @@ namespace Capstone.DAO
 
         List<Inventory> GetAllInventory();
 
-        decimal GetTotalItem(string cropName);
+        Inventory GetSpecificInventory(int inventoryId);
 
         bool AddInventory(int cropId, decimal amount, DateTime dateAdded);
 
-        bool debitInventory(int inventoryId, decimal debit);
+        bool DebitInventory(int inventoryId, decimal debit);
 
 
     }

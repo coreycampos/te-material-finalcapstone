@@ -14,6 +14,8 @@ namespace Capstone.DAO
 
         bool AddNewHarvest(Harvest newHarvest);
 
+        bool UpdateHarvest(Harvest someHarvest);
+
 
     }
 }

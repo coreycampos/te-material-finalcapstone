@@ -16,10 +16,12 @@ namespace Capstone.Controllers
     public class SalesController : ControllerBase
     {
         private readonly ISaleDAO salesDAO;
+        private readonly IInventoryDAO inventoryDAO;
 
-        public SalesController(ISaleDAO _salesDAO)
+        public SalesController(ISaleDAO _salesDAO, IInventoryDAO _inventoryDAO)
         {
             salesDAO = _salesDAO;
+            inventoryDAO = _inventoryDAO;
         }
 
         [HttpGet("allSales")]
@@ -32,8 +34,9 @@ namespace Capstone.Controllers
         public IActionResult AddNewSale(Sales newSale)
         {
             bool result = salesDAO.RecordNewSale(newSale);
+            bool inventoryResult = inventoryDAO.DebitInventory(newSale.inventoryId, newSale.amountSold);
 
-            if (result)
+            if (result && inventoryResult)
             {
                 return Created("", result);
             }

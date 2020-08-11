@@ -44,6 +44,20 @@ namespace Capstone.Controllers
                 return BadRequest();
             }
         }
+        [HttpPut("updateHarvest")]
+        public IActionResult UpdatePlan(Harvest someHarvest)
+        {
+            bool result = harvestDAO.UpdateHarvest(someHarvest);
+
+            if (result)
+            {
+                return Ok("Update successful");
+            }
+            else
+            {
+                return BadRequest("Update failed");
+            }
+        }
 
     }
 }

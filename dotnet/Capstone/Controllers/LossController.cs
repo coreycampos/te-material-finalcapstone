@@ -16,10 +16,12 @@ namespace Capstone.Controllers
     public class LossController : ControllerBase
     {
         private readonly ILossDAO lossDAO;
+        private readonly IInventoryDAO inventoryDAO;
 
-        public LossController(ILossDAO _lossDAO)
+        public LossController(ILossDAO _lossDAO, IInventoryDAO _inventoryDAO)
         {
             lossDAO = _lossDAO;
+            inventoryDAO = _inventoryDAO;
         }
 
         [HttpGet("allLoss")]
@@ -32,8 +34,9 @@ namespace Capstone.Controllers
         public IActionResult AddNewLoss(Loss newLoss)
         {
             bool result = lossDAO.RecordNewLoss(newLoss);
+            bool inventoryResult = inventoryDAO.DebitInventory(newLoss.inventoryId, newLoss.amountLost);
 
-            if (result)
+            if (result && inventoryResult)
             {
                 return Created("", result);
             }

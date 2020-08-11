@@ -16,10 +16,12 @@ namespace Capstone.Controllers
     public class WasteController : ControllerBase
     {
         private readonly IWasteDAO wasteDAO;
+        private readonly IInventoryDAO inventoryDAO;
 
-        public WasteController(IWasteDAO _wasteDAO)
+        public WasteController(IWasteDAO _wasteDAO, IInventoryDAO _inventoryDAO)
         {
             wasteDAO = _wasteDAO;
+            inventoryDAO = _inventoryDAO;
         }
 
         [HttpGet("allWaste")]
@@ -32,8 +34,9 @@ namespace Capstone.Controllers
         public IActionResult AddNewWaste(Waste newWaste)
         {
             bool result = wasteDAO.RecordNewWaste(newWaste);
+            bool inventoryResult = inventoryDAO.DebitInventory(newWaste.inventoryId, newWaste.amountWasted);
 
-            if (result)
+            if (result && inventoryResult)
             {
                 return Created("", result);
             }
