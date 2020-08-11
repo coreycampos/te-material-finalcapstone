@@ -106,7 +106,7 @@ namespace Capstone.DAO
 
         }
 
-        public bool debitInventory(int inventoryId, decimal debit)
+        public bool DebitInventory(int inventoryId, decimal debit)
         {
             bool result = false;
 

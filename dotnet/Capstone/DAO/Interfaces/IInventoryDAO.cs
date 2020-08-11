@@ -16,7 +16,7 @@ namespace Capstone.DAO
 
         bool AddInventory(int cropId, decimal amount, DateTime dateAdded);
 
-        bool debitInventory(int inventoryId, decimal debit);
+        bool DebitInventory(int inventoryId, decimal debit);
 
 
     }
