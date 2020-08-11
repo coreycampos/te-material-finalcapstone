@@ -73,7 +73,7 @@ namespace Capstone.DAO
             }
         }
 
-        public bool addInventory(int cropId, decimal amount, DateTime dateAdded)
+        public bool AddInventory(int cropId, decimal amount, DateTime dateAdded)
         {
             bool result = false;
 
