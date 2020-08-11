@@ -67,7 +67,17 @@ export default new Vuex.Store({
         harvestId: 1,
         weight: 50,
       }
-    ]
+    ],
+    sales: [
+      {
+        saleId: 1,
+        inventoryId: 1  ,
+        dateSold: "08/12/2020",
+        amountSold: 500,
+        revenue: 385.50,
+        methodOfSale: "wholesale",
+      }
+    ],
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -94,6 +104,9 @@ export default new Vuex.Store({
     },
     POPULATE_HARVEST_DATA(state, data) {
       state.harvests = data;
-    }
+    },
+    POPULATE_SALE_DATA(state, data) {
+      state.sales = data;
+    },
   }
 })

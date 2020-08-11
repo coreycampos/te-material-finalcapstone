@@ -38,6 +38,7 @@ namespace Capstone.DAO
                     currentSale.inventoryId = Convert.ToInt32(reader["inventory_id"]);
                     currentSale.dateSold = Convert.ToDateTime(reader["date_sold"]);
                     currentSale.amountSold = Convert.ToDecimal(reader["amount_sold"]);
+                    currentSale.revenue = Convert.ToDecimal(reader["revenue"]);
                     currentSale.methodOfSale = Convert.ToString(reader["method_of_sale"]);
 
                     salesList.Add(currentSale);

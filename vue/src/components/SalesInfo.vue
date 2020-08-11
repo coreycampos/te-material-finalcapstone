@@ -10,14 +10,14 @@
                 <td>Revenue</td>
                 <td>Method of Sale</td>
             </tr>
-            <!-- <tr>
+            <tr v-for="sale in sales" v-bind:key="sale.saleId">
                 <td>{{sale.saleId}}</td>
                 <td>{{sale.inventoryId}}</td>
                 <td>{{sale.dateSold}}</td>
                 <td>{{sale.amountSold}}</td>
                 <td>{{sale.revenue}}</td>
                 <td>{{sale.methodOfSale}}</td>
-            </tr> -->
+            </tr>
           </table>
     </div>
 </template>
@@ -25,7 +25,7 @@
 <script>
 export default {
     name: 'SalesInfo',
-    props: ['sale']
+    props: ['sales']
 }
 </script>
 
