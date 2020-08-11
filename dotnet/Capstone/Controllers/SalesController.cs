@@ -28,6 +28,20 @@ namespace Capstone.Controllers
             List<Sales> salesList = salesDAO.GetAllSales();
             return salesList;
         }
+        [HttpPost("newSale")]
+        public IActionResult AddNewSale(Sales newSale)
+        {
+            bool result = salesDAO.RecordNewSale(newSale);
+
+            if (result)
+            {
+                return Created("", result);
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
 
     }
 }

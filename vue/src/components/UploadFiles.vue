@@ -107,9 +107,9 @@ export default {
                     .then(response => {
                         if (response.status == '201' || response.status == '200') {
                             console.log("successfully uploaded");
-                            //if (this.$router.name !== 'home') {
-                                //this.$router.push({name: 'home'});
-                            //}
+                            if (this.$router.name !== 'home') {
+                                this.$router.push({name: 'home'});
+                            }
                         }
                     })
                     .catch(error => {
@@ -117,7 +117,7 @@ export default {
                     })
                 })
             }
-            this.$router.push({name: 'Home'});
+            //this.$router.push({name: 'Home'});
         },
         
     }

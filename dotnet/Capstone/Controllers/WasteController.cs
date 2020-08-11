@@ -28,6 +28,20 @@ namespace Capstone.Controllers
             List<Waste> wasteList = wasteDAO.GetAllWastes();
             return wasteList;
         }
+        [HttpPost("newWaste")]
+        public IActionResult AddNewWaste(Waste newWaste)
+        {
+            bool result = wasteDAO.RecordNewWaste(newWaste);
+
+            if (result)
+            {
+                return Created("", result);
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
 
     }
 }

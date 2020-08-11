@@ -49,7 +49,7 @@ export default {
 
     methods: {
         saveWaste() {
-            wasteService.addLoss(this.waste)
+            wasteService.addWaste(this.waste)
             .then((response) => console.log(response))
             .catch((error) => console.log(error));
             this.$router.push({name: 'Home'});

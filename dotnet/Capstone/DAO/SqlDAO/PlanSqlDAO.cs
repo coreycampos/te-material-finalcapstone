@@ -39,7 +39,7 @@ namespace Capstone.DAO
 
                     currentPlan.planId = Convert.ToInt32(reader["plan_id"]);
                     currentPlan.cropId = Convert.ToInt32(reader["crop_id"]);
-                    currentPlan.cropName = Convert.ToString(reader["crop_name"]);
+                    currentPlan.crop = Convert.ToString(reader["crop_name"]);
                     currentPlan.area_identifier = Convert.ToString(reader["area_identifier"]);
                     currentPlan.planting_date = Convert.ToString(reader["planting_date"]);
 
@@ -75,7 +75,7 @@ namespace Capstone.DAO
                     conn.Open();
                     // query to select the cropId from our crop name, execute scalar to give first value
                     SqlCommand gettingCropId = new SqlCommand(sqlGetCropId, conn);
-                    gettingCropId.Parameters.AddWithValue("@cropName", newPlan.cropName);
+                    gettingCropId.Parameters.AddWithValue("@cropName", newPlan.crop);
                     object cropId = gettingCropId.ExecuteScalar();
                     // This is where I would add validation for if the crop is already in the DB
                     // If the cropId object comes back as 'null', it is not in DB yet,
@@ -110,7 +110,7 @@ namespace Capstone.DAO
                     conn.Open();
 
                     SqlCommand gettingCropId = new SqlCommand(sqlGetCropId, conn);
-                    gettingCropId.Parameters.AddWithValue("@cropName", somePlan.cropName);
+                    gettingCropId.Parameters.AddWithValue("@cropName", somePlan.crop);
                     object cropId = gettingCropId.ExecuteScalar();
 
                     SqlCommand cmd = new SqlCommand(sqlAddNewPlan, conn);
