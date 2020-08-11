@@ -22,7 +22,7 @@ namespace Capstone.Controllers
             wasteDAO = _wasteDAO;
         }
 
-        [HttpGet("allLoss")]
+        [HttpGet("allWaste")]
         public List<Waste> GetAllWaste()
         {
             List<Waste> wasteList = wasteDAO.GetAllWastes();

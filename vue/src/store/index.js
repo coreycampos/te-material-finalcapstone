@@ -87,6 +87,15 @@ export default new Vuex.Store({
         lossDescription: "Sheep got into the silo and ate grain.",
       },
     ],
+    wastes: [
+      {
+        wasteId: 1,
+        inventoryId: 3,
+        dateWasted: "07/15/2020",
+        amountWasted: 25,
+        wasteDescription: "Tomatoes expired.",
+      },
+    ],
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -119,6 +128,9 @@ export default new Vuex.Store({
     },
     POPULATE_LOSS_DATA(state, data) {
       state.losses = data;
-    }
+    },
+    POPULATE_WASTE_DATA(state, data) {
+      state.wastes = data;
+    },
   }
 })

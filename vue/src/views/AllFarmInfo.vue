@@ -4,7 +4,7 @@
         <harvest-info v-bind:harvests="$store.state.harvests" />
         <sales-info v-bind:sales="$store.state.sales" />
         <loss-info v-bind:losses="$store.state.losses" />
-        <waste-info />
+        <waste-info v-bind:wastes="$store.state.wastes" />
     </div>
 </template>
 
@@ -19,6 +19,7 @@ import CropPlansService from "../services/CropPlansService.js"
 import HarvestDataService from "../services/HarvestDataService.js"
 import SaleDataService from "../services/SaleDataService.js"
 import LossDataService from "../services/LossDataService.js"
+import WasteDataService from "../services/WasteDataService.js"
 
 export default {
     components: {
@@ -43,7 +44,7 @@ export default {
         })
         .catch(error => {
             console.error(error);
-            alert("Error - see console.");
+            //alert("Error - see console.");
             });
         SaleDataService.getAllSales()
         .then(response => {
@@ -51,7 +52,7 @@ export default {
         })
         .catch(error => {
             console.error(error);
-            alert("Error - see console.");
+            //alert("Error - see console.");
             });
         LossDataService.getAllLosses()
         .then(response => {
@@ -59,7 +60,15 @@ export default {
         })
         .catch(error => {
             console.error(error);
-            alert("Error - see console.");
+            //alert("Error - see console.");
+            });
+        WasteDataService.getAllWastes()
+        .then(response => {
+            this.$store.commit("POPULATE_WASTE_DATA", response.data);
+        })
+        .catch(error => {
+            console.error(error);
+            //alert("Error - see console.");
             });
     }
 }
