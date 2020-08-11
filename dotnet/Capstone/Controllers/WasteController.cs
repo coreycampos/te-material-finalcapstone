@@ -22,11 +22,25 @@ namespace Capstone.Controllers
             wasteDAO = _wasteDAO;
         }
 
-        [HttpGet("allLoss")]
+        [HttpGet("allWaste")]
         public List<Waste> GetAllWaste()
         {
             List<Waste> wasteList = wasteDAO.GetAllWastes();
             return wasteList;
+        }
+        [HttpPost("newWaste")]
+        public IActionResult AddNewWaste(Waste newWaste)
+        {
+            bool result = wasteDAO.RecordNewWaste(newWaste);
+
+            if (result)
+            {
+                return Created("", result);
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
     }

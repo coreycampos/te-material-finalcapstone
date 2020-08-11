@@ -9,13 +9,13 @@
                 <td>Amount Lost</td>
                 <td>Loss Description</td>
             </tr>
-            <!-- <tr>
+            <tr v-for="loss in losses" v-bind:key="loss.lossId">
                 <td>{{loss.lossId}}</td>
                 <td>{{loss.inventoryId}}</td>
                 <td>{{loss.dateLost}}</td>
                 <td>{{loss.amountLost}}</td>
                 <td>{{loss.lossDescription}}</td>
-            </tr> -->
+            </tr>
           </table>
     </div>
 </template>
@@ -23,7 +23,7 @@
 <script>
 export default {
     name: 'LossInfo',
-    props: ['loss']
+    props: ['losses']
 }
 </script>
 

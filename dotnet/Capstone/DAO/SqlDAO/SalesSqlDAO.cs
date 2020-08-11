@@ -46,13 +46,10 @@ namespace Capstone.DAO
 
                 return salesList;
             }
-
         }
-
         public bool RecordNewSale(Sales newSale)
         {
             bool result = false;
-
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
@@ -68,15 +65,12 @@ namespace Capstone.DAO
 
                     cmd.ExecuteNonQuery();
                 }
-
                 result = true;
             }
-
             catch
             {
                 result = false;
             }
-
             return result;
         }
     }

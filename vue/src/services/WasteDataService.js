@@ -2,7 +2,10 @@ import axios from 'axios';
 
 export default {
 
-    addWaste(sale) {
-        return axios.post('/add/Waste', sale);
-      },
+    addWaste(waste) {
+        return axios.post('/Waste/newWaste', waste);
+    },
+    getAllWastes() {
+        return axios.get('Waste/AllWaste');
+    },
 }

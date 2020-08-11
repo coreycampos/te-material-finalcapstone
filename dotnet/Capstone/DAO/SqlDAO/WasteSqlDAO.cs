@@ -34,7 +34,7 @@ namespace Capstone.DAO
                 {
                     Waste currentWaste = new Waste();
 
-                    currentWaste.wasteId = Convert.ToInt32(reader["loss_id"]);
+                    currentWaste.wasteId = Convert.ToInt32(reader["waste_id"]);
                     currentWaste.inventoryId = Convert.ToInt32(reader["inventory_id"]);
                     currentWaste.dateWasted = Convert.ToDateTime(reader["date_wasted"]);
                     currentWaste.amountWasted = Convert.ToDecimal(reader["amount_wasted"]);

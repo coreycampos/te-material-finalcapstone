@@ -1,7 +1,7 @@
 <template>
     <div>
-    <h2>Add a Sale</h2>
-    <form v-on:submit.prevent>
+    <button v-on:click="changeDisplay">Add a Sale</button>
+    <form v-on:submit.prevent v-show="display">
         <div>
             <label for="inventoryIdInput">InventoryId</label>
             <input type="number" id="inventoryIdInput" v-model.number="sale.inventoryId">
@@ -48,7 +48,8 @@ export default {
                 amountSold: 0,
                 revenue: 0.00,
                 methodOfSale: ""
-            }
+            },
+            display: false
         }
     },
 
@@ -58,11 +59,17 @@ export default {
             .then((response) => console.log(response))
             .catch((error) => console.log(error));
             this.$router.push({name: 'Home'});
-        }
+        },
+        changeDisplay() {
+            this.display = !this.display;
+            console.log(this.display);
+            },
     }
 }
 </script>
 
 <style scoped>
-
+input{
+    display: block;
+}
 </style>

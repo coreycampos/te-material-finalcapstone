@@ -9,13 +9,13 @@
                 <td>Amount Wasted</td>
                 <td>Waste Description</td>
             </tr>
-            <!-- <tr>
+            <tr v-for="waste in wastes" v-bind:key="waste.wasteId">
                 <td>{{waste.wasteId}}</td>
                 <td>{{waste.inventoryId}}</td>
                 <td>{{waste.dateWasted}}</td>
                 <td>{{waste.amountWasted}}</td>
                 <td>{{waste.wasteDescription}}</td>
-            </tr> -->
+            </tr>
           </table>
     </div>
 </template>
@@ -23,7 +23,7 @@
 <script>
 export default {
     name: 'WasteInfo',
-    props: ['waste']
+    props: ['wastes']
 }
 </script>
 

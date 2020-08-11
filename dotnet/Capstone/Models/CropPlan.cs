@@ -11,7 +11,7 @@ namespace Capstone.Models
 
         public string area_identifier { get; set; }
 
-        public string cropName { get; set; }
+        public string crop { get; set; }
 
         public int cropId { get; set; }
 

@@ -70,8 +70,9 @@ namespace Capstone.DAO
                 result = true;
             }
 
-            catch
+            catch(Exception e)
             {
+                Console.WriteLine(e);
                 result = false;
             }
 

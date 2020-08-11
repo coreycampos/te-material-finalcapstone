@@ -1,7 +1,7 @@
 <template>
     <div>
-    <h2>Add a Loss</h2>
-    <form v-on:submit.prevent>
+    <button v-on:click="changeDisplay">Add a Loss</button>
+    <form v-on:submit.prevent v-show="display">
         <div>
             <label for="inventoryIdInput">InventoryId</label>
             <input type="number" id="inventoryIdInput" v-model.number="loss.inventoryId">
@@ -42,7 +42,9 @@ export default {
                 dateLost: Date.now(),
                 amountLost: 0,
                 lossDescription: ""
-            }
+            },
+
+            display: false
         }
     },
 
@@ -52,11 +54,17 @@ export default {
             .then((response) => console.log(response))
             .catch((error) => console.log(error));
             this.$router.push({name: 'Home'});
-        }
+        },
+        changeDisplay() {
+            this.display = !this.display;
+            console.log(this.display);
+            },
     }
 }
 </script>
 
 <style scoped>
-
+input{
+    display: block;
+}
 </style>

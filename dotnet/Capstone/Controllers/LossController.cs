@@ -28,6 +28,21 @@ namespace Capstone.Controllers
             List<Loss> lossList = lossDAO.GetAllLosses();
             return lossList;
         }
+        [HttpPost("newLoss")]
+        public IActionResult AddNewLoss(Loss newLoss)
+        {
+            bool result = lossDAO.RecordNewLoss(newLoss);
+
+            if (result)
+            {
+                return Created("", result);
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
 
     }
 }

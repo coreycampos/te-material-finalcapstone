@@ -44,9 +44,9 @@
       </router-link>
       <router-link 
       class="nav-item"
-      v-bind:to="{name: 'AddHarvestData'}"
+      v-bind:to="{name: 'AddFarmInfo'}"
       >
-      &nbsp;|&nbsp;Add Harvest Data
+      &nbsp;|&nbsp;Add Farming Information
       </router-link>
     </div>
     <router-view />
