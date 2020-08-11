@@ -9,10 +9,7 @@ import UploadFiles from "../views/UploadFileView.vue";
 import store from "../store/index";
 import EditCropDetails from "../views/EditCropDetails.vue";
 import AllFarmInfo from "../views/AllFarmInfo.vue";
-import AddHarvestData from "../views/AddHarvestData.vue";
-import AddSale from "../views/AddSale.vue";
-import AddLoss from "../views/AddLoss.vue";
-import AddWaste from "../views/AddWaste.vue";
+import AddFarmInfo from "../views/AddFarmInfo"
 
 Vue.use(Router);
 
@@ -94,36 +91,9 @@ const router = new Router({
       }
     },
     {
-      path: "/add/Harvest",
-      name: "AddHarvestData",
-      component: AddHarvestData,
-      meta: {
-        requiresAuth: true
-      }
-    },
-
-    {
-      path: "/add/Sale",
-      name: "AddSale",
-      component: AddSale,
-      meta: {
-        requiresAuth: true
-      }
-    },
-
-    {
-      path: "/add/Loss",
-      name: "AddLoss",
-      component: AddLoss,
-      meta: {
-        requiresAuth: true
-      }
-    },
-
-    {
-      path: "/add/Waste",
-      name: "AddWaste",
-      component: AddWaste,
+      path: "/add/FarmInfo",
+      name: "AddFarmInfo",
+      component: AddFarmInfo,
       meta: {
         requiresAuth: true
       }

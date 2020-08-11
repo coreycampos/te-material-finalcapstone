@@ -1,7 +1,7 @@
 <template>
     <div>
-    <h2> Add a Harvest </h2>
-    <form v-on:submit.prevent>
+    <button v-on:click="changeDisplay">Add a Harvest</button>
+    <form v-on:submit.prevent v-show="display">
         
         <div>
             <label for="cropIdInput">cropId</label>
@@ -26,13 +26,6 @@
 import harvestService from '../services/HarvestDataService.js';
 export default {
     name: 'add-harvest',
-    created() {
-        this.harvest.harvestId = this.$route.params.harvest.harvestId;
-        this.harvest.cropId = this.$route.params.harvest.cropId;
-        this.harvest.area = this.$route.params.harvest.area;
-        this.harvest.weight = this.$route.params.harvest.weight;
-        this.harvest.dateHarvested = this.$route.params.harvest.dateHarvested;
-    },
 
     data() {
         return {
@@ -43,7 +36,9 @@ export default {
                 weight: 0,
                 dateHarvested: Date.now()
 
-            }
+            },
+
+            display: false
         }
     },
 
@@ -56,7 +51,11 @@ export default {
                 console.log("Made it to line 56");
                 this.$router.push({name: 'home'});
             }
-        }
+        },
+        changeDisplay() {
+            this.display = !this.display;
+            console.log(this.display);
+            },
     }
    
 }
