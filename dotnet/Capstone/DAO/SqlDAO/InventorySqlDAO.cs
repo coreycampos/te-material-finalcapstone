@@ -73,7 +73,7 @@ namespace Capstone.DAO
             }
         }
 
-        public bool addInventory(Inventory newInventory)
+        public bool addInventory(int cropId, decimal amount, DateTime dateAdded)
         {
             bool result = false;
 
@@ -84,9 +84,9 @@ namespace Capstone.DAO
                     conn.Open();
 
                     SqlCommand cmd = new SqlCommand(sqlAddInventory, conn);
-                    cmd.Parameters.AddWithValue("@cropId", newInventory.cropId);
-                    cmd.Parameters.AddWithValue("@amount", newInventory.amount);
-                    cmd.Parameters.AddWithValue("@dateAdded", newInventory.dateAdded);
+                    cmd.Parameters.AddWithValue("@cropId", cropId);
+                    cmd.Parameters.AddWithValue("@amount", amount);
+                    cmd.Parameters.AddWithValue("@dateAdded", dateAdded);
 
                     cmd.ExecuteNonQuery();
                 }
