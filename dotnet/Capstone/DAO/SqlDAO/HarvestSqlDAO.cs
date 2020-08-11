@@ -12,13 +12,17 @@ namespace Capstone.DAO
         private readonly string connectionString;
         private string sqlSelectAllHarvests = "SELECT harvest_id, harvests.crop_id , crops.crop_name, area_identifier, weight_count, date_harvested FROM harvests INNER JOIN crops ON crops.crop_id=harvests.crop_id;";
         private string sqlAddNewHarvest = "INSERT INTO harvests (crop_id, area_identifier, weight_count, date_harvested) VALUES (@cropId, @area, @weight, @dateHarvested)";
+        private string sqlExpiringWithinWeek = "SELECT * FROM harvests AS h JOIN crops AS c ON h.crop_id = c.crop_id "
++ "WHERE DATEDIFF(day, DATEADD(day, c.time_to_expire, h.date_harvested), GETDATE()) <= 7;";
 
         public HarvestSqlDAO(string dbConnectionString)
         {
             connectionString = dbConnectionString;
         }
 
-        public List<Harvest> GetAllHarvests()
+
+
+        public List<Harvest> GenericSelectHarvest(string sqlCommand)
         {
             List<Harvest> harvestList = new List<Harvest>();
 
@@ -26,7 +30,7 @@ namespace Capstone.DAO
             {
                 conn.Open();
 
-                SqlCommand cmd = new SqlCommand(sqlSelectAllHarvests, conn);
+                SqlCommand cmd = new SqlCommand(sqlCommand, conn);
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read() == true)
@@ -45,6 +49,11 @@ namespace Capstone.DAO
 
                 return harvestList;
             }
+        } 
+
+        public List<Harvest> GetAllHarvests()
+        {
+            return GenericSelectHarvest(sqlSelectAllHarvests);
         }
 
         public bool AddNewHarvest(Harvest newHarvest)
@@ -76,6 +85,11 @@ namespace Capstone.DAO
             }
 
             return result;
+        }
+
+        public List<Harvest> ExpiringWithinWeek()
+        {
+            return GenericSelectHarvest(sqlExpiringWithinWeek);
         }
     }
 }

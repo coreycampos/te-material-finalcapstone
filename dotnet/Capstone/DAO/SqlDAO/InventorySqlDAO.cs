@@ -11,8 +11,9 @@ namespace Capstone.DAO
     {
         private readonly string connectionString;
         private string sqlSelectAllInventory = "SELECT * FROM inventory";
-        private string sqlExpiringWithinWeek = "SELECT * FROM inventory AS i JOIN harvests AS h ON h.harvest_id = i.harvest_id "
-+ "JOIN crops AS c ON h.crop_id = c.crop_id WHERE DATEDIFF(day, DATEADD(day, c.time_to_expire, i.date_added), GETDATE()) <= 7;";
+        private string sqlAddInventory = "INSERT INTO inventory (crop_id, amount, date_added) VALUES (@cropId, @amount, @dateAdded)";
+        private string sqlDebitInventory = "UPDATE inventory SET amount = amount - @debit WHERE inventory_id = @inventoryId";
+        private string sqlGetItemTotal = "SELECT SUM(amount) AS total FROM inventory WHERE crop_name = @cropName";
 
         public InventorySqlDAO(string dbConnectionString)
         {
@@ -35,7 +36,7 @@ namespace Capstone.DAO
                     Inventory currentInventory = new Inventory();
 
                     currentInventory.inventoryId = Convert.ToInt32(reader["inventory_id"]);
-                    currentInventory.harvestId = Convert.ToInt32(reader["harvest_id"]);
+                    currentInventory.cropId = Convert.ToInt32(reader["crop_id"]);
                     currentInventory.amount = Convert.ToDecimal(reader["amount"]);
                     currentInventory.dateAdded = Convert.ToDateTime(reader["date_added"]);
 
@@ -51,9 +52,84 @@ namespace Capstone.DAO
             return GenericSelectInventory(sqlSelectAllInventory);
         }
 
-        public List<Inventory> ExpiringWithinWeek()
+        public decimal GetTotalItem(string cropName)
         {
-            return GenericSelectInventory(sqlExpiringWithinWeek);
+            decimal totalOnHand = 0;
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                SqlCommand cmd = new SqlCommand(sqlGetItemTotal, conn);
+                cmd.Parameters.AddWithValue("@cropName", cropName);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read() == true)
+                {
+                    totalOnHand = Convert.ToDecimal(reader["total"]);
+                }
+
+                return totalOnHand;
+            }
+        }
+
+        public bool addInventory(Inventory newInventory)
+        {
+            bool result = false;
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(sqlAddInventory, conn);
+                    cmd.Parameters.AddWithValue("@cropId", newInventory.cropId);
+                    cmd.Parameters.AddWithValue("@amount", newInventory.amount);
+                    cmd.Parameters.AddWithValue("@dateAdded", newInventory.dateAdded);
+
+                    cmd.ExecuteNonQuery();
+                }
+
+                result = true;
+            }
+
+            catch
+            {
+                result = false;
+            }
+
+            return result;
+
+        }
+
+        public bool debitInventory(int inventoryId, decimal debit)
+        {
+            bool result = false;
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(sqlDebitInventory, conn);
+                    cmd.Parameters.AddWithValue("@inventoryId", inventoryId);
+                    cmd.Parameters.AddWithValue("@debit", debit);
+
+                    cmd.ExecuteNonQuery();
+                }
+
+                result = true;
+            }
+
+            catch
+            {
+                result = false;
+            }
+
+            return result;
+
         }
     }
 }

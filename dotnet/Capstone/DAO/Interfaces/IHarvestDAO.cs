@@ -8,9 +8,12 @@ namespace Capstone.DAO
 {
     public interface IHarvestDAO
     {
+        List<Harvest> GenericSelectHarvest(string sqlCommand);
+
         List<Harvest> GetAllHarvests();
 
         bool AddNewHarvest(Harvest newHarvest);
+
 
     }
 }

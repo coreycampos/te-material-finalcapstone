@@ -10,13 +10,14 @@ namespace Capstone.DAO
     {
         List<Inventory> GenericSelectInventory(string someSqlCommand);
 
-        //Get all inventory items
-
         List<Inventory> GetAllInventory();
 
-        //What's expiring within 7 days?
+        decimal GetTotalItem(string cropName);
 
-        List<Inventory> ExpiringWithinWeek();
+        bool AddInventory(Inventory newInventory);
+
+        bool debitInventory(int inventoryId, decimal debit);
+
 
     }
 }
