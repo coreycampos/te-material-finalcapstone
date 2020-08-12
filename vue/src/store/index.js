@@ -96,6 +96,15 @@ export default new Vuex.Store({
         wasteDescription: "Tomatoes expired.",
       },
     ],
+    inventory: [
+      {
+        inventoryId: 1,
+        cropId: 1,
+        cropName: "corn",
+        amount: 50,
+        dateAdded: "08/11/2020",
+      },
+    ],
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -131,6 +140,9 @@ export default new Vuex.Store({
     },
     POPULATE_WASTE_DATA(state, data) {
       state.wastes = data;
+    },
+    POPULATE_INVENTORY(state, data) {
+      state.inventory = data;
     },
   }
 })

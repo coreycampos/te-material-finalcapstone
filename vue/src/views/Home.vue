@@ -1,31 +1,29 @@
 <template>
   <div>
-    <Home-Crops />
+    <p>Hello this is the Home Page</p>
+    <inventory-info v-bind:inventories="$store.state.inventory" />
   </div>
 </template>
 
 <script>
-import HomeCrops from "../components/HomeCrops.vue"
-import CropDataService from "../services/CropDataService.js"
+import InventoryInfo from "../components/InventoryInfo.vue"
+import InventoryDataService from "../services/InventoryDataService.js"
 
-export default {
+export default { 
   components: {
-    HomeCrops
-    },
+    InventoryInfo,
+  },
   created() {
-    CropDataService.getCropData()
-    .then(response => {
-      this.$store.commit("POPULATE_CROP_DATA", response.data);
-    })
-    .catch(error => {
-      // if (error.response.status == '404') {
-      //   this.$router.push("/not-found");
-      // }
-      console.error(error);
-      alert("Error - see console.");
-    });
+        InventoryDataService.getInventoryData()
+        .then(response => {
+            this.$store.commit("POPULATE_INVENTORY", response.data);
+        })
+        .catch(error => {
+            console.error(error);
+            //alert("Error - see console.");
+            });    
   }
-};
+}  
 </script>
 
 <style scoped>

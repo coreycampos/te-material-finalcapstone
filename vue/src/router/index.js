@@ -11,6 +11,7 @@ import EditCropDetails from "../views/EditCropDetails.vue";
 import AllFarmInfo from "../views/AllFarmInfo.vue";
 import AddFarmInfo from "../views/AddFarmInfo.vue";
 import EditCropPlans from "../views/EditCropPlans.vue";
+import Crops from "../views/Crops.vue";
 
 Vue.use(Router);
 
@@ -31,6 +32,14 @@ const router = new Router({
       path: "/",
       name: "home",
       component: Home,
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
+      path: "/crops",
+      name: "crops",
+      component: Crops,
       meta: {
         requiresAuth: true,
       },
