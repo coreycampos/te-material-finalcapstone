@@ -3,9 +3,14 @@
     <button v-on:click="changeDisplay">Add a Sale</button>
     <form v-on:submit.prevent v-show="display">
         <form v-on:submit.prevent="saveSale()">
-            <label for="inventoryIdInput">InventoryId</label>
-            <input type="number" id="inventoryIdInput" v-model.number="sale.inventoryId" required>
-
+            <label for="inventoryIdDropDown">Inventory ID</label>
+            <select name="inventoryIdDropDown" id="inventoryIdDropDown"
+                    v-model="sale.inventoryId"
+                    required>
+                <option value="" selected disabled>Select Inventory ID</option>
+                <option v-for="inventory in saleInventories" v-bind:key="inventory.inventoryId">{{ inventory.inventoryId }}</option>
+            </select>  
+            
             <label for="dateSoldInput">Date Sold</label>
             <input type="date" id="dateSoldInput" v-model="sale.dateSold" required>
 
@@ -49,7 +54,10 @@ export default {
                 revenue: 0.00,
                 methodOfSale: ""
             },
-            display: false
+            display: false,
+            saleInventories: {
+
+            },
         }
     },
 
@@ -64,12 +72,15 @@ export default {
             this.display = !this.display;
             console.log(this.display);
             },
+    },
+    created() {
+        this.saleInventories = this.$store.state.inventory;
     }
 }
 </script>
 
 <style scoped>
-input{
+input, select {
     display: block;
 }
 </style>

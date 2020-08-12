@@ -3,9 +3,14 @@
     <button v-on:click="changeDisplay">Add Waste</button>
     <form v-on:submit.prevent v-show="display">
         <form v-on:submit.prevent="saveWaste()">
-            <label for="inventoryIdInput">InventoryId</label>
-            <input type="number" id="inventoryIdInput" v-model.number="waste.inventoryId" required>
-
+            <label for="inventoryIdDropDown">Inventory ID</label>
+            <select name="inventoryIdDropDown" id="inventoryIdDropDown"
+                    v-model="waste.inventoryId"
+                    required>
+                <option value="" selected disabled>Select Inventory ID</option>
+                <option v-for="inventory in wasteInventories" v-bind:key="inventory.inventoryId">{{ inventory.inventoryId }}</option>
+            </select>
+            
             <label for="dateWastedInput">Date Wasted</label>
             <input type="date" id="dateWastedInput" v-model="waste.dateWasted" required>
 
@@ -43,7 +48,10 @@ export default {
                 amountWasted: 0,
                 wasteDescription: ""
             },
-            display: false
+            display: false,
+            wasteInventories: {
+
+            },
         }
     },
 
@@ -58,12 +66,15 @@ export default {
             this.display = !this.display;
             console.log(this.display);
             },
+    },
+    created() {
+        this.wasteInventories = this.$store.state.inventory;
     }
 }
 </script>
 
 <style scoped>
-input{
+input, select{
     display: block;
 }
 </style>
