@@ -2,25 +2,25 @@
     <div>
     <button v-on:click="changeDisplay">Add a Sale</button>
     <form v-on:submit.prevent v-show="display">
-        <div>
+        <form v-on:submit.prevent="saveSale()">
             <label for="inventoryIdInput">InventoryId</label>
-            <input type="number" id="inventoryIdInput" v-model.number="sale.inventoryId">
+            <input type="number" id="inventoryIdInput" v-model.number="sale.inventoryId" required>
 
             <label for="dateSoldInput">Date Sold</label>
-            <input type="date" id="dateSoldInput" v-model="sale.dateSold">
+            <input type="date" id="dateSoldInput" v-model="sale.dateSold" required>
 
             <label for="amountSoldInput">Amount Sold</label>
-            <input type="number" id="amountSoldInput" v-model.number="sale.amountSold">
+            <input type="number" id="amountSoldInput" v-model.number="sale.amountSold" required>
 
             <label for="revenueInput">Revenue</label>
-            <input type="number" id="revenueInput" v-model.number="sale.revenue">
+            <input type="number" id="revenueInput" v-model.number="sale.revenue" required>
 
             <label for="methodOfSaleInput">Method of Sale</label>
-            <input type="text" id="methodOfSaleInput" v-model="sale.methodOfSale">
+            <input type="text" id="methodOfSaleInput" v-model="sale.methodOfSale" required>
 
-            <input type="submit" v-on:click.prevent="saveSale()">
+            <input type="submit">
             
-        </div>
+        </form>
     </form>
     </div>
 </template>
