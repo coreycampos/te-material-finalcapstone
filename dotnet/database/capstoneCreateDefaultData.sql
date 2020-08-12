@@ -102,32 +102,19 @@ VALUES (2, 'southwest', '04/07/2020'), (10, 'central', '05/16/2020'), (1, 'north
 (4, 'northeast', '03/14/2020'), (3, 'southeast', '03/21/2020'), (5, 'west', '06/28/2020'), (9, 'east', '03/01/2020'), 
 (7, 'north', '09/01/2020'), (8, 'south', '03/28/2020');
 
-INSERT INTO harvests (crop_id, area_identifier, weight_count, date_harvested, inventory_id)
-VALUES (1, 'north', 350, '06/22/2020', 1);
-
 INSERT INTO inventory (crop_id, date_added, amount)
-VALUES (1, '06/22/2020', 303);
+VALUES (6, '11/05/2019', 0), (4, '04/28/2020', 0), (8, '05/20/2020', 0), (2, '06/22/2020', 341.09), 
+(3, '07/05/2020', 31), (1, '08/10/2020', 217.65);
+
+INSERT INTO harvests (crop_id, area_identifier, weight_count, date_harvested, inventory_id)
+VALUES (6, 'central', 316.77, '11/05/2019', 1), (4, 'northeast', 247.3, '04/28/2020', 2), (8, 'south', 114, '05/20/2020', 3), (2, 'southwest', 350, '06/22/2020', 4), 
+(3, 'southeast', 76, '07/05/2020', 5), (1, 'northwest', 217.65, '08/10/2020', 6);
 
 INSERT INTO sales (inventory_id, date_sold, amount_sold, revenue, method_of_sale)
-VALUES (1, '06/25/2020', 32, 62.67, 'retail');
+VALUES (1, '11/11/2019', 315, 787.50, 'wholesale'), (5, '07/07/2020', 45, 90.00, 'retail'), (3, '04/01/2020', 100, 'wholesale');
 
 INSERT INTO loss (inventory_id, date_lost, amount_lost, loss_description)
-VALUES (1, '06/27/2020', 4, 'theft');
+VALUES (2, '04/30/2020', 247.3, 'E. coli contamination'), (5, '07/07/2020', 4, 'theft'), (4, '06/27/2020', 8.91, 'eaten by livestock');
 
 INSERT INTO waste (inventory_id, date_wasted, amount_wasted, waste_description)
-VALUES (1, '07/08/2020', 11, 'expired');
-
-INSERT INTO crop_plans (crop_id, area_identifier, planting_date)
-VALUES (2, 'northeast', '08/10/2020');
-
-IF EXISTS (SELECT * FROM crops WHERE crop_name = 'squash')
-BEGIN
-UPDATE crops SET time_to_expire = 35 WHERE crop_name = 'squash'
-END
-ELSE
-BEGIN
-INSERT INTO crops (crop_name, time_to_expire) VALUES ('squash', 35)
-END;
-
-SELECT i.inventory_id, i.date_added, c.crop_name, l.* FROM loss AS l JOIN inventory AS i ON l.inventory_id = i.inventory_id JOIN crops AS c ON i.crop_id = c.crop_id;
-
+VALUES (1, '11/25/2019', 1.77, 'expired'), (1, '07/08/2020', 11, 'expired'), (3, '04/05/2020', 14, 'expired');
