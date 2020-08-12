@@ -16,10 +16,12 @@ namespace Capstone.Controllers
     public class HarvestController : ControllerBase
     {
         private readonly IHarvestDAO harvestDAO;
+        private readonly IInventoryDAO inventoryDAO;
 
-        public HarvestController(IHarvestDAO _harvestDAO)
+        public HarvestController(IHarvestDAO _harvestDAO, IInventoryDAO _inventoryDAO)
         {
             harvestDAO = _harvestDAO;
+            inventoryDAO = _inventoryDAO;
         }
 
         [HttpGet("allHarvests")]
@@ -32,13 +34,16 @@ namespace Capstone.Controllers
         [HttpPost("newHarvest")]
         public IActionResult AddNewHarvest(Harvest newHarvest)
         {
-            bool result = harvestDAO.AddNewHarvest(newHarvest);
-
+            bool result = false;
+            bool inventoryResult = inventoryDAO.AddInventory(newHarvest.cropID, newHarvest.weight, newHarvest.dateHarvested);
+            if (inventoryResult)
+            {
+                result = harvestDAO.AddNewHarvest(newHarvest);
+            }
             if (result)
             {
                 return Created("", result);
             }
-
             else
             {
                 return BadRequest();
