@@ -2,14 +2,20 @@
     <div>
         <h1>Crop Plan {{cropPlan.planId}}</h1>
         <form>
-            <label for="cropName">Crop Name</label>
-            <input type="text" v-model="cropPlan.crop" id="cropName">
+            <label for="cropNameDropDown">Crop Name</label>
+            <select name="cropNameDropDown" id="cropNameDropDown" 
+                    v-model="cropPlan.crop"
+                    required>
+                <option value="" selected disabled>Select Crop Name</option>
+                <option v-for="crop in crops" v-bind:key="crop.cropName">{{ crop.cropName }}</option>
+            </select>
 
             <label for="areaIdentifier">Area Identifier</label>
             <input type="text" v-model="cropPlan.area_identifier" id="areaIdentifier">
             
             <label for="plantingDate">Planting Date</label>
             <input type="text" v-model="cropPlan.planting_date" id="plantingDate">
+            
             <input type="submit" v-on:click.prevent="saveChanges(cropPlan)">
         </form>
 
@@ -26,6 +32,8 @@ export default {
         this.cropPlan.planId = this.$route.params.cropPlan.planId;
         this.cropPlan.area_identifier = this.$route.params.cropPlan.area_identifier;
         this.cropPlan.planting_date = this.$route.params.cropPlan.planting_date;
+
+        this.crops = this.$store.state.crop;
     },
 
     data(){
@@ -36,6 +44,9 @@ export default {
                 planId: 0,
                 area_identifier: "",
                 planting_date: 0,
+            },
+            crops: {
+
             }
         }
     },
@@ -47,12 +58,12 @@ export default {
             })
         }
         
-    }
+    },
 }
 </script>
 
 <style scoped>
-input{
+input, select{
     display:block;
 }
 </style>
