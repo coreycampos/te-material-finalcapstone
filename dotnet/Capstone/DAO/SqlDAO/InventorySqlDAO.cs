@@ -13,7 +13,7 @@ namespace Capstone.DAO
         private string sqlSelectAllInventory = "SELECT c.crop_name, i.* FROM inventory AS i JOIN crops AS c ON i.crop_id = c.crop_id;";
         private string sqlAddInventory = "INSERT INTO inventory (crop_id, amount, date_added) VALUES (@cropId, @amount, @dateAdded);";
         private string sqlDebitInventory = "UPDATE inventory SET amount = amount - @debit WHERE inventory_id = @inventoryId;";
-        private string sqlGetSpecificInventory = "SELECT * FROM inventory WHERE inventory_id = @inventoryId;";
+        private string sqlGetSpecificInventory = "SELECT inventory_id, crops.crop_name, inventory.crop_id, amount, date_added FROM inventory JOIN crops on crops.crop_id = inventory.crop_id WHERE inventory_id = @inventoryId;";
 
         public InventorySqlDAO(string dbConnectionString)
         {
