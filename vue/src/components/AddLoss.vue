@@ -2,21 +2,26 @@
     <div>
     <button v-on:click="changeDisplay">Add a Loss</button>
     <form v-on:submit.prevent v-show="display">
-        <div>
-            <label for="inventoryIdInput">InventoryId</label>
-            <input type="number" id="inventoryIdInput" v-model.number="loss.inventoryId">
+        <form v-on:submit.prevent="saveLoss()">
+            <label for="inventoryIdDropDown">Inventory ID</label>
+            <select name="inventoryIdDropDown" id="inventoryIdDropDown"
+                    v-model="loss.inventoryId"
+                    required>
+                <option value="" selected disabled>Select Inventory ID</option>
+                <option v-for="inventory in lossInventories" v-bind:key="inventory.inventoryId">{{ inventory.inventoryId }}</option>
+            </select>  
 
             <label for="dateLostInput">Date Lost</label>
-            <input type="date" id="dateLostInput" v-model="loss.dateLost">
+            <input type="date" id="dateLostInput" v-model="loss.dateLost" required>
 
             <label for="amountLostInput">Amount Lost</label>
-            <input type="number" id="amountLostInput" v-model.number="loss.amountLost">
+            <input type="number" id="amountLostInput" v-model.number="loss.amountLost" required>
 
             <label for="lossDescriptionInput">Loss Description</label>
-            <input type="text" id="lossDescriptionInput" v-model="loss.lossDescription">
+            <input type="text" id="lossDescriptionInput" v-model="loss.lossDescription" required>
 
-            <input type="submit" v-on:click.prevent="saveLoss()">
-        </div>
+            <input type="submit">
+        </form>
     </form>
     </div>
 </template>
@@ -44,7 +49,11 @@ export default {
                 lossDescription: ""
             },
 
-            display: false
+            display: false,
+
+            lossInventories: {
+
+            },
         }
     },
 
@@ -59,12 +68,15 @@ export default {
             this.display = !this.display;
             console.log(this.display);
             },
+    },
+    created() {
+        this.lossInventories = this.$store.state.inventory;
     }
 }
 </script>
 
 <style scoped>
-input{
+input, select{
     display: block;
 }
 </style>

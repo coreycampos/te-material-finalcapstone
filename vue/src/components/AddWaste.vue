@@ -2,21 +2,26 @@
     <div>
     <button v-on:click="changeDisplay">Add Waste</button>
     <form v-on:submit.prevent v-show="display">
-        <div>
-            <label for="inventoryIdInput">InventoryId</label>
-            <input type="number" id="inventoryIdInput" v-model.number="waste.inventoryId">
-
+        <form v-on:submit.prevent="saveWaste()">
+            <label for="inventoryIdDropDown">Inventory ID</label>
+            <select name="inventoryIdDropDown" id="inventoryIdDropDown"
+                    v-model="waste.inventoryId"
+                    required>
+                <option value="" selected disabled>Select Inventory ID</option>
+                <option v-for="inventory in wasteInventories" v-bind:key="inventory.inventoryId">{{ inventory.inventoryId }}</option>
+            </select>
+            
             <label for="dateWastedInput">Date Wasted</label>
-            <input type="date" id="dateWastedInput" v-model="waste.dateWasted">
+            <input type="date" id="dateWastedInput" v-model="waste.dateWasted" required>
 
             <label for="amountWastedInput">Amount Wasted</label>
-            <input type="number" id="amountWastedInput" v-model.number="waste.amountWasted">
+            <input type="number" id="amountWastedInput" v-model.number="waste.amountWasted" required>
 
             <label for="wasteDescriptionInput">Waste Description</label>
-            <input type="text" id="wasteDescriptionInput" v-model="waste.wasteDescription">
+            <input type="text" id="wasteDescriptionInput" v-model="waste.wasteDescription" required>
 
-            <input type="submit" v-on:click.prevent="saveWaste()">
-        </div>
+            <input type="submit">
+        </form>
     </form>
     </div>
 </template>
@@ -43,7 +48,10 @@ export default {
                 amountWasted: 0,
                 wasteDescription: ""
             },
-            display: false
+            display: false,
+            wasteInventories: {
+
+            },
         }
     },
 
@@ -58,12 +66,15 @@ export default {
             this.display = !this.display;
             console.log(this.display);
             },
+    },
+    created() {
+        this.wasteInventories = this.$store.state.inventory;
     }
 }
 </script>
 
 <style scoped>
-input{
+input, select{
     display: block;
 }
 </style>

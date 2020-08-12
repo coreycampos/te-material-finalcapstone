@@ -2,25 +2,30 @@
     <div>
     <button v-on:click="changeDisplay">Add a Sale</button>
     <form v-on:submit.prevent v-show="display">
-        <div>
-            <label for="inventoryIdInput">InventoryId</label>
-            <input type="number" id="inventoryIdInput" v-model.number="sale.inventoryId">
-
+        <form v-on:submit.prevent="saveSale()">
+            <label for="inventoryIdDropDown">Inventory ID</label>
+            <select name="inventoryIdDropDown" id="inventoryIdDropDown"
+                    v-model="sale.inventoryId"
+                    required>
+                <option value="" selected disabled>Select Inventory ID</option>
+                <option v-for="inventory in saleInventories" v-bind:key="inventory.inventoryId">{{ inventory.inventoryId }}</option>
+            </select>  
+            
             <label for="dateSoldInput">Date Sold</label>
-            <input type="date" id="dateSoldInput" v-model="sale.dateSold">
+            <input type="date" id="dateSoldInput" v-model="sale.dateSold" required>
 
             <label for="amountSoldInput">Amount Sold</label>
-            <input type="number" id="amountSoldInput" v-model.number="sale.amountSold">
+            <input type="number" id="amountSoldInput" v-model.number="sale.amountSold" required>
 
             <label for="revenueInput">Revenue</label>
-            <input type="number" id="revenueInput" v-model.number="sale.revenue">
+            <input type="number" id="revenueInput" v-model.number="sale.revenue" required>
 
             <label for="methodOfSaleInput">Method of Sale</label>
-            <input type="text" id="methodOfSaleInput" v-model="sale.methodOfSale">
+            <input type="text" id="methodOfSaleInput" v-model="sale.methodOfSale" required>
 
-            <input type="submit" v-on:click.prevent="saveSale()">
+            <input type="submit">
             
-        </div>
+        </form>
     </form>
     </div>
 </template>
@@ -49,7 +54,10 @@ export default {
                 revenue: 0.00,
                 methodOfSale: ""
             },
-            display: false
+            display: false,
+            saleInventories: {
+
+            },
         }
     },
 
@@ -64,12 +72,15 @@ export default {
             this.display = !this.display;
             console.log(this.display);
             },
+    },
+    created() {
+        this.saleInventories = this.$store.state.inventory;
     }
 }
 </script>
 
 <style scoped>
-input{
+input, select {
     display: block;
 }
 </style>
