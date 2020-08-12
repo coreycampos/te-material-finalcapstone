@@ -139,7 +139,27 @@ namespace Capstone.DAO
             }
             return result;
         }
+        public int GetCropId(string cropName)
+        {
+            int cropId = 0;
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
 
+                    SqlCommand gettingCropId = new SqlCommand(sqlGetCropId, conn);
+                    gettingCropId.Parameters.AddWithValue("@cropName", cropName);
+                    cropId = (int)gettingCropId.ExecuteScalar();
+
+                    return cropId;
+                }
+            }
+            catch(Exception e)
+            {
+                return cropId;
+            }
+        }
 
         public List<Harvest> ExpiringWithinWeek()
         {

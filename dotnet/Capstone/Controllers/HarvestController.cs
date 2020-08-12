@@ -35,6 +35,7 @@ namespace Capstone.Controllers
         public IActionResult AddNewHarvest(Harvest newHarvest)
         {
             bool result = false;
+            newHarvest.cropID = harvestDAO.GetCropId(newHarvest.cropName);
             int newInventoryId = inventoryDAO.AddInventory(newHarvest.cropID, newHarvest.weight, newHarvest.dateHarvested);
             if (newInventoryId != 0)
             {

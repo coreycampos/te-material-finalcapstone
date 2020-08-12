@@ -18,6 +18,6 @@ namespace Capstone.DAO
 
         bool UpdateHarvest(Harvest someHarvest);
 
-
+        int GetCropId(string cropName);
     }
 }
