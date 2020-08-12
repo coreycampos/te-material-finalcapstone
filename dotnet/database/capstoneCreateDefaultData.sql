@@ -92,10 +92,14 @@ GO
 --adding default data
 
 INSERT INTO crops (crop_name, time_seed_to_transplant, time_transplant_to_harvest, time_seed_to_harvest, time_to_expire) 
-VALUES ('corn', 14, 13, 27, 16), ('wheat', 130, 80, 210, 62), ('onions', 15, 15, 15, 15), ('spinach', 60, 30, 45, 90);
+VALUES ('corn', 10, 100, 110, 7), ('wheat', 5, 205, 210, 120), ('onion', 10, 100, 110, 42), ('spinach', 5, 40, 45, 7),
+('summer squash', 10, 50, 60, 7), ('kale', 7, 45, 52, 14), ('radish', 5, 25, 30, 14), ('beet', 8, 42, 50, 5),
+('carrot', 21, 59, 80, 21), ('tomato', 10, 80, 90, 14);
 
 INSERT INTO crop_plans (crop_id, area_identifier, planting_date)
-VALUES (2, 'southwest', '08/31/2020');
+VALUES (2, 'southwest', '04/07/2020'), (10, 'central', '05/16/2020'), (1, 'northwest', '04/12/2020'), (6, 'central', '9/14/2019'),
+(4, 'northeast', '03/14/2020'), (3, 'southeast', '03/21/2020'), (5, 'west', '06/28/2020'), (9, 'east', '03/01/2020'), 
+(7, 'north', '09/01/2020'), (8, 'south', '03/28/2020');
 
 INSERT INTO harvests (crop_id, area_identifier, weight_count, date_harvested)
 VALUES (1, 'north', 350, '06/22/2020');
@@ -124,5 +128,5 @@ BEGIN
 INSERT INTO crops (crop_name, time_to_expire) VALUES ('squash', 35)
 END;
 
-SELECT i.inventory_id, i.date_added, c.crop_name, l.date_lost, l.amount_lost, l.loss_description FROM loss AS l JOIN inventory AS i ON l.inventory_id = i.inventory_id JOIN crops AS c ON i.crop_id = c.crop_id;
+SELECT i.inventory_id, i.date_added, c.crop_name, l.* FROM loss AS l JOIN inventory AS i ON l.inventory_id = i.inventory_id JOIN crops AS c ON i.crop_id = c.crop_id;
 
