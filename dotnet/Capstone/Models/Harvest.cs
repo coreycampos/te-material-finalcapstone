@@ -19,5 +19,7 @@ namespace Capstone.Models
 
         public DateTime dateHarvested { get; set; }
 
+        public int inventoryId { get; set; }
+
     }
 }

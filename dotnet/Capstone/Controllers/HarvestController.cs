@@ -35,10 +35,10 @@ namespace Capstone.Controllers
         public IActionResult AddNewHarvest(Harvest newHarvest)
         {
             bool result = false;
-            bool inventoryResult = inventoryDAO.AddInventory(newHarvest.cropID, newHarvest.weight, newHarvest.dateHarvested);
-            if (inventoryResult)
+            int newInventoryId = inventoryDAO.AddInventory(newHarvest.cropID, newHarvest.weight, newHarvest.dateHarvested);
+            if (newInventoryId != 0)
             {
-                result = harvestDAO.AddNewHarvest(newHarvest);
+                result = harvestDAO.AddNewHarvest(newHarvest, newInventoryId);
             }
             if (result)
             {
@@ -52,8 +52,14 @@ namespace Capstone.Controllers
         [HttpPut("updateHarvest")]
         public IActionResult UpdatePlan(Harvest someHarvest)
         {
-            bool result = harvestDAO.UpdateHarvest(someHarvest);
-
+            bool result = false;
+            Harvest originalHarvest = harvestDAO.GetSpecificHarvest(someHarvest.harvestId);
+            decimal inventoryAmountChange = originalHarvest.weight - someHarvest.weight;
+            bool inventoryResult = inventoryDAO.DebitInventory(someHarvest.inventoryId, inventoryAmountChange);
+            if (inventoryResult)
+            {
+                result = harvestDAO.UpdateHarvest(someHarvest);
+            }
             if (result)
             {
                 return Ok("Update successful");

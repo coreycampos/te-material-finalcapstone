@@ -12,7 +12,9 @@ namespace Capstone.DAO
 
         List<Harvest> GetAllHarvests();
 
-        bool AddNewHarvest(Harvest newHarvest);
+        Harvest GetSpecificHarvest(int harvestId);
+
+        bool AddNewHarvest(Harvest newHarvest, int inventoryId);
 
         bool UpdateHarvest(Harvest someHarvest);
 
