@@ -4,6 +4,7 @@
     <table>
         <tr class="headerRow">
             <td>Harvest Id</td>
+            <td>Inventory Id</td>
             <td>Crop</td>
             <td>Area</td>
             <td>Harvest Weight</td>
@@ -11,6 +12,7 @@
         </tr>
         <tr v-for="harvest in harvests" v-bind:key="harvest.harvestId">
             <td>{{harvest.harvestId}}</td>
+            <td>{{harvest.inventoryId}}</td>
             <td>{{harvest.cropName}}</td>
             <td>{{harvest.area}}</td>
             <td>{{harvest.weight}}</td>

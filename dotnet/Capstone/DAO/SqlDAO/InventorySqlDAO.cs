@@ -14,6 +14,7 @@ namespace Capstone.DAO
         private string sqlAddInventory = "INSERT INTO inventory (crop_id, amount, date_added) VALUES (@cropId, @amount, @dateAdded);";
         private string sqlDebitInventory = "UPDATE inventory SET amount = amount - @debit WHERE inventory_id = @inventoryId;";
         private string sqlGetSpecificInventory = "SELECT inventory_id, crops.crop_name, inventory.crop_id, amount, date_added FROM inventory JOIN crops on crops.crop_id = inventory.crop_id WHERE inventory_id = @inventoryId;";
+        private string sqlGetMostRecentInventoryId = "SELECT TOP 1 inventory_id FROM inventory ORDER BY inventory_id DESC;";
 
         public InventorySqlDAO(string dbConnectionString)
         {
@@ -78,9 +79,9 @@ namespace Capstone.DAO
             }
         }
 
-        public bool AddInventory(int cropId, decimal amount, DateTime dateAdded)
+        public int AddInventory(int cropId, decimal amount, DateTime dateAdded)
         {
-            bool result = false;
+            int currentInventoryId = 0;
 
             try
             {
@@ -94,18 +95,19 @@ namespace Capstone.DAO
                     cmd.Parameters.AddWithValue("@dateAdded", dateAdded);
 
                     cmd.ExecuteNonQuery();
+
+                    SqlCommand cmdGetInventoryId = new SqlCommand(sqlGetMostRecentInventoryId, conn);
+                    currentInventoryId = (int)cmdGetInventoryId.ExecuteScalar();
+
+                    return currentInventoryId;
                 }
-
-                result = true;
             }
-
             catch
             {
-                result = false;
+                currentInventoryId = 0;
+
+                return currentInventoryId;
             }
-
-            return result;
-
         }
 
         public bool DebitInventory(int inventoryId, decimal debit)

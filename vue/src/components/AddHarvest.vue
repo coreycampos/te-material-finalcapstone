@@ -4,8 +4,8 @@
     <form v-on:submit.prevent v-show="display">
         
         <div>
-            <label for="cropIdInput">cropId</label>
-            <input type="number" id="cropIdInput" v-model.number="harvest.cropId">
+            <label for="cropNameInput">Crop Name</label>
+            <input type="text" id="cropNameInput" v-model.number="harvest.cropName">
 
             <label for="areaInput">Area</label>
             <input type="text" id="areaInput" v-model.number="harvest.area">
@@ -31,11 +31,10 @@ export default {
         return {
             harvest: {
                 harvestId: 0,
-                cropId: 0,
+                cropName: "",
                 area: "",
                 weight: 0,
                 dateHarvested: Date.now()
-
             },
 
             display: false

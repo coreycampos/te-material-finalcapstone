@@ -43,6 +43,7 @@ crop_id int NOT NULL,
 area_identifier varchar(50) NOT NULL,
 weight_count decimal NOT NULL,
 date_harvested date NOT NULL,
+inventory_id int NOT NULL,
 PRIMARY KEY (harvest_id),
 FOREIGN KEY (crop_id) REFERENCES crops(crop_id)
 );
@@ -101,8 +102,8 @@ VALUES (2, 'southwest', '04/07/2020'), (10, 'central', '05/16/2020'), (1, 'north
 (4, 'northeast', '03/14/2020'), (3, 'southeast', '03/21/2020'), (5, 'west', '06/28/2020'), (9, 'east', '03/01/2020'), 
 (7, 'north', '09/01/2020'), (8, 'south', '03/28/2020');
 
-INSERT INTO harvests (crop_id, area_identifier, weight_count, date_harvested)
-VALUES (1, 'north', 350, '06/22/2020');
+INSERT INTO harvests (crop_id, area_identifier, weight_count, date_harvested, inventory_id)
+VALUES (1, 'north', 350, '06/22/2020', 1);
 
 INSERT INTO inventory (crop_id, date_added, amount)
 VALUES (1, '06/22/2020', 303);

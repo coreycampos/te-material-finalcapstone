@@ -62,7 +62,8 @@ export default new Vuex.Store({
       {
         area: "raised bed 1",
         cropId: 9,
-        cropName: "garlic",
+        inventoryId: 1,
+        cropName: "corn",
         dateHarvested: "08/10/2020",
         harvestId: 1,
         weight: 50,

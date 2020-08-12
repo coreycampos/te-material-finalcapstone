@@ -10,8 +10,9 @@ namespace Capstone.DAO
     public class HarvestSqlDAO : IHarvestDAO
     {
         private readonly string connectionString;
-        private string sqlSelectAllHarvests = "SELECT harvest_id, harvests.crop_id , crops.crop_name, area_identifier, weight_count, date_harvested FROM harvests INNER JOIN crops ON crops.crop_id=harvests.crop_id;";
-        private string sqlAddNewHarvest = "INSERT INTO harvests (crop_id, area_identifier, weight_count, date_harvested) VALUES (@cropId, @area, @weight, @dateHarvested)";
+        private string sqlSelectAllHarvests = "SELECT harvest_id, inventory_id, harvests.crop_id , crops.crop_name, area_identifier, weight_count, date_harvested FROM harvests INNER JOIN crops ON crops.crop_id=harvests.crop_id;";
+        private string sqlSelectSpecificHarvest = "SELECT harvest_id, harvests.crop_id , crops.crop_name, area_identifier, weight_count, date_harvested FROM harvests INNER JOIN crops ON crops.crop_id=harvests.crop_id WHERE harvest_id = @harvestId;";
+        private string sqlAddNewHarvest = "INSERT INTO harvests (crop_id, area_identifier, weight_count, date_harvested, inventory_id) VALUES (@cropId, @area, @weight, @dateHarvested, @inventoryId)";
         private string sqlExpiringWithinWeek = "SELECT * FROM harvests AS h JOIN crops AS c ON h.crop_id = c.crop_id "
 + "WHERE DATEDIFF(day, DATEADD(day, c.time_to_expire, h.date_harvested), GETDATE()) <= 7;";
         private string sqlUpdateHarvest = "UPDATE harvests SET crop_id = @cropId, area_identifier = @area, weight_count = @amount, date_harvested = @dateHarvested WHERE harvest_id = @harvestId;";
@@ -39,6 +40,7 @@ namespace Capstone.DAO
                     Harvest currentHarvest = new Harvest();
 
                     currentHarvest.harvestId = Convert.ToInt32(reader["harvest_id"]);
+                    currentHarvest.inventoryId = Convert.ToInt32(reader["inventory_id"]);
                     currentHarvest.cropID = Convert.ToInt32(reader["crop_id"]);
                     currentHarvest.cropName = Convert.ToString(reader["crop_name"]);
                     currentHarvest.area = Convert.ToString(reader["area_identifier"]);
@@ -57,10 +59,33 @@ namespace Capstone.DAO
             return GenericSelectHarvest(sqlSelectAllHarvests);
         }
 
-        public bool AddNewHarvest(Harvest newHarvest)
+        public Harvest GetSpecificHarvest(int harvestId)
+        {
+            Harvest currentHarvest = new Harvest();
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                SqlCommand cmd = new SqlCommand(sqlSelectSpecificHarvest, conn);
+                cmd.Parameters.AddWithValue("@harvestId", harvestId);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read() == true)
+                {
+                    currentHarvest.harvestId = Convert.ToInt32(reader["harvest_id"]);
+                    currentHarvest.cropID = Convert.ToInt32(reader["crop_id"]);
+                    currentHarvest.cropName = Convert.ToString(reader["crop_name"]);
+                    currentHarvest.area = Convert.ToString(reader["area_identifier"]);
+                    currentHarvest.weight = Convert.ToDecimal(reader["weight_count"]);
+                    currentHarvest.dateHarvested = Convert.ToDateTime(reader["date_harvested"]);
+                }
+                return currentHarvest;
+            }
+        }
+        public bool AddNewHarvest(Harvest newHarvest, int inventoryId)
         {
             bool result = false;
-            
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
@@ -72,19 +97,16 @@ namespace Capstone.DAO
                     cmd.Parameters.AddWithValue("@area", newHarvest.area);
                     cmd.Parameters.AddWithValue("@weight", newHarvest.weight);
                     cmd.Parameters.AddWithValue("@dateHarvested", newHarvest.dateHarvested);
+                    cmd.Parameters.AddWithValue("@inventoryId", inventoryId);
 
                     cmd.ExecuteNonQuery();
                 }
-
                 result = true;
-
             }
-
             catch
             {
                 result = false;
             }
-
             return result;
         }
         public bool UpdateHarvest(Harvest someHarvest)
@@ -117,7 +139,27 @@ namespace Capstone.DAO
             }
             return result;
         }
+        public int GetCropId(string cropName)
+        {
+            int cropId = 0;
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
 
+                    SqlCommand gettingCropId = new SqlCommand(sqlGetCropId, conn);
+                    gettingCropId.Parameters.AddWithValue("@cropName", cropName);
+                    cropId = (int)gettingCropId.ExecuteScalar();
+
+                    return cropId;
+                }
+            }
+            catch(Exception e)
+            {
+                return cropId;
+            }
+        }
 
         public List<Harvest> ExpiringWithinWeek()
         {
