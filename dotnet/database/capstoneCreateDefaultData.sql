@@ -111,10 +111,10 @@ VALUES (6, 'central', 316.77, '11/05/2019', 1), (4, 'northeast', 247.3, '04/28/2
 (3, 'southeast', 76, '07/05/2020', 5), (1, 'northwest', 217.65, '08/10/2020', 6);
 
 INSERT INTO sales (inventory_id, date_sold, amount_sold, revenue, method_of_sale)
-VALUES (1, '11/11/2019', 315, 787.50, 'wholesale'), (5, '07/07/2020', 45, 90.00, 'retail'), (3, '04/01/2020', 100, 'wholesale');
+VALUES (1, '11/11/2019', 315, 787.50, 'wholesale'), (3, '05/21/2020', 100, 195.00, 'wholesale'), (5, '07/07/2020', 45, 90.00, 'retail');
 
 INSERT INTO loss (inventory_id, date_lost, amount_lost, loss_description)
 VALUES (2, '04/30/2020', 247.3, 'E. coli contamination'), (5, '07/07/2020', 4, 'theft'), (4, '06/27/2020', 8.91, 'eaten by livestock');
 
 INSERT INTO waste (inventory_id, date_wasted, amount_wasted, waste_description)
-VALUES (1, '11/25/2019', 1.77, 'expired'), (1, '07/08/2020', 11, 'expired'), (3, '04/05/2020', 14, 'expired');
+VALUES (1, '11/25/2019', 1.77, 'expired'), (1, '07/08/2020', 11, 'expired'), (3, '05/28/2020', 14, 'expired');
