@@ -30,14 +30,7 @@ import saleService from '../services/SaleDataService.js';
 export default {
     name: 'add-sale',
 
-    // created() {
-    //     this.sale.saleId = this.$route.params.sale.saleId;
-    //     this.sale.inventoryId = this.$route.params.sale.inventoryId;
-    //     this.sale.dateSold = this.$route.params.sale.dateSold;
-    //     this.sale.amountSold = this.$route.params.sale.amountSold;
-    //     this.sale.revenue = this.$route.params.sale.revenue;
-    //     this.sale.methodOfSale = this.$route.params.sale.methodOfSale;
-    // },
+    
 
     data() {
         return {

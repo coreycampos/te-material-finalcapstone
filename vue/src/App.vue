@@ -1,6 +1,8 @@
 <!-- Main Application Template. 
      Note that you have classes from bootstrap available to you.
      See https://getbootstrap.com/docs/4.0/components/alerts/ for reference on bootstrap -->
+
+
 <template>
   <div id="nav">
     <nav-bar/>    

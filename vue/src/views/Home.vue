@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>Hello this is the Home Page</p>
+    <h1>Home</h1>
     <inventory-info v-bind:inventories="$store.state.inventory" />
   </div>
 </template>

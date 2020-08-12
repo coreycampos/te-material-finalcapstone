@@ -34,4 +34,15 @@ export default {
 .headerRow {
     font-weight: bold;
 }
+
+td{
+    width: 20%;
+    padding-bottom: 10px;
+}
+
+table{
+    margin-bottom: 20px;
+    border-bottom: 1px solid black;
+    width: 100%;
+}
 </style>
