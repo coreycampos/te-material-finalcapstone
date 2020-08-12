@@ -33,10 +33,13 @@ namespace Capstone.Controllers
         [HttpPost("newSale")]
         public IActionResult AddNewSale(Sales newSale)
         {
-            bool result = salesDAO.RecordNewSale(newSale);
+            bool result = false;
             bool inventoryResult = inventoryDAO.DebitInventory(newSale.inventoryId, newSale.amountSold);
-
-            if (result && inventoryResult)
+            if (inventoryResult)
+            {
+                result = salesDAO.RecordNewSale(newSale);
+            }
+            if (result)
             {
                 return Created("", result);
             }

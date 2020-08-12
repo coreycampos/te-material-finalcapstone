@@ -2,21 +2,21 @@
     <div>
     <button v-on:click="changeDisplay">Add a Loss</button>
     <form v-on:submit.prevent v-show="display">
-        <div>
+        <form v-on:submit.prevent="saveLoss()">
             <label for="inventoryIdInput">InventoryId</label>
-            <input type="number" id="inventoryIdInput" v-model.number="loss.inventoryId">
+            <input type="number" id="inventoryIdInput" v-model.number="loss.inventoryId" required>
 
             <label for="dateLostInput">Date Lost</label>
-            <input type="date" id="dateLostInput" v-model="loss.dateLost">
+            <input type="date" id="dateLostInput" v-model="loss.dateLost" required>
 
             <label for="amountLostInput">Amount Lost</label>
-            <input type="number" id="amountLostInput" v-model.number="loss.amountLost">
+            <input type="number" id="amountLostInput" v-model.number="loss.amountLost" required>
 
             <label for="lossDescriptionInput">Loss Description</label>
-            <input type="text" id="lossDescriptionInput" v-model="loss.lossDescription">
+            <input type="text" id="lossDescriptionInput" v-model="loss.lossDescription" required>
 
-            <input type="submit" v-on:click.prevent="saveLoss()">
-        </div>
+            <input type="submit">
+        </form>
     </form>
     </div>
 </template>

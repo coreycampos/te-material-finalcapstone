@@ -16,10 +16,12 @@ namespace Capstone.Controllers
     public class HarvestController : ControllerBase
     {
         private readonly IHarvestDAO harvestDAO;
+        private readonly IInventoryDAO inventoryDAO;
 
-        public HarvestController(IHarvestDAO _harvestDAO)
+        public HarvestController(IHarvestDAO _harvestDAO, IInventoryDAO _inventoryDAO)
         {
             harvestDAO = _harvestDAO;
+            inventoryDAO = _inventoryDAO;
         }
 
         [HttpGet("allHarvests")]
@@ -32,13 +34,17 @@ namespace Capstone.Controllers
         [HttpPost("newHarvest")]
         public IActionResult AddNewHarvest(Harvest newHarvest)
         {
-            bool result = harvestDAO.AddNewHarvest(newHarvest);
-
+            bool result = false;
+            newHarvest.cropID = harvestDAO.GetCropId(newHarvest.cropName);
+            int newInventoryId = inventoryDAO.AddInventory(newHarvest.cropID, newHarvest.weight, newHarvest.dateHarvested);
+            if (newInventoryId != 0)
+            {
+                result = harvestDAO.AddNewHarvest(newHarvest, newInventoryId);
+            }
             if (result)
             {
                 return Created("", result);
             }
-
             else
             {
                 return BadRequest();
@@ -47,8 +53,14 @@ namespace Capstone.Controllers
         [HttpPut("updateHarvest")]
         public IActionResult UpdatePlan(Harvest someHarvest)
         {
-            bool result = harvestDAO.UpdateHarvest(someHarvest);
-
+            bool result = false;
+            Harvest originalHarvest = harvestDAO.GetSpecificHarvest(someHarvest.harvestId);
+            decimal inventoryAmountChange = originalHarvest.weight - someHarvest.weight;
+            bool inventoryResult = inventoryDAO.DebitInventory(someHarvest.inventoryId, inventoryAmountChange);
+            if (inventoryResult)
+            {
+                result = harvestDAO.UpdateHarvest(someHarvest);
+            }
             if (result)
             {
                 return Ok("Update successful");

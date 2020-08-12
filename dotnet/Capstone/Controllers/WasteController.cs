@@ -33,10 +33,13 @@ namespace Capstone.Controllers
         [HttpPost("newWaste")]
         public IActionResult AddNewWaste(Waste newWaste)
         {
-            bool result = wasteDAO.RecordNewWaste(newWaste);
+            bool result = false;
             bool inventoryResult = inventoryDAO.DebitInventory(newWaste.inventoryId, newWaste.amountWasted);
-
-            if (result && inventoryResult)
+            if (inventoryResult)
+            {
+                result = wasteDAO.RecordNewWaste(newWaste);
+            }
+            if (result)
             {
                 return Created("", result);
             }

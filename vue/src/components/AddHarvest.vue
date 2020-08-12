@@ -3,21 +3,26 @@
     <button v-on:click="changeDisplay">Add a Harvest</button>
     <form v-on:submit.prevent v-show="display">
         
-        <div>
-            <label for="cropIdInput">cropId</label>
-            <input type="number" id="cropIdInput" v-model.number="harvest.cropId">
+        <form v-on:submit.prevent="saveHarvest()">
+            <label for="cropNameDropDown">Crop Name</label>
+            <select name="cropNameDropDown" id="cropNameDropDown" 
+                    v-model="harvest.cropName"
+                    required>
+                <option value="" selected disabled>Select Crop Name</option>
+                <option v-for="crop in crops" v-bind:key="crop.cropName">{{ crop.cropName }}</option>
+            </select>
 
             <label for="areaInput">Area</label>
-            <input type="text" id="areaInput" v-model.number="harvest.area">
+            <input type="text" id="areaInput" v-model.number="harvest.area" required>
 
             <label for="weightInput">Weight</label>
-            <input type="number" id="weightInput" v-model.number="harvest.weight">
+            <input type="number" id="weightInput" v-model.number="harvest.weight" required>
 
             <label for="dateInput">Date of Harvest</label>
-            <input type="date" id="dateInput" v-model="harvest.dateHarvested">
+            <input type="date" id="dateInput" v-model="harvest.dateHarvested" required>
 
-            <input type="submit" v-on:click.prevent="saveHarvest()">
-        </div>
+            <input type="submit">
+        </form>
     </form>
     </div>
 </template>
@@ -31,17 +36,17 @@ export default {
         return {
             harvest: {
                 harvestId: 0,
-                cropId: 0,
+                cropName: "",
                 area: "",
                 weight: 0,
                 dateHarvested: Date.now()
+            },
+            display: false,
+            crops: {
 
             },
-
-            display: false
         }
     },
-
     methods: {
         saveHarvest() {
             harvestService.addHarvest(this.harvest)
@@ -56,13 +61,15 @@ export default {
             this.display = !this.display;
             console.log(this.display);
             },
+    },
+    created() {
+        this.crops = this.$store.state.crop;
     }
-   
 }
 </script>
 
 <style scoped>
-input {
+input, select {
     display: block;
 }
 </style>

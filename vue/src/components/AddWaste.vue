@@ -2,21 +2,21 @@
     <div>
     <button v-on:click="changeDisplay">Add Waste</button>
     <form v-on:submit.prevent v-show="display">
-        <div>
+        <form v-on:submit.prevent="saveWaste()">
             <label for="inventoryIdInput">InventoryId</label>
-            <input type="number" id="inventoryIdInput" v-model.number="waste.inventoryId">
+            <input type="number" id="inventoryIdInput" v-model.number="waste.inventoryId" required>
 
             <label for="dateWastedInput">Date Wasted</label>
-            <input type="date" id="dateWastedInput" v-model="waste.dateWasted">
+            <input type="date" id="dateWastedInput" v-model="waste.dateWasted" required>
 
             <label for="amountWastedInput">Amount Wasted</label>
-            <input type="number" id="amountWastedInput" v-model.number="waste.amountWasted">
+            <input type="number" id="amountWastedInput" v-model.number="waste.amountWasted" required>
 
             <label for="wasteDescriptionInput">Waste Description</label>
-            <input type="text" id="wasteDescriptionInput" v-model="waste.wasteDescription">
+            <input type="text" id="wasteDescriptionInput" v-model="waste.wasteDescription" required>
 
-            <input type="submit" v-on:click.prevent="saveWaste()">
-        </div>
+            <input type="submit">
+        </form>
     </form>
     </div>
 </template>
