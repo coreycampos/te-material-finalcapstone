@@ -54,7 +54,7 @@ export default {
     methods: {
         saveChanges(cropPlan){
             CropPlansService.updateCropPlans(cropPlan).then( () => {
-                this.$router.push({name: 'home'});
+                this.$router.push({name: 'AllFarmInfo'});
             })
         }
         

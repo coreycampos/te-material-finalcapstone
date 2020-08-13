@@ -62,7 +62,7 @@ export default {
     methods: {
         saveChanges(crop){
             UploadService.updateCrop(crop).then( () => {
-                this.$router.push({name: 'home'});
+                this.$router.push({name: 'crops'});
             })
         }
     }
