@@ -7,7 +7,7 @@
             <th>Inventory Id</th>
             <th>Crop Name</th>
             <th>Area</th>
-            <th>Harvest Weight</th>
+            <th>Harvest Weight (lbs)</th>
             <th>Harvest Date</th>
         </thead>
         <tbody>
