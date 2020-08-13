@@ -61,4 +61,7 @@ export default {
 .informationRow{
     font-size: 60%;
 }
+#displayToggle{
+    font-size: 50%;
+}
 </style>

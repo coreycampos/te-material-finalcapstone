@@ -1,7 +1,7 @@
 <template>
 <div>
     <h2>Crop Plans</h2>
-    <table>
+    <table class="table table-hover">
         <tr class="headerRow">
             <td>Plan Id</td>
             <td>Crop</td>
@@ -42,7 +42,6 @@ td{
 
 table{
     margin-bottom: 20px;
-    border-bottom: 1px solid black;
     width: 100%;
 }
 </style>

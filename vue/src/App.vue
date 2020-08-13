@@ -4,8 +4,8 @@
 
 
 <template>
-  <div id="nav">
-    <nav-bar/>    
+  <div id="app" class="container">
+    <nav-bar/>
   </div>
 </template>
 
@@ -21,5 +21,11 @@ export default {
 
 <!-- Application-Wide Styles go here -->
 <style>
-
+div{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+/* table{
+  background-color: rgba(188, 253, 188, 0.712);
+  border-radius: 10px;
+} */
 </style>

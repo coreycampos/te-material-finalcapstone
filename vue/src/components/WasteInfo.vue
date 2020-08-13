@@ -33,7 +33,6 @@ export default {
 }
 
 table{
-    border-bottom: 1px solid black;
     width: 100%;
 }
 

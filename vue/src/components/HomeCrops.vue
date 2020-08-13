@@ -3,10 +3,7 @@
 
     <h2 v-for="item in $store.state.crop" v-bind:key="item.cropId">
         {{item.cropName}}
-                
-                <button id="sendToEdit" v-on:click="sendToEdit(item)">
-                    Edit
-                </button>
+                <router-link id="SendToEdit" v-bind:to="{name: 'EditCrop', params: {crop: item}}">Edit</router-link>
           <Crop-Info v-bind:crop="item" />
     </h2>
     
@@ -36,13 +33,18 @@ export default {
             console.log(this.display);
             },
 
-        sendToEdit(item) {
-            this.$router.push({name: 'EditCrop', params:{crop: item} })
-        },
-
         updateCrop(item){
             this.crop.push(item);
             }
         }
     };
 </script>
+
+<style scoped>
+button{
+    font-size: 25%;
+}
+#SendToEdit{
+    font-size: 50%;
+}
+</style>

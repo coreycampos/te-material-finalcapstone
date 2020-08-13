@@ -36,7 +36,6 @@ export default {
 
 table{
     margin-bottom: 20px;
-    border-bottom: 1px solid black;
     width: 100%
 }
 

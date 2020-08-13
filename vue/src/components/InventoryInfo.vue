@@ -27,5 +27,13 @@ export default {
 </script>
 
 <style>
+td{
+    width: 25%;
+    padding-bottom: 10px;
+}
 
+table{
+    margin-bottom: 20px;
+    width: 100%;
+}
 </style>

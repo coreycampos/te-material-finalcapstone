@@ -1,23 +1,23 @@
 <template>
     <div>
-        <table id="full crop table">
-            <tr class="headerRow">
-                <td>
+        <table id="full crop table" class="table table-hover">
+            <thead class="headerRow">
+                <th scope="col">
                     Crop Name &nbsp;
-                </td>
-                <td>
+                </th>
+                <th scope="col">
                     Seed to Harvest Time &nbsp;
-                </td>
-                <td>
+                </th>
+                <th scope="col">
                     Seed to Transpant Time
-                </td>
-                <td>
+                </th>
+                <th scope="col">
                     Transplant to Harvest Time
-                </td>
-                <td>
+                </th>
+                <th scope="col">
                         Time to Expiration
-                </td>
-            </tr>
+                </th>
+            </thead>
             <tr v-for="item in $store.state.crop" v-bind:key="item.cropId">
                 <td>{{item.cropName}}</td>
                 <td>{{item.timeSeedToHarvest}}</td>

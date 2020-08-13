@@ -1,9 +1,9 @@
 <template>
     <div>
         <plan-info v-bind:plans="$store.state.cropPlans" />
-        <harvest-info v-bind:harvests="$store.state.harvests" />
         <loss-info v-bind:losses="$store.state.losses" />
         <waste-info v-bind:wastes="$store.state.wastes" />
+        <harvest-info v-bind:harvests="$store.state.harvests" />
         <sales-info v-bind:sales="$store.state.sales" />
     </div>
 </template>
