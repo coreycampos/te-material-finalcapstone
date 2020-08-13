@@ -16,6 +16,7 @@ import AddHarvest from "../views/AddHarvest.vue";
 import AddLoss from "../views/AddLoss.vue";
 import AddSale from "../views/AddSale.vue";
 import AddWaste from "../views/AddWaste.vue";
+import CurrentInventory from "../views/CurrentInventory.vue";
 
 Vue.use(Router);
 
@@ -44,6 +45,14 @@ const router = new Router({
       path: "/crops",
       name: "crops",
       component: Crops,
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
+      path: "/inventory",
+      name: "inventory",
+      component: CurrentInventory,
       meta: {
         requiresAuth: true,
       },

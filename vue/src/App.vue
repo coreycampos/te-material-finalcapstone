@@ -5,8 +5,10 @@
 
 <template>
   <div id="app" class="container">
-    <nav-bar/>
-    <router-view />
+    <nav-bar class="nav"/>
+    <div class="routerView">
+      <router-view/>
+    </div>
   </div>
 </template>
 
@@ -25,9 +27,19 @@ export default {
 div{
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-
 table{
   background-color: #E8EDDF;
   border-radius: 10px;
+  margin-top: .5rem;
 }
+h2 {
+  padding-top: 1rem;
+}
+
+.nav {
+  z-index: 999999 !important;
+  padding-bottom: 4rem;
+}
+
+
 </style>
