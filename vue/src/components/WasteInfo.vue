@@ -9,6 +9,7 @@
                 <th>Amount Wasted</th>
                 <th>Waste Description</th>
             </thead>
+            <tbody>
             <tr v-for="waste in wastes" v-bind:key="waste.wasteId">
                 <td>{{waste.wasteId}}</td>
                 <td>{{waste.inventoryId}}</td>
@@ -16,6 +17,7 @@
                 <td>{{waste.amountWasted}}</td>
                 <td>{{waste.wasteDescription}}</td>
             </tr>
+            </tbody>
           </table>
     </div>
 </template>
@@ -44,6 +46,5 @@ table{
 
 td{
     width: 20%;
-    padding-bottom: 10px;
 }
 </style>
