@@ -5,7 +5,7 @@
         <thead class="headerRow">
             <th>Harvest Id</th>
             <th>Inventory Id</th>
-            <th>Crop</th>
+            <th>Crop Name</th>
             <th>Area</th>
             <th>Harvest Weight</th>
             <th>Harvest Date</th>

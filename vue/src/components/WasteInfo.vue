@@ -5,13 +5,15 @@
             <thead class="headerRow">
                 <th>Waste Id</th>
                 <th>Inventory Id</th>
+                <th>Crop Name</th>
                 <th>Date Wasted</th>
-                <th>Amount Wasted</th>
+                <th>Amount Wasted (lbs)</th>
                 <th>Waste Description</th>
             </thead>
             <tr v-for="waste in wastes" v-bind:key="waste.wasteId">
                 <td>{{waste.wasteId}}</td>
                 <td>{{waste.inventoryId}}</td>
+                <td>{{waste.cropName}}</td>
                 <td>{{toDateString(waste.dateWasted)}}</td>
                 <td>{{waste.amountWasted}}</td>
                 <td>{{waste.wasteDescription}}</td>

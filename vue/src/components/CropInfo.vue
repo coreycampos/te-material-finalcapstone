@@ -5,10 +5,10 @@
                 </button>
         <table v-show="display" class="table table-hover">
             <thead class="headerRow">
-                <th>Seed to Harvest Time</th>
-                <th>Seed to Transplant Time</th>
-                <th>Transplant to Harvest Time</th>
-                <th>Time to Expiration</th>
+                <th>Seed to Harvest Time (days)</th>
+                <th>Seed to Transplant Time (days)</th>
+                <th>Transplant to Harvest Time (days)</th>
+                <th>Time to Expiration (days)</th>
             </thead>
             <tbody>
           <tr class="informationRow">

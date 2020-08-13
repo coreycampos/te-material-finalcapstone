@@ -5,14 +5,16 @@
             <thead class="headerRow">
                 <th>Sale Id</th>
                 <th>Inventory Id</th>
+                <th>Crop Name</th>
                 <th>Date Sold</th>
-                <th>Amount Sold</th>
-                <th>Revenue</th>
+                <th>Amount Sold (lbs)</th>
+                <th>Revenue ($)</th>
                 <th>Method of Sale</th>
             </thead>
             <tr v-for="sale in sales" v-bind:key="sale.saleId">
                 <td>{{sale.saleId}}</td>
                 <td>{{sale.inventoryId}}</td>
+                <td>{{sale.cropName}}</td>
                 <td>{{toDateString(sale.dateSold)}}</td>
                 <td>{{sale.amountSold}}</td>
                 <td>{{sale.revenue}}</td>

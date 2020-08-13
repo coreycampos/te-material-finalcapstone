@@ -5,13 +5,15 @@
             <thead class="headerRow">
                 <th>Loss Id</th>
                 <th>Inventory Id</th>
+                <th>Crop Name</th>
                 <th>Date Lost</th>
-                <th>Amount Lost</th>
+                <th>Amount Lost (lbs)</th>
                 <th>Loss Description</th>
             </thead>
             <tr v-for="loss in losses" v-bind:key="loss.lossId">
                 <td>{{loss.lossId}}</td>
                 <td>{{loss.inventoryId}}</td>
+                <td>{{loss.cropName}}</td>
                 <td>{{toDateString(loss.dateLost)}}</td>
                 <td>{{loss.amountLost}}</td>
                 <td>{{loss.lossDescription}}</td>

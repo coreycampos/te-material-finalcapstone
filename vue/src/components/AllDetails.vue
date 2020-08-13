@@ -3,10 +3,10 @@
         <table id="full crop table" class="table table-hover">
             <thead class="headerRow">
                 <th>Crop Name</th>
-                <th>Seed to Harvest Time</th>
-                <th>Seed to Transpant Time</th>
-                <th>Transplant to Harvest Time</th>
-                <th>Time to Expiration</th>
+                <th>Seed to Harvest Time (days)</th>
+                <th>Seed to Transpant Time (days)</th>
+                <th>Transplant to Harvest Time (days)</th>
+                <th>Time to Expiration (days)</th>
             </thead>
             <tr v-for="item in $store.state.crop" v-bind:key="item.cropId">
                 <td>{{item.cropName}}</td>

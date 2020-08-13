@@ -4,7 +4,7 @@
     <table class="table table-hover">
         <tr class="headerRow">
             <td>Plan Id</td>
-            <td>Crop</td>
+            <td>Crop Name</td>
             <td>Area</td>
             <td>Planting Date</td>
             <td>Make Edits</td>
