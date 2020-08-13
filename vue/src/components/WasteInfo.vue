@@ -12,7 +12,7 @@
             <tr v-for="waste in wastes" v-bind:key="waste.wasteId">
                 <td>{{waste.wasteId}}</td>
                 <td>{{waste.inventoryId}}</td>
-                <td>{{waste.dateWasted}}</td>
+                <td>{{toDateString(waste.dateWasted)}}</td>
                 <td>{{waste.amountWasted}}</td>
                 <td>{{waste.wasteDescription}}</td>
             </tr>
@@ -23,7 +23,13 @@
 <script>
 export default {
     name: 'WasteInfo',
-    props: ['wastes']
+    props: ['wastes'],
+    methods: {
+      toDateString(longDate) {
+        let simpleDate = longDate.split('T')[0];
+        return simpleDate;
+      },
+    },
 }
 </script>
 

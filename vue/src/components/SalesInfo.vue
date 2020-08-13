@@ -13,7 +13,7 @@
             <tr v-for="sale in sales" v-bind:key="sale.saleId">
                 <td>{{sale.saleId}}</td>
                 <td>{{sale.inventoryId}}</td>
-                <td>{{sale.dateSold}}</td>
+                <td>{{toDateString(sale.dateSold)}}</td>
                 <td>{{sale.amountSold}}</td>
                 <td>{{sale.revenue}}</td>
                 <td>{{sale.methodOfSale}}</td>
@@ -25,7 +25,13 @@
 <script>
 export default {
     name: 'SalesInfo',
-    props: ['sales']
+    props: ['sales'],
+    methods: {
+      toDateString(longDate) {
+        let simpleDate = longDate.split('T')[0];
+        return simpleDate;
+      },
+    },
 }
 </script>
 

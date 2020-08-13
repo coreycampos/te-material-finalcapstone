@@ -16,7 +16,7 @@
             <td>{{harvest.cropName}}</td>
             <td>{{harvest.area}}</td>
             <td>{{harvest.weight}}</td>
-            <td>{{harvest.dateHarvested}}</td>
+            <td>{{toDateString(harvest.dateHarvested)}}</td>
         </tr>
     </table>
 </div>
@@ -25,7 +25,13 @@
 <script>
 export default {
     name: 'HarvestInfo',
-    props: ['harvests']
+    props: ['harvests'],
+    methods: {
+      toDateString(longDate) {
+        let simpleDate = longDate.split('T')[0];
+        return simpleDate;
+      },
+    },
 }
 </script>
 
