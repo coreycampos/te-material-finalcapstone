@@ -13,7 +13,7 @@
             <td>{{plan.planId}}</td>
             <td>{{plan.crop}}</td>
             <td>{{plan.area_identifier}}</td>
-            <td>{{plan.planting_date}}</td>
+            <td>{{toDateString(plan.planting_date)}}</td>
             <td>
                 <router-link v-bind:to="{name: 'EditCropPlans', params: {cropPlan: plan}}">Edit</router-link>
             </td>
@@ -26,7 +26,13 @@
 <script>
 export default {
     name: 'PlanInfo',
-    props: ['plans']
+    props: ['plans'],
+    methods: {
+      toDateString(longDate) {
+        let simpleDate = longDate.split(' ')[0];
+        return simpleDate;
+      },
+    },
 }
 </script>
 

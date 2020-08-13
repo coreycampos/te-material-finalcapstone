@@ -12,7 +12,7 @@
             <td>{{inventory.inventoryId}}</td>
             <td>{{inventory.cropName}}</td>
             <td>{{inventory.amount}}</td>
-            <td>{{inventory.dateAdded}}</td>
+            <td>{{toDateString(inventory.dateAdded)}}</td>
         </tr>
     </table>
   </div>
@@ -22,7 +22,12 @@
 export default {
     name: 'InventoryInfo',
     props: ['inventories'],
-
+    methods: {
+      toDateString(longDate) {
+        let simpleDate = longDate.split('T')[0];
+        return simpleDate;
+      },
+    },
 }
 </script>
 
