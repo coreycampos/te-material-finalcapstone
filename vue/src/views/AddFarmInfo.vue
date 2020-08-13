@@ -1,31 +1,37 @@
 <template>
     <div>
-        <add-harvest />
-        <add-loss />
-        <add-sale />
-        <add-waste />
+        <button v-on:click="sendToAddHarvest">Add a Harvest</button>
+        <button v-on:click="sendToAddLoss">Add a Loss</button>
+        <button v-on:click="sendToAddSale">Add a Sale</button>
+        <button v-on:click="sendToAddWaste">Add Waste</button>
     </div>
 </template>
 
 <script>
-import AddHarvest from "../components/AddHarvest.vue"
-import AddLoss from "../components/AddLoss.vue"
-import AddSale from "../components/AddSale.vue"
-import AddWaste from "../components/AddWaste.vue"
 
 export default {
     components: {
-        AddHarvest,
-        AddLoss,
-        AddSale,
-        AddWaste,
+        },
+    methods: {
+        sendToAddHarvest(){
+            this.$router.push({name: 'AddHarvest'});
+        },
+        sendToAddLoss(){
+            this.$router.push({name: 'AddLoss'});
+        },
+        sendToAddSale(){
+            this.$router.push({name: 'AddSale'});
+        },
+        sendToAddWaste(){
+            this.$router.push({name: 'AddWaste'});
         }
+    }
 }
 </script>
 
 <style scoped>
 div{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 25% 25% 25% 25%;
 }
 </style>

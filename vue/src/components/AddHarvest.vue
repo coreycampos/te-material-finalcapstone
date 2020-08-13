@@ -1,8 +1,5 @@
 <template>
     <div>
-    <button v-on:click="changeDisplay">Add a Harvest</button>
-    <form v-on:submit.prevent v-show="display">
-        
         <form v-on:submit.prevent="saveHarvest()">
             <label for="cropNameDropDown">Crop Name</label>
             <select name="cropNameDropDown" id="cropNameDropDown" 
@@ -23,7 +20,6 @@
 
             <input type="submit">
         </form>
-    </form>
     </div>
 </template>
 
@@ -52,15 +48,11 @@ export default {
             harvestService.addHarvest(this.harvest)
             .then((response) => console.log(response))
             .catch((error) => console.log(error));
-            if (this.$router.name !== 'home') {
+            if (this.$router.name !== 'AllFarmInfo') {
                 console.log("Made it to line 56");
-                this.$router.push({name: 'home'});
+                this.$router.push({name: 'AllFarmInfo'});
             }
         },
-        changeDisplay() {
-            this.display = !this.display;
-            console.log(this.display);
-            },
     },
     created() {
         this.crops = this.$store.state.crop;

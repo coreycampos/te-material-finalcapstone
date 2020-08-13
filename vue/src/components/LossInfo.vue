@@ -9,6 +9,7 @@
                 <th>Amount Lost</th>
                 <th>Loss Description</th>
             </thead>
+            <tbody>
             <tr v-for="loss in losses" v-bind:key="loss.lossId">
                 <td>{{loss.lossId}}</td>
                 <td>{{loss.inventoryId}}</td>
@@ -16,6 +17,7 @@
                 <td>{{loss.amountLost}}</td>
                 <td>{{loss.lossDescription}}</td>
             </tr>
+            </tbody>
           </table>
     </div>
 </template>
@@ -39,12 +41,10 @@ export default {
 }
 
 table{
-    margin-bottom: 20px;
     width: 100%;
 }
 
 td{
     width: 20%;
-    padding-bottom: 10px;
 }
 </style>
