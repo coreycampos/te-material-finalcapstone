@@ -27,17 +27,17 @@
         <section id="csvFileStructure">
             <h3>Structure of your .csv files</h3>
             <h4>Harvest Times</h4>
-            <p>crop, direct_seed_to_harvest_time(days), crop, direct_seed_to_harvest_time
-                <br>carrot, 70, turnip, 45, pepper, 65, etc.</p>
+            <img src="../assets/images/HarvestTimesFormat.jpg" />
+            <p></p>
             <h4>Transplant Times</h4>
-            <p>crop, direct_seed_to_transplant_time(days), transplant_to_harvest_time(days)
-                <br>cauliflour, 21, 80, tomato, 18, 110, etc.</p>
+            <img src="../assets/images/TransplantTimesFormat.jpg" />
+            <p></p>
             <h4>Expiration Times</h4>
-            <p>crop, days_to_expire(days)
-                <br>spinach, 3, summer squash, 30, etc.</p>
+            <img src="../assets/images/ExpirationTimesFormat.jpg" />
+            <p></p>
             <h4>Crop Plans</h4>
-            <p>area_identifier, crop, planting_date(mmddyyyy)
-                <br>raised bed 4, garlic, 05012020, container 2, black beans, 05222020, etc.</p>
+            <img src="../assets/images/CropPlansFormat.jpg" />
+            <p></p>
         </section>
     </div>
 </template>
