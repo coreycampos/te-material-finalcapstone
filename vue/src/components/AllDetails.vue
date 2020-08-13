@@ -8,6 +8,7 @@
                 <th>Transplant to Harvest Time (days)</th>
                 <th>Time to Expiration (days)</th>
             </thead>
+            <tbody>
             <tr v-for="item in $store.state.crop" v-bind:key="item.cropId">
                 <td>{{item.cropName}}</td>
                 <td>{{item.timeSeedToHarvest}}</td>
@@ -15,6 +16,7 @@
                 <td>{{item.timeTransplantToHarvest}}</td>
                 <td>{{item.timeToExpiration}}</td>
             </tr>
+            </tbody>
         </table>
     </div>
 </template>

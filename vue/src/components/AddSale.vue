@@ -1,7 +1,5 @@
 <template>
     <div>
-    <button v-on:click="changeDisplay">Add a Sale</button>
-    <form v-on:submit.prevent v-show="display">
         <form v-on:submit.prevent="saveSale()">
             <label for="inventoryIdDropDown">Inventory ID</label>
             <select name="inventoryIdDropDown" id="inventoryIdDropDown"
@@ -26,7 +24,6 @@
             <input type="submit">
             
         </form>
-    </form>
     </div>
 </template>
 
@@ -59,12 +56,8 @@ export default {
             saleService.addSale(this.sale)
             .then((response) => console.log(response))
             .catch((error) => console.log(error));
-            this.$router.push({name: 'Home'});
+            this.$router.push({name: 'AllFarmInfo'});
         },
-        changeDisplay() {
-            this.display = !this.display;
-            console.log(this.display);
-            },
     },
     created() {
         this.saleInventories = this.$store.state.inventory;

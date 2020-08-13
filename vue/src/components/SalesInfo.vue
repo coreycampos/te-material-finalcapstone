@@ -11,6 +11,7 @@
                 <th>Revenue ($)</th>
                 <th>Method of Sale</th>
             </thead>
+            <tbody>
             <tr v-for="sale in sales" v-bind:key="sale.saleId">
                 <td>{{sale.saleId}}</td>
                 <td>{{sale.inventoryId}}</td>
@@ -20,6 +21,7 @@
                 <td>{{sale.revenue}}</td>
                 <td>{{sale.methodOfSale}}</td>
             </tr>
+            </tbody>
           </table>
     </div>
 </template>
@@ -43,12 +45,10 @@ export default {
 }
 
 table{
-    margin-bottom: 20px;
     width: 100%
 }
 
 td{
     width: 16%;
-    padding-bottom: 10px;
 }
 </style>

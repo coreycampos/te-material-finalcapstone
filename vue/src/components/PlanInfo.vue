@@ -2,6 +2,7 @@
 <div>
     <h2>Crop Plans</h2>
     <table class="table table-hover">
+<<<<<<< HEAD
         <tr class="headerRow">
             <td>Plan Id</td>
             <td>Crop Name</td>
@@ -9,6 +10,16 @@
             <td>Planting Date</td>
             <td>Make Edits</td>
         </tr>
+=======
+        <thead class="headerRow">
+            <th>Plan Id</th>
+            <th>Crop</th>
+            <th>Area</th>
+            <th>Planting Date</th>
+            <th>Make Edits</th>
+        </thead>
+        <tbody>
+>>>>>>> 189d57251258183bebe60c761385f8fac3d93d99
         <tr v-for="plan in plans" v-bind:key="plan.planId">
             <td>{{plan.planId}}</td>
             <td>{{plan.crop}}</td>
@@ -19,6 +30,7 @@
             </td>
 
         </tr>
+        </tbody>
     </table>
 </div>
 </template>
@@ -43,11 +55,9 @@ export default {
 
 td{
     width: 20%;
-    padding-bottom: 10px;
 }
 
 table{
-    margin-bottom: 20px;
     width: 100%;
 }
 </style>

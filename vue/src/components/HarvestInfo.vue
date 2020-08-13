@@ -10,6 +10,7 @@
             <th>Harvest Weight</th>
             <th>Harvest Date</th>
         </thead>
+        <tbody>
         <tr v-for="harvest in harvests" v-bind:key="harvest.harvestId">
             <td>{{harvest.harvestId}}</td>
             <td>{{harvest.inventoryId}}</td>
@@ -18,6 +19,7 @@
             <td>{{harvest.weight}}</td>
             <td>{{toDateString(harvest.dateHarvested)}}</td>
         </tr>
+        </tbody>
     </table>
 </div>
 </template>
@@ -42,11 +44,9 @@ export default {
 
 td{
     width: 20%;
-    padding-bottom: 10px;
 }
 
 table{
-    margin-bottom: 20px;
     width: 100%;
 }
 </style>

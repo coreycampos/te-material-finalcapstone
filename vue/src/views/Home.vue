@@ -35,7 +35,7 @@ export default {
 
 .appTitle {
   color: whitesmoke;
-  /* text-shadow: 5px 5px 0 black; */
+  text-shadow: 0px 0px 3px black, 0px 0px 3px black, 0px 0px 3px black, 0px 0px 3px black;
   font-family: 'Raleway', sans-serif;
   text-align: center;
   vertical-align: bottom;

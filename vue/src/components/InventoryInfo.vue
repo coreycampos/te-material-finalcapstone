@@ -8,12 +8,14 @@
             <th>Amount</th>
             <th>Date Added</th>
         </thead>
+        <tbody>
         <tr v-for="inventory in inventories" v-bind:key="inventory.inventoryId">
             <td>{{inventory.inventoryId}}</td>
             <td>{{inventory.cropName}}</td>
             <td>{{inventory.amount}}</td>
             <td>{{toDateString(inventory.dateAdded)}}</td>
         </tr>
+        </tbody>
     </table>
   </div>
 </template>
