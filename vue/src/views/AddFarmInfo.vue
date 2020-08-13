@@ -25,6 +25,7 @@ export default {
 
 <style scoped>
 div{
-    display: inline;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 </style>

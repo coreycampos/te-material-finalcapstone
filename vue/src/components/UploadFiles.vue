@@ -1,7 +1,6 @@
 <template>
     <div class="upload-container-root">
         <h2>Upload a File</h2>
-        <h3>Choose a file to .csv file to upload 'Harvest Times', 'Transplant Times', 'Expiration Times', or 'Crop Plans'</h3>
         <form id="fileUploadForm" v-on:submit.prevent="uploadCSVFile">
             <div id="fileTypeSelectors">
                 <div class="radio-selector">
@@ -26,19 +25,19 @@
             <br><input type="submit" class="uploadCSVButton"/>
         </form>
         <section id="csvFileStructure">
-            <h3>*Structure of your .csv files*</h3>
+            <h3>Structure of your .csv files</h3>
             <h4>Harvest Times</h4>
-            <p>crop, direct_seed_to_harvest_time(days), crop, direct_seed_to_harvest_time, etc.
-                <br>e.g. carrot, 70, turnip, 45, pepper, 65, etc.</p>
+            <p>crop, direct_seed_to_harvest_time(days), crop, direct_seed_to_harvest_time
+                <br>carrot, 70, turnip, 45, pepper, 65, etc.</p>
             <h4>Transplant Times</h4>
-            <p>crop, direct_seed_to_transplant_time(days), transplant_to_harvest_time(days), etc.
-                <br>e.g. cauliflour, 21, 80, tomato, 18, 110, etc.</p>
+            <p>crop, direct_seed_to_transplant_time(days), transplant_to_harvest_time(days)
+                <br>cauliflour, 21, 80, tomato, 18, 110, etc.</p>
             <h4>Expiration Times</h4>
-            <p>crop, days_to_expire(days), etc.
-                <br>e.g. spinach, 3, summer squash, 30, etc.</p>
+            <p>crop, days_to_expire(days)
+                <br>spinach, 3, summer squash, 30, etc.</p>
             <h4>Crop Plans</h4>
-            <p>area_identifier, crop, planting_date(mmddyyyy), etc.
-                <br>e.g. raised bed 4, garlic, 05012020, container 2, black beans, 05222020, etc.</p>
+            <p>area_identifier, crop, planting_date(mmddyyyy)
+                <br>raised bed 4, garlic, 05012020, container 2, black beans, 05222020, etc.</p>
         </section>
     </div>
 </template>
@@ -125,7 +124,9 @@ export default {
 }
 </script>
 
-<style>
-
-
+<style scoped>
+h3{
+    text-decoration: underline;
+    padding-top: 10px;
+}
 </style>

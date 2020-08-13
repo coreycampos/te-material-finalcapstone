@@ -6,6 +6,7 @@
 <template>
   <div id="app" class="container">
     <nav-bar/>
+    <router-view />
   </div>
 </template>
 
@@ -24,8 +25,9 @@ export default {
 div{
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-/* table{
-  background-color: rgba(188, 253, 188, 0.712);
+
+table{
+  background-color: #E8EDDF;
   border-radius: 10px;
-} */
+}
 </style>

@@ -3,21 +3,14 @@
         <button id="displayToggle" v-on:click="changeDisplay">
                     Display Details
                 </button>
-        <table v-show="display">
-            <tr class="headerRow">
-                <td>
-                    Seed to Harvest Time
-                </td>
-                <td>
-                    Seed to Transplant Time
-                </td>
-                <td>
-                    Transplant to Harvest Time
-                </td>
-                <td>
-                    Time to Expiration
-                </td>
-            </tr>
+        <table v-show="display" class="table table-hover">
+            <thead class="headerRow">
+                <th>Seed to Harvest Time</th>
+                <th>Seed to Transplant Time</th>
+                <th>Transplant to Harvest Time</th>
+                <th>Time to Expiration</th>
+            </thead>
+            <tbody>
           <tr class="informationRow">
               <td>
                   {{crop.timeSeedToHarvest}}
@@ -32,6 +25,7 @@
                   {{crop.timeToExpiration}}
               </td>
           </tr>
+            </tbody>
           </table>
     </div>
 </template>
@@ -56,10 +50,10 @@ export default {
 
 <style scoped>
 .headerRow{
-    font-size: 75%;
+    font-size: 50%;
 }
 .informationRow{
-    font-size: 60%;
+    font-size: 50%;
 }
 #displayToggle{
     font-size: 50%;

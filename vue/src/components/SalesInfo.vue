@@ -1,15 +1,15 @@
 <template>
     <div>
         <h2>Crop Sales</h2>
-        <table>
-            <tr class="headerRow">
-                <td>Sale Id</td>
-                <td>Inventory Id</td>
-                <td>Date Sold</td>
-                <td>Amount Sold</td>
-                <td>Revenue</td>
-                <td>Method of Sale</td>
-            </tr>
+        <table class="table table-hover">
+            <thead class="headerRow">
+                <th>Sale Id</th>
+                <th>Inventory Id</th>
+                <th>Date Sold</th>
+                <th>Amount Sold</th>
+                <th>Revenue</th>
+                <th>Method of Sale</th>
+            </thead>
             <tr v-for="sale in sales" v-bind:key="sale.saleId">
                 <td>{{sale.saleId}}</td>
                 <td>{{sale.inventoryId}}</td>

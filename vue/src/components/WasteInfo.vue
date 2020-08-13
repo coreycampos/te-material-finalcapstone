@@ -1,14 +1,14 @@
 <template>
     <div>
         <h2>Crop Waste</h2>
-        <table>
-            <tr class="headerRow">
-                <td>Waste Id</td>
-                <td>Inventory Id</td>
-                <td>Date Wasted</td>
-                <td>Amount Wasted</td>
-                <td>Waste Description</td>
-            </tr>
+        <table class="table table-hover">
+            <thead class="headerRow">
+                <th>Waste Id</th>
+                <th>Inventory Id</th>
+                <th>Date Wasted</th>
+                <th>Amount Wasted</th>
+                <th>Waste Description</th>
+            </thead>
             <tr v-for="waste in wastes" v-bind:key="waste.wasteId">
                 <td>{{waste.wasteId}}</td>
                 <td>{{waste.inventoryId}}</td>

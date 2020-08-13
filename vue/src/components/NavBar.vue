@@ -39,7 +39,6 @@
         v-if="$store.state.token">
         &nbsp;|&nbsp;Logout</router-link>
     </div>
-    <router-view />
   </div>
 </template>
 

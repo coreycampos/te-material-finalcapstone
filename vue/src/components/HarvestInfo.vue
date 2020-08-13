@@ -1,15 +1,15 @@
 <template>
 <div>
     <h2> Harvests</h2>
-    <table>
-        <tr class="headerRow">
-            <td>Harvest Id</td>
-            <td>Inventory Id</td>
-            <td>Crop</td>
-            <td>Area</td>
-            <td>Harvest Weight</td>
-            <td>Harvest Date</td>
-        </tr>
+    <table class="table table-hover">
+        <thead class="headerRow">
+            <th>Harvest Id</th>
+            <th>Inventory Id</th>
+            <th>Crop</th>
+            <th>Area</th>
+            <th>Harvest Weight</th>
+            <th>Harvest Date</th>
+        </thead>
         <tr v-for="harvest in harvests" v-bind:key="harvest.harvestId">
             <td>{{harvest.harvestId}}</td>
             <td>{{harvest.inventoryId}}</td>

@@ -1,14 +1,14 @@
 <template>
     <div>
         <h2>Crop Loss</h2>
-        <table>
-            <tr class="headerRow">
-                <td>Loss Id</td>
-                <td>Inventory Id</td>
-                <td>Date Lost</td>
-                <td>Amount Lost</td>
-                <td>Loss Description</td>
-            </tr>
+        <table class="table table-hover">
+            <thead class="headerRow">
+                <th>Loss Id</th>
+                <th>Inventory Id</th>
+                <th>Date Lost</th>
+                <th>Amount Lost</th>
+                <th>Loss Description</th>
+            </thead>
             <tr v-for="loss in losses" v-bind:key="loss.lossId">
                 <td>{{loss.lossId}}</td>
                 <td>{{loss.inventoryId}}</td>

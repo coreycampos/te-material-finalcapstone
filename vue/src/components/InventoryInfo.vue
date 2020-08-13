@@ -1,13 +1,13 @@
 <template>
   <div>
     <h2> Current Inventory</h2>
-    <table>
-        <tr class="headerRow">
-            <td>Inventory Id</td>
-            <td>Crop</td>
-            <td>Amount</td>
-            <td>Date Added</td>
-        </tr>
+    <table class="table table-hover">
+        <thead class="headerRow">
+            <th>Inventory Id</th>
+            <th>Crop</th>
+            <th>Amount</th>
+            <th>Date Added</th>
+        </thead>
         <tr v-for="inventory in inventories" v-bind:key="inventory.inventoryId">
             <td>{{inventory.inventoryId}}</td>
             <td>{{inventory.cropName}}</td>
